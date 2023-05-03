@@ -1,22 +1,21 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-// import GoogleProvider from 'next-auth/providers/google';
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { prisma } from '@/lib/prisma';
+const { PrismaAdapter } = await import( '@next-auth/prisma-adapter' );
+const { prisma } = await import( '@/lib/prisma' );
 import { NextApiRequest, NextApiResponse } from 'next/types';
-const GoogleProvider =  await import('next-auth/providers/google').then((mod) => mod.default);
-export const authOptions:NextAuthOptions = {
+const GoogleProvider = await import( 'next-auth/providers/google' ).then( ( mod ) => mod.default );
+export const authOptions: NextAuthOptions = {
   providers: [
-    GoogleProvider({
+    GoogleProvider( {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    })],
-  adapter: PrismaAdapter(prisma),
+    } ) ],
+  adapter: PrismaAdapter( prisma ),
   pages: {
     signIn: '/login',
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
-
-export default(req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions)
+const authHandler = ( req: NextApiRequest, res: NextApiResponse ) => NextAuth( req, res, authOptions );
+export default authHandler
 
 

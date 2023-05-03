@@ -8,7 +8,6 @@
 			"dist",
 			"module",
 			".next",
-			"scripts",
 			"*.json"
 		],
 		"formatWithErrors": false
@@ -20,7 +19,6 @@
 			"dist",
 			"module",
 			".next",
-			"scripts",
 			"*.json"
 		],
 		"rules": {
