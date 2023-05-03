@@ -1,4 +1,3 @@
-import React from "react";
 import { ClientSafeProvider, getProviders, signIn } from "next-auth/react";
 import {
 	GetServerSidePropsContext,
