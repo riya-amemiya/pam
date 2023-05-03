@@ -7,14 +7,13 @@ const nextConfig = {
 	experimental: {
 		appDir: false,
 	},
-	serverRuntimeConfig: {
-		// Will only be available on the server side
-		mySecret: "secret",
-		key: process.env.AUTH_KEY, // Pass through env variables
-	},
-	env: {
-		BACKEND_URL: process.env.BACKEND_BASE_URL,
-	},
+	// serverRuntimeConfig: {
+	// 	mySecret: "secret",
+	// 	key: process.env.AUTH_KEY,
+	// },
+	// env: {
+	// 	BACKEND_URL: process.env.BACKEND_BASE_URL,
+	// },
 };
 
 module.exports = withInterceptStdout(nextConfig, (text) =>
