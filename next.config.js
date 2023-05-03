@@ -14,6 +14,14 @@ const nextConfig = {
 	// env: {
 	// 	BACKEND_URL: process.env.BACKEND_BASE_URL,
 	// },
+	compiler: {
+		removeConsole: true,
+	},
+	webpack: (config) => {
+		config.experiments = { ...config.experiments, topLevelAwait: true };
+
+		return config;
+	},
 };
 
 module.exports = withInterceptStdout(nextConfig, (text) =>

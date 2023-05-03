@@ -1,9 +1,9 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+// import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { prisma } from '@/lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-
+const GoogleProvider =  await import('next-auth/providers/google').then((mod) => mod.default);
 export const authOptions:NextAuthOptions = {
   providers: [
     GoogleProvider({
