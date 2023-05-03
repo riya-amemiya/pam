@@ -1,0 +1,89 @@
+{
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 80,
+		"ignore": [
+			"node_modules",
+			"dist",
+			"module",
+			".next",
+			"scripts",
+			"*.json"
+		],
+		"formatWithErrors": false
+	},
+	"linter": {
+		"enabled": true,
+		"ignore": [
+			"node_modules",
+			"dist",
+			"module",
+			".next",
+			"scripts",
+			"*.json"
+		],
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"noUselessFragments": "warn",
+				"useSimplifiedLogicExpression": "error"
+			},
+			"correctness": {
+				"noUndeclaredVariables": "off",
+				"noUnusedVariables": "off"
+			},
+			"style": {
+				"noImplicitBoolean": "warn",
+				"noNegationElse": "error",
+				"noShoutyConstants": "warn",
+				"useBlockStatements": "error",
+				"useExponentiationOperator": "warn",
+				"useShorthandArrayType": "warn",
+				"useSingleCaseStatement": "warn",
+				"useFragmentSyntax": "warn"
+			},
+			"suspicious": {
+				"noRedundantUseStrict": "warn"
+			},
+			"nursery": {
+				"noAssignInExpressions": "error",
+				"noBannedTypes": "error",
+				"noClassAssign": "error",
+				"noCommaOperator": "error",
+				"noConfusingLabels": "error",
+				"noDuplicateCase": "error",
+				"noDuplicateClassMembers": "error",
+				"noDuplicateJsxProps": "error",
+				"noExtraLabels": "error",
+				"noExtraSemicolons": "error",
+				"noGlobalObjectCalls": "error",
+				"noInferrableTypes": "error",
+				"noInnerDeclarations": "error",
+				"noInvalidConstructorSuper": "error",
+				"noNamespace": "error",
+				"noNoninteractiveElementToInteractiveRole": "error",
+				"noParameterAssign": "error",
+				"noParameterProperties": "off",
+				"noPrototypeBuiltins": "error",
+				"noRedeclare": "error",
+				"noRestrictedGlobals": "error",
+				"noSelfAssign": "error",
+				"noSelfCompare": "error",
+				"noSwitchDeclarations": "error",
+				"noUnreachableSuper": "error",
+				"noUnsafeOptionalChaining": "error",
+				"noUselessCatch": "error",
+				"noUselessRename": "error",
+				"noUselessSwitchCase": "error",
+				"noWith": "error",
+				"useCamelCase": "off",
+				"useExhaustiveDependencies": "off",
+				"useHookAtTopLevel": "off",
+				"useIframeTitle": "warn",
+				"useIsNan": "warn",
+				"useYield": "warn"
+			}
+		}
+	}
+}

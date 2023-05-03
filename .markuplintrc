@@ -1,0 +1,52 @@
+{
+  "extends": [
+    "markuplint:a11y",
+    "markuplint:html-standard",
+    "markuplint:recommended-react"
+  ],
+  "excludeFiles": [
+    "node_modules/**/*",
+    "scripts/**/*",
+    "src/**/*.stories.tsx",
+    "src/**/*.stories.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.spec.tsx",
+    "src/**/*.spec.ts"
+  ],
+  "parser": {
+    ".[jt]sx$": "@markuplint/jsx-parser"
+  },
+  "specs": {
+    ".[jt]sx$": "@markuplint/react-spec"
+  },
+  "pretenders": [
+    {
+      "selector": "Link",
+      "as": "a"
+    },
+    {
+      "selector": "Button",
+      "as": "button"
+    },
+    {
+      "selector": "Image",
+      "as": "img"
+    },
+    {
+      "selector": "Input",
+      "as": "input"
+    },
+    {
+      "selector": "Text",
+      "as": "span"
+    },
+    {
+      "selector": "View",
+      "as": "div"
+    }
+  ],
+  "rules": {
+    "no-refer-to-non-existent-id": false
+  }
+}
