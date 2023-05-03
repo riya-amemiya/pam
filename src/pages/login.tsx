@@ -4,11 +4,11 @@ import {
 	GetServerSidePropsContext,
 	InferGetServerSidePropsType,
 	NextPage,
-} from "next";
+} from "next/types";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]";
-import Layout from "@/components/Layout";
-
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("@/components/Layout"));
+const { authOptions } = await import("./api/auth/[...nextauth]");
 const Login: NextPage<{
 	providers: InferGetServerSidePropsType<typeof getServerSideProps>;
 }> = ({ providers }) => {
