@@ -1,13 +1,12 @@
 import { ClientSafeProvider, getProviders, signIn } from "next-auth/react";
-import {
+import type {
 	GetServerSidePropsContext,
 	InferGetServerSidePropsType,
 	NextPage,
 } from "next/types";
 import { getServerSession } from "next-auth/next";
-import dynamic from "next/dynamic";
-const Layout = dynamic(() => import("@/components/Layout"), { ssr: false });
-const { authOptions } = await import("./api/auth/[...nextauth]");
+import Layout from "@/components/Layout";
+import { authOptions } from "./api/auth/[...nextauth]";
 const Login: NextPage<{
 	providers: InferGetServerSidePropsType<typeof getServerSideProps>;
 }> = ({ providers }) => {
