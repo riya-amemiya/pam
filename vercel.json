@@ -1,9 +1,9 @@
 {
     "functions": {
-        "pages/login.tsx": {
+        "src/pages/login.tsx": {
             "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
         },
-        "api/*.ts": {
+        "src/api/**/*.ts": {
             "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
         }
     }
