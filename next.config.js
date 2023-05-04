@@ -6,6 +6,7 @@ const nextConfig = {
 	swcMinify: true,
 	experimental: {
 		appDir: false,
+		legacyBrowsers: false,
 	},
 	// serverRuntimeConfig: {
 	// 	mySecret: "secret",
