@@ -3,7 +3,7 @@
         "src/pages/login.tsx": {
             "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
         },
-        "src/api/**/*.py": {
+        "src/pages/api/**/*.ts": {
             "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
         }
     }
