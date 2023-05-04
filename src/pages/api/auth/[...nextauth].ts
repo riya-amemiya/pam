@@ -10,9 +10,6 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     } ) ],
   adapter: PrismaAdapter( prisma ),
-  pages: {
-    signIn: '/login',
-  },
   secret: process.env.NEXTAUTH_SECRET,
 }
 const authHandler = ( req: NextApiRequest, res: NextApiResponse ) => NextAuth( req, res, authOptions );
