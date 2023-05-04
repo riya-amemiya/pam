@@ -6,7 +6,7 @@ import {
 } from "next/types";
 import { getServerSession } from "next-auth/next";
 import dynamic from "next/dynamic";
-const Layout = dynamic(() => import("@/components/Layout"));
+const Layout = dynamic(() => import("@/components/Layout"), { ssr: false });
 const { authOptions } = await import("./api/auth/[...nextauth]");
 const Login: NextPage<{
 	providers: InferGetServerSidePropsType<typeof getServerSideProps>;
