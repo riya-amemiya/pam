@@ -1,8 +1,8 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
-const { PrismaAdapter } = await import( '@next-auth/prisma-adapter' );
-const { prisma } = await import( '@/lib/prisma' );
+import {PrismaAdapter} from '@next-auth/prisma-adapter';
+import {prisma} from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next/types';
-const GoogleProvider = await import( 'next-auth/providers/google' ).then( ( mod ) => mod.default );
+import GoogleProvider from 'next-auth/providers/google';
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider( {
