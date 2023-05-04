@@ -23,7 +23,7 @@ const nextConfig = {
 	// 	BACKEND_URL: process.env.BACKEND_BASE_URL,
 	// },
 	compiler: {
-		removeConsole: true,
+		removeConsole: process.env.NODE_ENV === "production",
 	},
 	webpack: (config) => {
 		config.experiments = { ...config.experiments, topLevelAwait: true };

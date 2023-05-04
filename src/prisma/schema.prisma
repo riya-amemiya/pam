@@ -38,13 +38,16 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id               String             @id @default(cuid())
+    name             String?
+    email            String?            @unique
+    emailVerified    DateTime?
+    image            String?
+    accounts         Account[]
+    sessions         Session[]
+    Post             Post[]
+    roleId           String?
+    UserRelationRole UserRelationRole[]
 }
 
 model VerificationToken {
@@ -53,4 +56,54 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Post {
+    id              String            @id @default(cuid())
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    published       Boolean           @default(false)
+    title           String
+    content         String?
+    author          User?             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    authorId        String?
+    PostRelationTag PostRelationTag[]
+}
+
+model Role {
+    id               String             @id @default(cuid())
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    name             String             @unique
+    UserRelationRole UserRelationRole[]
+}
+
+model UserRelationRole {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String
+    role      Role     @relation(fields: [roleId], references: [id])
+    roleId    String
+}
+
+model Tag {
+    id              String            @id @default(cuid())
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    name            String            @unique
+    PostRelationTag PostRelationTag[]
+
+    @@unique([id, name])
+}
+
+model PostRelationTag {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId    String
+    tag       Tag      @relation(fields: [tagName], references: [name])
+    tagName   String
 }

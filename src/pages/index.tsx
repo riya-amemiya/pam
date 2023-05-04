@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
 	const { data: session } = useSession();
+
 	return (
 		<>
 			<Layout className={styles.main} header={false} title="Create Next App">
