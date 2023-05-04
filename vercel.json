@@ -1,0 +1,10 @@
+{
+    "functions": {
+        "pages/login.tsx": {
+            "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
+        },
+        "api/*.ts": {
+            "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
+        }
+    }
+}
