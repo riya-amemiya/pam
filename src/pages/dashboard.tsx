@@ -7,11 +7,16 @@ import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 import Button from "@mui/material/Button";
 import { fetcherPost } from "@/lib/fetcherPost";
+import { fetcherGet } from "@/lib/fetcherGet";
 const Dashboard: NextPage = () => {
 	const { data: session } = useSession();
 	const { trigger: newPost } = useSWRMutation(
 		"/api/prisma/newPost",
 		fetcherPost<NewPostReq>,
+	);
+	const { trigger: getPost, data: postData } = useSWRMutation(
+		"/api/prisma/getPost",
+		fetcherGet,
 	);
 	const { data: data2 }: { data: GetRoleRes } = useSWR(
 		"/api/prisma/getRole",
@@ -30,6 +35,17 @@ const Dashboard: NextPage = () => {
 				className="text-blue-500"
 			>
 				newPost
+			</Button>
+			<Button
+				onClick={() => {
+					getPost();
+					console.log("====================================");
+					console.log(postData);
+					console.log("====================================");
+				}}
+				className="text-blue-500"
+			>
+				getPost
 			</Button>
 			<p>カウント: {count}</p>
 			<p>ロール: {data2?.message}</p>

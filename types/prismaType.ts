@@ -1,4 +1,4 @@
-import { RoleName } from "@prisma/client";
+import { Post, RoleName } from "@prisma/client";
 
 export type NewPostReq = {
 	title: string;
@@ -8,4 +8,9 @@ export type NewPostReq = {
 export type GetRoleRes = {
 	statusCode: number;
 	message: RoleName;
+};
+
+export type GetPostRes = {
+	statusCode: number;
+	message: Post[];
 };
