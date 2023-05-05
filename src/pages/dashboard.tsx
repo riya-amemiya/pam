@@ -5,9 +5,10 @@ import { type NextPage } from "next/types";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
+import Button from "@mui/material/Button";
 const Dashboard: NextPage = () => {
 	const { data: session } = useSession();
-	const { trigger } = useSWRMutation(
+	const { trigger: newPost } = useSWRMutation(
 		"/api/prisma/newPost",
 		(
 			url,
@@ -30,15 +31,15 @@ const Dashboard: NextPage = () => {
 		<Layout title="ダッシュボード">
 			<h1>Dashboard</h1>
 			<p>ようこそ, {session ? session?.user?.email : ""}</p>
-			<button
+			<Button
 				onClick={() => {
 					setCount(count + 1);
-					trigger({ title: "Test", content: "Test" });
+					newPost({ title: "Test", content: "Test" });
 				}}
-				type="button"
+				className="text-blue-500"
 			>
-				アクション
-			</button>
+				newPost
+			</Button>
 			<p>カウント: {count}</p>
 			<p>ロール: {data2?.message}</p>
 		</Layout>

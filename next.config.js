@@ -1,4 +1,6 @@
 const withInterceptStdout = require("next-intercept-stdout");
+const { createVanillaExtractPlugin } = require("@vanilla-extract/next-plugin");
+const withVanillaExtract = createVanillaExtractPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	output: "standalone",
@@ -32,6 +34,8 @@ const nextConfig = {
 	},
 };
 
-module.exports = withInterceptStdout(nextConfig, (text) =>
-	text.includes("Duplicate atom key") ? "" : text,
+module.exports = withVanillaExtract(
+	withInterceptStdout(nextConfig, (text) =>
+		text.includes("Duplicate atom key") ? "" : text,
+	),
 );

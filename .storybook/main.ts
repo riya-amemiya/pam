@@ -14,6 +14,7 @@ const config: StorybookConfig = {
 				nextConfigPath: path.resolve(__dirname, "../next.config.js"),
 			},
 		},
+		"@storybook/addon-styling",
 	],
 	webpackFinal: async (config) => {
 		if (config.resolve) {
