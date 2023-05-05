@@ -12,7 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -23,7 +23,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
@@ -36,9 +36,18 @@
       {
         "name": "next"
       }
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "types": [
+      "node",
+      "jest"
     ]
   },
   "include": [
+    "types/**/*.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
@@ -46,5 +55,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

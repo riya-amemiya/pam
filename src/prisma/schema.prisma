@@ -46,7 +46,6 @@ model User {
     accounts         Account[]
     sessions         Session[]
     Post             Post[]
-    roleId           String?
     UserRelationRole UserRelationRole[]
 }
 
@@ -70,12 +69,19 @@ model Post {
     PostRelationTag PostRelationTag[]
 }
 
+enum RoleName {
+    ADMIN
+    USER
+}
+
 model Role {
     id               String             @id @default(cuid())
     createdAt        DateTime           @default(now())
     updatedAt        DateTime           @updatedAt
-    name             String             @unique
+    name             RoleName           @unique
     UserRelationRole UserRelationRole[]
+
+    @@unique([id, name])
 }
 
 model UserRelationRole {
@@ -84,8 +90,8 @@ model UserRelationRole {
     updatedAt DateTime @updatedAt
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId    String
-    role      Role     @relation(fields: [roleId], references: [id])
-    roleId    String
+    role      Role     @relation(fields: [roleName], references: [name])
+    roleName  RoleName
 }
 
 model Tag {

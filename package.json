@@ -76,10 +76,12 @@
     "sass": "^1.62.1",
     "storybook": "^7.0.8",
     "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
     "typed-scss-modules": "^7.1.0",
     "typescript": "5.0.4"
   },
   "prisma": {
+    "seed": "ts-node src/prisma/seed.ts",
     "schema": "src/prisma/schema.prisma"
   }
 }

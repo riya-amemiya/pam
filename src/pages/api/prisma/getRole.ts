@@ -12,18 +12,19 @@ export default async function handler(
 		const user = await prisma.user.findUnique({
 			where: { email: session?.user?.email || "" },
 		});
-		const roleId = await prisma.userRelationRole
+		const roleName = await prisma.userRelationRole
 			.findFirst({
 				where: {
 					userId: user?.id,
 				},
 			})
-			.then((user) => user?.roleId);
-		const role = await prisma.role.findUnique({
+			.then((user) => user?.roleName);
+		const role = await prisma.role.findFirst({
 			where: {
-				id: roleId,
+				name: roleName,
 			},
 		});
-		res.status(200).json({ statusCode: 200, message: role?.name });
+		const message = role?.name || "USER";
+		res.status(200).json({ statusCode: 200, message });
 	}
 }
