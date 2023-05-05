@@ -1,10 +1,9 @@
 import Layout from "@/components/Layout";
-import { GetRoleRes, NewPostReq } from "types/prismaType";
+import { NewPostReq } from "types/prismaType";
 import { useSession } from "next-auth/react";
 import { type NextPage } from "next/types";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
-import useSWR from "swr";
 import Button from "@mui/material/Button";
 import { fetcherPost } from "@/lib/fetcherPost";
 import { fetcherGet } from "@/lib/fetcherGet";
@@ -18,15 +17,12 @@ const Dashboard: NextPage = () => {
 		"/api/prisma/getPost",
 		fetcherGet,
 	);
-	const { data: data2 }: { data: GetRoleRes } = useSWR(
-		"/api/prisma/getRole",
-		(url) => fetch(url).then((res) => res.json()),
-	);
+
 	const [count, setCount] = useState(0);
 	return (
 		<Layout title="ダッシュボード">
 			<h1>Dashboard</h1>
-			<p>ようこそ, {session ? session?.user?.email : ""}</p>
+			<p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
 			<Button
 				className="text-blue-500"
 				onClick={() => {
@@ -48,7 +44,7 @@ const Dashboard: NextPage = () => {
 				getPost
 			</Button>
 			<p>カウント: {count}</p>
-			<p>ロール: {data2?.message}</p>
+			<p>ロール: {session?.user.role || "loading..."}</p>
 		</Layout>
 	);
 };

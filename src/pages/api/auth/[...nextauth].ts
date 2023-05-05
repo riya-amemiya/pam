@@ -40,7 +40,8 @@ export const authOptions: NextAuthOptions = {
         }
       } )
 
-      session.user.role = role?.name || 'USER'}
+      session.user.role = role?.name || 'USER'
+    }
       catch ( e )
       {
         console.log( e )
