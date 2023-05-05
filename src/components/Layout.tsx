@@ -1,7 +1,9 @@
 import SEO from "./SEO";
 import Header from "./Header";
+import { Looding } from "./Looding";
 const Layout = ({
 	children,
+	looding,
 	className,
 	title,
 	description,
@@ -11,6 +13,7 @@ const Layout = ({
 	header = true,
 }: {
 	children: React.ReactNode;
+	looding?: boolean;
 	className?: string;
 	title: string;
 	description?: string;
@@ -36,9 +39,14 @@ const Layout = ({
 				title={title}
 				twitter={twitter}
 			/>
-			{header && <Header />}
+			<div className={looding ? "hidden" : ""}>
+				{header && <Header />}
 
-			<main className={className}>{children}</main>
+				<main className={className}>{children}</main>
+			</div>
+			<div className={looding ? "" : "hidden"}>
+				<Looding />
+			</div>
 		</div>
 	);
 };

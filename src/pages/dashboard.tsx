@@ -22,11 +22,10 @@ const Dashboard: NextPage = () => {
 	const [count, setCount] = useState(0);
 	const user = useRecoilValue(userState);
 	return (
-		<Layout title="ダッシュボード">
-			<h1>Dashboard</h1>
+		<Layout looding={!user} title="ダッシュボード">
+			<h1 className="animate__animated animate__backInLeft">Dashboard</h1>
 			<p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
 			<Button
-				className="text-blue-500"
 				onClick={() => {
 					setCount(count + 1);
 					newPost({ title: "Test", content: "Test" });
@@ -35,7 +34,7 @@ const Dashboard: NextPage = () => {
 				newPost
 			</Button>
 			<Button
-				className="text-blue-500"
+				color="secondary"
 				onClick={() => {
 					getPost();
 					console.log("====================================");

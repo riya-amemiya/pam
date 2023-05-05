@@ -22,7 +22,7 @@ const SEO = ({
 	};
 }) => {
 	const router = useRouter();
-	const url = `${process.env.SITE_URL}${router.asPath}`;
+	const url = `${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`;
 	return (
 		<NextSeo
 			canonical={url}

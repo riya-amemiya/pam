@@ -2,13 +2,15 @@ import type { AppProps } from "next/app";
 import { RecoilRoot, useRecoilState } from "recoil";
 import "the-new-css-reset/css/reset.css";
 import "@/styles/globals.scss";
+// import "animate.css";
 import { SessionProvider, useSession } from "next-auth/react";
-import { ThemeProvider } from "@mui/material";
-import { darkTheme } from "@/lib/themes";
+import { ThemeProvider, useMediaQuery } from "@mui/material";
+
 import { userState } from "@/atom/userState";
 import { fetcherGet } from "@/lib/fetcherGet";
 import useSWRMutation from "swr/mutation";
 import { GetRoleRes } from "types/prismaType";
+import { lightTheme, darkTheme } from "@/lib/themes";
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	const { data: session } = useSession();
 	const [user, setUser] = useRecoilState(userState);
@@ -32,11 +34,12 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 
 	return <>{children}</>;
 };
-function myApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+	const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 	return (
 		<SessionProvider session={session}>
 			<RecoilRoot>
-				<ThemeProvider theme={darkTheme}>
+				<ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
 					<Wrapper>
 						<Component {...pageProps} />
 					</Wrapper>
@@ -45,4 +48,4 @@ function myApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 		</SessionProvider>
 	);
 }
-export default myApp;
+export default App;
