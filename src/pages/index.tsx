@@ -1,4 +1,3 @@
-import styles from "@/styles/Home.module.css";
 import Layout from "@/components/Layout";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -8,8 +7,8 @@ export default function Home() {
 
 	return (
 		<>
-			<Layout className={styles.main} header={false} title="Create Next App">
-				<div className={styles.description}>
+			<Layout title="Home">
+				<div>
 					{
 						// セッションがある場合、ログアウトを表示
 						session && (
