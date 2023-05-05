@@ -8,6 +8,12 @@ const roleData: Prisma.RoleCreateInput[] = [
 	{
 		name: "ADMIN",
 	},
+	{
+		name: "STUDENT",
+	},
+	{
+		name: "TEACHER",
+	},
 ];
 
 const seed = async () => {
