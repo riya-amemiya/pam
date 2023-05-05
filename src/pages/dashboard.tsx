@@ -6,21 +6,12 @@ import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 import Button from "@mui/material/Button";
+import { fetcherPost } from "@/lib/fetcherPost";
 const Dashboard: NextPage = () => {
 	const { data: session } = useSession();
 	const { trigger: newPost } = useSWRMutation(
 		"/api/prisma/newPost",
-		(
-			url,
-			{
-				arg,
-			}: {
-				arg: NewPostReq;
-			},
-		) =>
-			fetch(url, { method: "POST", body: JSON.stringify(arg) }).then((res) =>
-				res.json(),
-			),
+		fetcherPost<NewPostReq>,
 	);
 	const { data: data2 }: { data: GetRoleRes } = useSWR(
 		"/api/prisma/getRole",
