@@ -7,8 +7,10 @@ import useSWRMutation from "swr/mutation";
 import Button from "@mui/material/Button";
 import { fetcherPost } from "@/lib/fetcherPost";
 import { fetcherGet } from "@/lib/fetcherGet";
+import { useRecoilValue } from "recoil";
+import { userState } from "@/atom/userState";
 const Dashboard: NextPage = () => {
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 	const { trigger: newPost } = useSWRMutation(
 		"/api/prisma/newPost",
 		fetcherPost<NewPostReq>,
@@ -17,8 +19,8 @@ const Dashboard: NextPage = () => {
 		"/api/prisma/getPost",
 		fetcherGet,
 	);
-
 	const [count, setCount] = useState(0);
+	const user = useRecoilValue(userState);
 	return (
 		<Layout title="ダッシュボード">
 			<h1>Dashboard</h1>
@@ -44,7 +46,9 @@ const Dashboard: NextPage = () => {
 				getPost
 			</Button>
 			<p>カウント: {count}</p>
-			<p>ロール: {session?.user.role || "loading..."}</p>
+			<p>ロール: {user?.role || "loading..."}</p>
+			<p>ステータス: {status}</p>
+			<p>ユーザー: {user?.name || "loading..."}</p>
 		</Layout>
 	);
 };

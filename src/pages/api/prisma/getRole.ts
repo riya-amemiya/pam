@@ -9,22 +9,22 @@ export default async function handler(
 ) {
 	const session = await getServerSession(req, res, authOptions);
 	if (session) {
-		const user = await prisma.user.findUnique({
+		const user = await prisma.user.findFirstOrThrow({
 			where: { email: session?.user?.email || "" },
 		});
-		const roleName = await prisma.userRelationRole
-			.findFirst({
+		const roleData =
+			(await prisma.userRelationRole.findFirst({
 				where: {
 					userId: user?.id,
 				},
-			})
-			.then((user) => user?.roleName);
-		const role = await prisma.role.findFirst({
-			where: {
-				name: roleName,
-			},
-		});
-		const message = role?.name || "USER";
+			})) ||
+			(await prisma.userRelationRole.create({
+				data: {
+					userId: user.id,
+					roleName: "USER",
+				},
+			}));
+		const message = roleData.roleName;
 		res.status(200).json({ statusCode: 200, message });
 	}
 }
