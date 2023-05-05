@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { NewPost } from "types/prismaType";
+import { NewPostReq } from "types/prismaType";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
@@ -8,7 +8,7 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse,
 ) {
-	const data: NewPost = JSON.parse(req.body);
+	const data: NewPostReq = JSON.parse(req.body);
 	const session = await getServerSession(req, res, authOptions);
 	if (session) {
 		const userId = await prisma.user

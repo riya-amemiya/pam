@@ -28,22 +28,22 @@ const Dashboard: NextPage = () => {
 			<h1>Dashboard</h1>
 			<p>ようこそ, {session ? session?.user?.email : ""}</p>
 			<Button
+				className="text-blue-500"
 				onClick={() => {
 					setCount(count + 1);
 					newPost({ title: "Test", content: "Test" });
 				}}
-				className="text-blue-500"
 			>
 				newPost
 			</Button>
 			<Button
+				className="text-blue-500"
 				onClick={() => {
 					getPost();
 					console.log("====================================");
 					console.log(postData);
 					console.log("====================================");
 				}}
-				className="text-blue-500"
 			>
 				getPost
 			</Button>
