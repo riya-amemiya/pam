@@ -2,18 +2,19 @@ import Layout from "@/components/Layout";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
-export default function Home() {
+const Home = () => {
 	const { data: session } = useSession();
-
 	return (
 		<>
 			<Layout title="Home">
-				<div>
+				<div className="text-center">
 					{
 						// セッションがある場合、ログアウトを表示
 						session && (
 							<div>
-								<h1>ようこそ, {session.user?.email}</h1>
+								<h1 className="text-red-500">
+									ようこそ, {session.user?.email}
+								</h1>
 								<button onClick={() => signOut()} type="button">
 									ログアウト
 								</button>
@@ -41,4 +42,5 @@ export default function Home() {
 			</Layout>
 		</>
 	);
-}
+};
+export default Home;

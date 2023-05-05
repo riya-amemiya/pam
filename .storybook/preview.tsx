@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-styling";
 import { darkTheme, lightTheme } from "../src/lib/themes";
+import "../src/styles/globals.scss";
 export const decorators = [
 	withThemeFromJSXProvider({
 		themes: {
