@@ -28,6 +28,6 @@ jobs:
     - name: Install dependencies
       run: yarn install
     - name: Build
-      run: yarn build
+      run: yarn build:next
     - name: Test
       run: yarn test
