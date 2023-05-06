@@ -36,7 +36,8 @@ const Dashboard: NextPage = () => {
 				newPost
 			</Button>
 			<Button
-				color="secondary"
+				variant="outlined"
+				color="primary"
 				onClick={() => {
 					getPost();
 					console.log("====================================");

@@ -2,15 +2,15 @@ import type { AppProps } from "next/app";
 import { RecoilRoot, useRecoilState } from "recoil";
 import "the-new-css-reset/css/reset.css";
 import "@/styles/globals.scss";
-// import "animate.css";
+import "animate.css";
 import { SessionProvider, useSession } from "next-auth/react";
-import { ThemeProvider, useMediaQuery } from "@mui/material";
-
 import { userState } from "@/atom/userState";
 import { fetcherGet } from "@/lib/fetcherGet";
 import useSWRMutation from "swr/mutation";
 import { GetRoleRes } from "types/prismaType";
 import { lightTheme, darkTheme } from "@/lib/themes";
+import { ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	const { data: session } = useSession();
 	const [user, setUser] = useRecoilState(userState);
