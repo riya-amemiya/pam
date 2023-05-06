@@ -5,7 +5,8 @@
   "scripts": {
     "format": "rome format .",
     "dev": "WATCHPACK_POLLING=true prisma generate && next dev",
-    "build": "prisma generate && prisma db push && yarn lint && next build && yarn sitemap",
+    "build": "prisma generate && prisma db push && yarn build:next",
+    "build:next": "yarn lint && next build && yarn sitemap",
     "start": "next start",
     "sitemap": "next-sitemap",
     "lint": "eslint --fix src/ && rome check . && next lint && yarn markuplint && yarn typed-scss && tsc && rome format . --write",

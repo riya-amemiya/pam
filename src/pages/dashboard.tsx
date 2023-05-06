@@ -37,7 +37,6 @@ const Dashboard: NextPage = () => {
 				newPost
 			</Button>
 			<Button
-				variant="outlined"
 				color="primary"
 				onClick={() => {
 					getPost();
@@ -45,6 +44,7 @@ const Dashboard: NextPage = () => {
 					console.log(postData);
 					console.log("====================================");
 				}}
+				variant="outlined"
 			>
 				getPost
 			</Button>
@@ -65,11 +65,11 @@ const Dashboard: NextPage = () => {
 			>
 				<TextField
 					className="text-blue-500"
-					type="text"
 					name="GitHub"
 					placeholder="GitHub Account Name"
+					type="text"
 				/>
-				<Button type="submit" size="large">
+				<Button size="large" type="submit">
 					Submit
 				</Button>
 			</form>
