@@ -9,6 +9,7 @@ import { fetcherPost } from "@/lib/fetcherPost";
 import { fetcherGet } from "@/lib/fetcherGet";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/atom/userState";
+import { DateWrapper } from "umt/module/Date/DateWrapper";
 const Dashboard: NextPage = () => {
 	const { data: session, status } = useSession();
 	const { trigger: newPost } = useSWRMutation(
@@ -21,6 +22,7 @@ const Dashboard: NextPage = () => {
 	);
 	const [count, setCount] = useState(0);
 	const user = useRecoilValue(userState);
+	const now = new DateWrapper().getDateObj();
 	return (
 		<Layout looding={!user} title="ダッシュボード">
 			<h1 className="animate__animated animate__backInLeft">Dashboard</h1>
@@ -48,6 +50,9 @@ const Dashboard: NextPage = () => {
 			<p>ロール: {user?.role || "loading..."}</p>
 			<p>ステータス: {status}</p>
 			<p>ユーザー: {user?.name || "loading..."}</p>
+			<p>
+				{now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
+			</p>
 		</Layout>
 	);
 };

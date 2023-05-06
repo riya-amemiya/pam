@@ -1,6 +1,6 @@
 import SEO from "./SEO";
 import Header from "./Header";
-import { Looding } from "./Looding";
+import { Looding } from "../stories/Looding/Looding";
 const Layout = ({
 	children,
 	looding,
@@ -31,7 +31,7 @@ const Layout = ({
 	header?: boolean;
 }) => {
 	return (
-		<div>
+		<div className="h-full w-full">
 			<SEO
 				description={description}
 				images={images}
@@ -39,12 +39,12 @@ const Layout = ({
 				title={title}
 				twitter={twitter}
 			/>
-			<div className={looding ? "hidden" : ""}>
+			<div className={`${looding ? "hidden" : ""} h-full w-full`}>
 				{header && <Header />}
 
-				<main className={className}>{children}</main>
+				<main className={`${className} h-full w-full`}>{children}</main>
 			</div>
-			<div className={looding ? "" : "hidden"}>
+			<div className={`${looding ? "" : "hidden"} h-full w-full`}>
 				<Looding />
 			</div>
 		</div>
