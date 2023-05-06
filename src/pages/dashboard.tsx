@@ -4,12 +4,13 @@ import { useSession } from "next-auth/react";
 import { type NextPage } from "next/types";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
-import Button from "@mui/material/Button";
 import { fetcherPost } from "@/lib/fetcherPost";
 import { fetcherGet } from "@/lib/fetcherGet";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/atom/userState";
 import { DateWrapper } from "umt/module/Date/DateWrapper";
+import TextField from "@mui/material/TextField";
+import { Button } from "@/stories/Button";
 const Dashboard: NextPage = () => {
 	const { data: session, status } = useSession();
 	const { trigger: newPost } = useSWRMutation(
@@ -54,6 +55,24 @@ const Dashboard: NextPage = () => {
 			<p>
 				{now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
 			</p>
+			<form
+				onSubmit={(e) => {
+					const target = e.target as typeof e.target & {
+						GitHub?: { value: string };
+					};
+					alert(target.GitHub?.value);
+				}}
+			>
+				<TextField
+					className="text-blue-500"
+					type="text"
+					name="GitHub"
+					placeholder="GitHub Account Name"
+				/>
+				<Button type="submit" size="large">
+					Submit
+				</Button>
+			</form>
 		</Layout>
 	);
 };
