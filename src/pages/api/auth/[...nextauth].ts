@@ -27,5 +27,9 @@ export const authOptions: NextAuthOptions = {
 const authHandler = ( req: NextApiRequest, res: NextApiResponse ) => NextAuth( req, res, authOptions );
 export default authHandler
 
+export const config = {
+  runtime: "edge",
+}
+
 
 

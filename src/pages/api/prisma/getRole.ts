@@ -28,3 +28,6 @@ export default async function handler(
 		res.status(200).json({ statusCode: 200, message });
 	}
 }
+export const config = {
+	runtime: "edge",
+};
