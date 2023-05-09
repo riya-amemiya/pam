@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/prisma";
 import { NewPostReq } from "types/prismaType";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
+import { newPostService } from "./service/newPost.service";
 
 export default async function handler(
 	req: NextApiRequest,
@@ -11,24 +11,7 @@ export default async function handler(
 	const data: NewPostReq = JSON.parse(req.body);
 	const session = await getServerSession(req, res, authOptions);
 	if (session) {
-		const userId = await prisma.user
-			.findUnique({
-				where: { email: session?.user?.email || "" },
-			})
-			.then((user) => user?.id);
-		const newPost = await prisma.post.create({
-			data: {
-				title: data.title,
-				content: data.content,
-				authorId: userId,
-			},
-		});
-		await prisma.postRelationTag.create({
-			data: {
-				postId: newPost.id,
-				tagName: "default",
-			},
-		});
+		await newPostService(session, data);
 		res.status(200).json({ statusCode: 200, message: "newPost" });
 	}
 }
