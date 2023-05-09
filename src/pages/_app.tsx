@@ -27,7 +27,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 				email: session.user.email || "",
 				name: session.user.name || "",
 				image: session.user.image || "",
-				role: data?.message || "USER",
+				role: data?.roleName || "USER",
 			});
 		}
 	}
