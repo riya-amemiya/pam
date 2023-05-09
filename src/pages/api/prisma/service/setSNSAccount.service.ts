@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import type { Session } from "next-auth";
-import type { SetSNSAccountReq } from "types/prismaType";
+import type { SetSNSAccountReq } from "types/prisma";
 
 export const setSNSAccountService = async (
 	session: Session,

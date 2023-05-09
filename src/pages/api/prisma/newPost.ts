@@ -1,4 +1,4 @@
-import { NewPostReq } from "types/prismaType";
+import { NewPostReq, NewPostRes } from "types/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
@@ -12,6 +12,7 @@ export default async function handler(
 	const session = await getServerSession(req, res, authOptions);
 	if (session) {
 		await newPostService(session, data);
-		res.status(200).json({ statusCode: 200, message: "newPost" });
+		const returnData: NewPostRes = { statusCode: 200, message: "newPost" };
+		res.status(200).json(returnData);
 	}
 }

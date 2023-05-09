@@ -7,7 +7,7 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { userState } from "@/atom/userState";
 import { fetcherGet } from "@/lib/fetcherGet";
 import useSWRMutation from "swr/mutation";
-import { GetRoleRes } from "types/prismaType";
+import { GetRoleRes } from "types/prisma";
 import { lightTheme, darkTheme } from "@/lib/themes";
 import { ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";

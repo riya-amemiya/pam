@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import type { Session } from "next-auth";
-import type { NewPostReq } from "types/prismaType";
+import type { NewPostReq } from "types/prisma";
 export const newPostService = async (session: Session, data: NewPostReq) => {
 	const userId = await prisma.user
 		.findUnique({

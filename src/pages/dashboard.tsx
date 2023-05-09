@@ -5,7 +5,7 @@ import {
 	NewPostRes,
 	SetSNSAccountReq,
 	SetSNSAccountRes,
-} from "types/prismaType";
+} from "types/prisma";
 import { useSession } from "next-auth/react";
 import { type NextPage } from "next/types";
 import { useState } from "react";
