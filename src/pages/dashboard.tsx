@@ -43,6 +43,8 @@ const Dashboard: NextPage = () => {
 					setCount(count + 1);
 					newPost({ title: "Test", content: "Test" });
 				}}
+				variant="contained"
+				color="primary"
 			>
 				newPost
 			</Button>
