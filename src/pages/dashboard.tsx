@@ -1,5 +1,11 @@
 import Layout from "@/components/Layout";
-import { NewPostReq } from "types/prismaType";
+import {
+	GetPostRes,
+	NewPostReq,
+	NewPostRes,
+	SetSNSAccountReq,
+	SetSNSAccountRes,
+} from "types/prisma";
 import { useSession } from "next-auth/react";
 import { type NextPage } from "next/types";
 import { useState } from "react";
@@ -15,11 +21,15 @@ const Dashboard: NextPage = () => {
 	const { data: session, status } = useSession();
 	const { trigger: newPost } = useSWRMutation(
 		"/api/prisma/newPost",
-		fetcherPost<NewPostReq>,
+		fetcherPost<NewPostReq, NewPostRes>,
 	);
 	const { trigger: getPost, data: postData } = useSWRMutation(
 		"/api/prisma/getPost",
-		fetcherGet,
+		fetcherGet<GetPostRes>,
+	);
+	const { trigger: setSNSAccount } = useSWRMutation(
+		"/api/prisma/setSNSAccount",
+		fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
 	);
 	const [count, setCount] = useState(0);
 	const user = useRecoilValue(userState);
@@ -60,7 +70,9 @@ const Dashboard: NextPage = () => {
 					const target = e.target as typeof e.target & {
 						GitHub?: { value: string };
 					};
-					alert(target.GitHub?.value);
+					setSNSAccount({
+						GitHubLink: target.GitHub?.value || "",
+					});
 				}}
 			>
 				<TextField
