@@ -3,7 +3,7 @@ import type { Session } from "next-auth";
 import type { NewPostReq } from "types/prisma";
 export const newPostService = async (session: Session, data: NewPostReq) => {
 	const userId = await prisma.user
-		.findUnique({
+		.findUniqueOrThrow({
 			where: { email: session?.user?.email || "" },
 		})
 		.then((user) => user?.id);

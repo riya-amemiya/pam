@@ -7,27 +7,34 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { userState } from "@/atom/userState";
 import { fetcherGet } from "@/lib/fetcherGet";
 import useSWRMutation from "swr/mutation";
-import { GetRoleRes } from "types/prisma";
 import { lightTheme, darkTheme } from "@/lib/themes";
 import { ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { GetUserDataRes } from "types/prisma/getUserDataType";
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	const { data: session } = useSession();
 	const [user, setUser] = useRecoilState(userState);
-	const { trigger, data, isMutating } = useSWRMutation<GetRoleRes>(
-		"/api/prisma/getRole",
-		fetcherGet,
-	);
-
+	const {
+		trigger: getUserData,
+		data: userData,
+		isMutating,
+	} = useSWRMutation<GetUserDataRes>("/api/prisma/getUserData", fetcherGet);
 	if (!user && session) {
-		trigger();
-
-		if (!isMutating && data) {
+		getUserData();
+		console.log("====================================");
+		console.log(userData);
+		console.log("====================================");
+		if (!isMutating && userData) {
 			setUser({
 				email: session.user.email || "",
 				name: session.user.name || "",
 				image: session.user.image || "",
-				role: data?.roleName || "USER",
+				role: userData?.role?.roleName || "USER",
+				sns: {
+					GitHub: userData.snsAccount?.GitHub || "",
+					Twitter: userData.snsAccount?.Twitter || "",
+					Facebook: userData.snsAccount?.Facebook || "",
+				},
 			});
 		}
 	}

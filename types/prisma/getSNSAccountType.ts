@@ -1,6 +1,7 @@
 import { User } from "@prisma/client";
 
 export type GetSNSAccountRes = {
-	statusCode: number;
-	github: User["GitHub"];
+	GitHub: User["GitHub"];
+	Facebook: User["Facebook"];
+	Twitter: User["Twitter"];
 };

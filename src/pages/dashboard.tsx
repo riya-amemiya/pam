@@ -17,6 +17,7 @@ import { userState } from "@/atom/userState";
 import { DateWrapper } from "umt/module/Date/DateWrapper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
+
 const Dashboard: NextPage = () => {
 	const { data: session, status } = useSession();
 	const { trigger: newPost } = useSWRMutation(
@@ -35,7 +36,7 @@ const Dashboard: NextPage = () => {
 	const user = useRecoilValue(userState);
 	const now = new DateWrapper().getDateObj();
 	return (
-		<Layout looding={!user} title="ダッシュボード">
+		<Layout looding={!user ? true : !user.sns} title="ダッシュボード">
 			<h1 className="animate__animated animate__backInLeft">Dashboard</h1>
 			<p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
 			<Button
@@ -75,12 +76,16 @@ const Dashboard: NextPage = () => {
 					});
 				}}
 			>
-				<TextField
-					className="text-blue-500"
-					name="GitHub"
-					placeholder="GitHub Account Name"
-					type="text"
-				/>
+				{user?.sns?.GitHub && (
+					<TextField
+						className="text-blue-500"
+						name="GitHub"
+						placeholder="GitHub Account Name"
+						type="text"
+						defaultValue={user?.sns?.GitHub || ""}
+					/>
+				)}
+
 				<Button size="large" type="submit">
 					Submit
 				</Button>
