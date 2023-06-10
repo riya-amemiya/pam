@@ -3,13 +3,13 @@ import type { Session } from "next-auth";
 import type { SetSNSAccountReq } from "types/prisma";
 
 export const setSNSAccountService = async (
-	session: Session,
-	data: SetSNSAccountReq,
+  session: Session,
+  data: SetSNSAccountReq,
 ) => {
-	await prisma.user.update({
-		where: { email: session?.user?.email || "" },
-		data: {
-			GitHub: data.GitHubLink,
-		},
-	});
+  await prisma.user.update({
+    where: { email: session?.user?.email || "" },
+    data: {
+      GitHub: data.GitHubLink,
+    },
+  });
 };

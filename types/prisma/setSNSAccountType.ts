@@ -1,7 +1,7 @@
 export type SetSNSAccountReq = {
-	GitHubLink: string;
+  GitHubLink: string;
 };
 
 export type SetSNSAccountRes = {
-	statusCode: number;
+  statusCode: number;
 };

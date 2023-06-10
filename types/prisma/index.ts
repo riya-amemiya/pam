@@ -5,16 +5,16 @@ import { NewPostReq, NewPostRes } from "./newPostType";
 import { SetSNSAccountReq, SetSNSAccountRes } from "./setSNSAccountType";
 
 export type PrismaResDefault = {
-	statusCode: number;
-	message: string;
+  statusCode: number;
+  message: string;
 };
 
 export type {
-	GetRoleRes,
-	GetPostRes,
-	GetSNSAccountRes,
-	NewPostReq,
-	NewPostRes,
-	SetSNSAccountReq,
-	SetSNSAccountRes,
+  GetRoleRes,
+  GetPostRes,
+  GetSNSAccountRes,
+  NewPostReq,
+  NewPostRes,
+  SetSNSAccountReq,
+  SetSNSAccountRes,
 };
