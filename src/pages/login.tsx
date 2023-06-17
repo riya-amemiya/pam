@@ -7,27 +7,33 @@ import type {
 import { getServerSession } from "next-auth/next";
 import Layout from "@/components/Layout";
 import { authOptions } from "./api/auth/[...nextauth]";
+import GoogleIcon from "@mui/icons-material/Google";
 const Login: NextPage<{
   providers: InferGetServerSidePropsType<typeof getServerSideProps>;
 }> = ({ providers }) => {
   return (
     <Layout title="ログイン">
-      {Object.values(providers).map((provider, index) => {
-        return (
-          // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          <div key={index}>
-            <button
-              onClick={() =>
-                signIn(provider?.id as unknown as ClientSafeProvider["id"])
-              }
-              type="button"
-            >
-              Sign in with{" "}
-              {provider?.name as unknown as ClientSafeProvider["name"]}
-            </button>
-          </div>
-        );
-      })}
+      <div className="flex flex-col items-center justify-center">
+        {Object.values(providers).map((provider, index) => {
+          const providerId =
+            provider?.id as unknown as ClientSafeProvider["id"];
+          const providerName =
+            provider?.name as unknown as ClientSafeProvider["name"];
+          return (
+            // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            <div key={index}>
+              <button
+                onClick={() => signIn(providerId)}
+                type="button"
+                className="flex items-center"
+              >
+                <span>{providerName === "Google" && <GoogleIcon />}</span>
+                <span>ログイン</span>
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </Layout>
   );
 };
