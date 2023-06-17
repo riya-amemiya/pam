@@ -1,33 +1,122 @@
-name: Node.js 18 Build and Test on Pull Request
-
+name: JavaScript CI
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'src/**'
-      - '.storybook/**'
-      - 'package.json'
-      - 'yarn.lock'
-      - 'tsconfig.json'
-      - 'jest.config.js'
+    workflow_dispatch:
+    push:
+        branches:
+            - master
+            - develop
+        paths:
+            - 'src/**/*'
+            - '.github/workflows/**'
+    pull_request:
+        branches:
+            - master
+            - develop
+        paths:
+            - 'src/**/*'
+            - '.github/workflows/**'
+            - '.storybook/**/*'
+            - 'package.json'
+            - 'yarn.lock'
+            - 'tsconfig.json'
+            - 'jest.config.js'
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
-    - name: Use Node.js 18
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18.x
-    - name: Install dependencies
-      run: yarn install
-    - name: Build
-      run: yarn build:next
-    - name: Test
-      run: yarn test
+    setup:
+        name: JavaScript Setup
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                os: [ubuntu-latest]
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Cache Restore devDependencies
+              id: cache-restore-dev-depends
+              uses: actions/cache/restore@v3
+              with:
+                  path: '**/node_modules'
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+            - name: Install dependencies
+              if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
+              run: yarn install --frozen-lockfile --check-files
+            - name: Cache Save devDependencies
+              if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
+              id: cache-save-dev-depends
+              uses: actions/cache/save@v3
+              with:
+                  path: '**/node_modules'
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+    lint:
+        needs: setup
+        name: JavaScript Lint
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                os: [ubuntu-latest]
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Cache Restore devDependencies
+              id: cache-restore-dev-depends
+              uses: actions/cache/restore@v3
+              with:
+                  path: '**/node_modules'
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+            - name: Lint with yarn
+              run: yarn lint:nofix
+    test:
+        needs: setup
+        name: JavaScript Test
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                os: [ubuntu-latest]
+                shard: [1/2, 2/2]
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js  ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Cache Restore devDependencies
+              id: cache-restore-dev-depends
+              uses: actions/cache/restore@v3
+              with:
+                  path: '**/node_modules'
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+            - name: Run tests with yarn
+              run: yarn test --shard ${{ matrix.shard }}
+    build:
+        needs: [test, lint]
+        name: JavaScript Build
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                os: [ubuntu-latest]
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Cache Restore devDependencies
+              id: cache-restore-dev-depends
+              uses: actions/cache/restore@v3
+              with:
+                  path: '**/node_modules'
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+            - name: Build with yarn
+              run: yarn next build

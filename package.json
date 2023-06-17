@@ -10,6 +10,7 @@
     "start": "next start",
     "sitemap": "next-sitemap",
     "lint": "eslint --fix src/ && rome check . && next lint && yarn markuplint && yarn typed-scss && tsc && rome format . --write",
+    "lint:nofix": "eslint src/ && rome check . && next lint && yarn markuplint && yarn typed-scss && tsc && rome format .",
     "typed-scss": "typed-scss-modules \"src/**/*.{scss,css}\"",
     "typed-scss:watch": "typed-scss-modules \"src/**/*.{scss,css}\" --watch",
     "markuplint": "markuplint \"./src/**/*.{jsx,tsx}\"",
