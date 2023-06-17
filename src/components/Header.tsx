@@ -96,6 +96,17 @@ const Header = () => {
           horizontal: "left",
         }}
       >
+        <MenuItem>
+          <Link href="/">
+            <p>ホーム</p>
+          </Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href="/dashboard">
+            <p>ダッシュボード</p>
+          </Link>
+        </MenuItem>
         {reducer(session)}
       </Menu>
     </header>
