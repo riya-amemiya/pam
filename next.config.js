@@ -16,13 +16,9 @@ const nextConfig = {
       ],
     },
   },
-  // serverRuntimeConfig: {
-  // 	mySecret: "secret",
-  // 	key: process.env.AUTH_KEY,
-  // },
-  // env: {
-  // 	BACKEND_URL: process.env.BACKEND_BASE_URL,
-  // },
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

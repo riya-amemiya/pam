@@ -1,31 +1,44 @@
-import Button from "@mui/material/Button";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { match } from "ts-pattern";
+import Image from "next/image";
+import { useState } from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Link from "next/link";
 const Header = () => {
   const { data: session } = useSession();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const reducer = (data: typeof session) => {
     return match(data)
       .with(null, () => {
         return (
-          <Button
+          <MenuItem
             onClick={() => {
+              setAnchorEl(null);
               signIn();
             }}
           >
             ログイン
-          </Button>
+          </MenuItem>
         );
       })
       .otherwise(() => {
         return (
-          <Button
+          <MenuItem
             onClick={() => {
+              setAnchorEl(null);
               signOut();
             }}
           >
             ログアウト
-          </Button>
+          </MenuItem>
         );
       });
   };
@@ -34,21 +47,57 @@ const Header = () => {
       style={{
         backgroundColor: "white",
         height: "50px",
+        width: "100%",
         color: "black",
+        cursor: "default",
       }}
+      className="absolute top-0"
     >
-      <Link
-        href={"/"}
-        style={{
-          fontSize: "20px",
-          fontWeight: "bold",
-          textDecoration: "none",
-          color: "black",
+      <div className="h-full w-full flex justify-between items-center">
+        <div>
+          <Link href="/">
+            <div className="flex items-center">
+              <Image
+                className="rounded-full cursor-pointer"
+                alt="ロゴ"
+                src={"/logo.png"}
+                width={25}
+                height={25}
+                onClick={handleClick}
+              />
+              <span>PAM</span>
+            </div>
+          </Link>
+        </div>
+        <div>
+          {session?.user?.image && (
+            <Image
+              className="rounded-full cursor-pointer"
+              alt="プロフィール画像"
+              src={session?.user?.image}
+              width={50}
+              height={50}
+              onClick={handleClick}
+            />
+          )}
+        </div>
+      </div>
+      <Menu
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
         }}
       >
-        Home
-      </Link>
-      {reducer(session)}
+        {reducer(session)}
+      </Menu>
     </header>
   );
 };

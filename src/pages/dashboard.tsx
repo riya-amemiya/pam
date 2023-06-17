@@ -39,7 +39,6 @@ const Dashboard: NextPage = () => {
       looding={isSetSNSAccountLoading || isGetUserDataLoading}
       title="ダッシュボード"
     >
-      <h1 className="animate__animated animate__backInLeft">Dashboard</h1>
       <p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
       <Button
         onClick={() => {
@@ -49,13 +48,16 @@ const Dashboard: NextPage = () => {
       >
         newPost
       </Button>
-      <p>カウント: {count}</p>
-      <p>ロール: {user?.role[0]?.roleName || "loading..."}</p>
-      <p>ステータス: {status}</p>
-      <p>ユーザー: {session?.user?.name || "loading..."}</p>
-      <p>
-        {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
-      </p>
+      <ul>
+        <li>カウント: {count}</li>
+        <li>ロール: {user?.role[0]?.roleName || "loading..."}</li>
+        <li>ステータス: {status}</li>
+        <li>ユーザー: {session?.user?.name || "loading..."}</li>
+        <li>
+          {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
+        </li>
+      </ul>
+
       <form
         onSubmit={(e) => {
           const target = e.target as typeof e.target & {

@@ -43,7 +43,14 @@ const Layout = ({
       <div className={`${looding ? "hidden" : ""} h-full w-full`}>
         {header && <Header />}
 
-        <main className={`${className} h-full w-full`}>{children}</main>
+        <main
+          className={`${className} h-full w-full`}
+          style={{
+            marginTop: "50px",
+          }}
+        >
+          {children}
+        </main>
       </div>
       <div className={`${looding ? "" : "hidden"} h-full w-full`}>
         <Looding />
