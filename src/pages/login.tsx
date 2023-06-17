@@ -23,9 +23,9 @@ const Login: NextPage<{
             // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <div key={index}>
               <button
+                className="flex items-center"
                 onClick={() => signIn(providerId)}
                 type="button"
-                className="flex items-center"
               >
                 <span>{providerName === "Google" && <GoogleIcon />}</span>
                 <span>ログイン</span>
