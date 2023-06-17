@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import {
-  GetPostRes,
   NewPostReq,
   NewPostRes,
   SetSNSAccountReq,
@@ -12,11 +11,11 @@ import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { fetcherPost } from "@/lib/fetcherPost";
 import { fetcherGet } from "@/lib/fetcherGet";
-import { useRecoilValue } from "recoil";
-import { userState } from "@/atom/userState";
 import { DateWrapper } from "umt/module/Date/DateWrapper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
+import useSWR from "swr";
+import { GetUserDataRes } from "types/prisma/getUserDataType";
 
 const Dashboard: NextPage = () => {
   const { data: session, status } = useSession();
@@ -24,20 +23,22 @@ const Dashboard: NextPage = () => {
     "/api/prisma/newPost",
     fetcherPost<NewPostReq, NewPostRes>,
   );
-  const { trigger: getPost, data: postData } = useSWRMutation(
-    "/api/prisma/getPost",
-    fetcherGet<GetPostRes>,
-  );
-  const { trigger: setSNSAccount } = useSWRMutation(
-    "/api/prisma/setSNSAccount",
-    fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
+  const { trigger: setSNSAccount, isMutating: isSetSNSAccountLoading } =
+    useSWRMutation(
+      "/api/prisma/setSNSAccount",
+      fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
+    );
+  const { data: user, isLoading: isGetUserDataLoading } = useSWR(
+    "/api/prisma/getUserData",
+    fetcherGet<GetUserDataRes>,
   );
   const [count, setCount] = useState(0);
-  const user = useRecoilValue(userState);
   const now = new DateWrapper().getDateObj();
   return (
-    <Layout looding={user ? !user.sns : true} title="ダッシュボード">
-      <h1 className="animate__animated animate__backInLeft">Dashboard</h1>
+    <Layout
+      looding={isSetSNSAccountLoading || isGetUserDataLoading}
+      title="ダッシュボード"
+    >
       <p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
       <Button
         onClick={() => {
@@ -47,25 +48,16 @@ const Dashboard: NextPage = () => {
       >
         newPost
       </Button>
-      <Button
-        color="primary"
-        onClick={() => {
-          getPost();
-          console.log("====================================");
-          console.log(postData);
-          console.log("====================================");
-        }}
-        variant="outlined"
-      >
-        getPost
-      </Button>
-      <p>カウント: {count}</p>
-      <p>ロール: {user?.role || "loading..."}</p>
-      <p>ステータス: {status}</p>
-      <p>ユーザー: {user?.name || "loading..."}</p>
-      <p>
-        {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
-      </p>
+      <ul>
+        <li>カウント: {count}</li>
+        <li>ロール: {user?.role[0]?.roleName || "loading..."}</li>
+        <li>ステータス: {status}</li>
+        <li>ユーザー: {session?.user?.name || "loading..."}</li>
+        <li>
+          {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
+        </li>
+      </ul>
+
       <form
         onSubmit={(e) => {
           const target = e.target as typeof e.target & {
@@ -76,10 +68,10 @@ const Dashboard: NextPage = () => {
           });
         }}
       >
-        {user?.sns?.GitHub && (
+        {user?.GitHub && (
           <TextField
             className="text-blue-500"
-            defaultValue={user?.sns?.GitHub || ""}
+            defaultValue={user?.GitHub || ""}
             name="GitHub"
             placeholder="GitHub Account Name"
             type="text"
