@@ -10,8 +10,8 @@ export default async function handler(
 ) {
   const session = await getServerSession(req, res, authOptions);
   if (session) {
-    const { roleName } = await getRoleService(session);
-    const returnData: GetRoleRes = { statusCode: 200, roleName };
+    const role = await getRoleService(session);
+    const returnData: GetRoleRes = { statusCode: 200, role };
     res.status(200).json(returnData);
   }
 }

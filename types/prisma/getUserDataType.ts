@@ -1,6 +1,3 @@
-import { User, UserRelationRole } from "@prisma/client";
+import { Post, User, UserRelationRole } from "@prisma/client";
 
-export type GetUserDataRes = {
-  snsAccount: User;
-  role: UserRelationRole;
-};
+export type GetUserDataRes = User & { role: UserRelationRole[]; post: Post[] };

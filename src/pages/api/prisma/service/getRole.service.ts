@@ -5,7 +5,7 @@ export const getRoleService = async (session: Session) => {
     where: { email: session?.user?.email || "" },
   });
   return (
-    (await prisma.userRelationRole.findFirst({
+    (await prisma.userRelationRole.findMany({
       where: {
         userId: user?.id,
       },

@@ -1,11 +1,18 @@
 import type { Session } from "next-auth";
-import { getSNSAccountService } from "./getSNSAccount.service";
 import { getRoleService } from "./getRole.service";
+import { prisma } from "@/lib/prisma";
+import { getPostService } from "./getPost.service";
 export const getUserDataService = async (session: Session) => {
-  const snsAccount = await getSNSAccountService(session);
+  const user = await prisma.user.findFirstOrThrow({
+    where: {
+      email: session.user?.email,
+    },
+  });
   const role = await getRoleService(session);
+  const post = await getPostService(session);
   return {
-    snsAccount,
+    ...user,
     role,
+    post,
   };
 };
