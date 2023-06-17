@@ -12,9 +12,11 @@ const Home: NextPage<Props> = () => {
     UI: "Material-UI",
     StateManagement: "Recoil",
     CSS: "Tailwind CSS",
+    Animation: "Animate.css",
     Hosting: "Vercel",
     Auth: "NextAuth.js",
     Database: "Vercel DB",
+    ORM: "Prisma",
   };
   return (
     <>
