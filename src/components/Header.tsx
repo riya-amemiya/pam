@@ -44,6 +44,7 @@ const Header = () => {
   };
   return (
     <header
+      className="absolute top-0"
       style={{
         backgroundColor: "white",
         height: "50px",
@@ -51,19 +52,18 @@ const Header = () => {
         color: "black",
         cursor: "default",
       }}
-      className="absolute top-0"
     >
       <div className="h-full w-full flex justify-between items-center">
         <div>
           <Link href="/">
             <div className="flex items-center">
               <Image
-                className="rounded-full cursor-pointer"
                 alt="ロゴ"
-                src={"/logo.png"}
-                width={25}
+                className="rounded-full cursor-pointer"
                 height={25}
                 onClick={handleClick}
+                src={"/logo.png"}
+                width={25}
               />
               <span>PAM</span>
             </div>
@@ -72,25 +72,25 @@ const Header = () => {
         <div>
           {session?.user?.image && (
             <Image
-              className="rounded-full cursor-pointer"
               alt="プロフィール画像"
-              src={session?.user?.image}
-              width={50}
+              className="rounded-full cursor-pointer"
               height={50}
               onClick={handleClick}
+              src={session?.user?.image}
+              width={50}
             />
           )}
         </div>
       </div>
       <Menu
-        aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
         }}
+        aria-labelledby="demo-positioned-button"
+        onClose={handleClose}
+        open={open}
         transformOrigin={{
           vertical: "top",
           horizontal: "left",

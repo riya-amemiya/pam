@@ -22,9 +22,9 @@ export default function Chat() {
       <form onSubmit={handleSubmit}>
         <TextField
           multiline={true}
-          value={input}
-          placeholder="Say something..."
           onChange={handleInputChange}
+          placeholder="Say something..."
+          value={input}
         />
         <Button type="submit">Send</Button>
       </form>
