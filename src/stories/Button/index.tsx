@@ -31,11 +31,16 @@ export const Button = ({
   size = "medium",
   children,
   color = "primary",
+  className,
   ...props
 }: ButtonProps) => {
   // const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   return (
-    <MuiButton className={style({ size, color })} type="button" {...props}>
+    <MuiButton
+      className={`${style({ size, color })} ${className}`}
+      type="button"
+      {...props}
+    >
       {children}
     </MuiButton>
   );
