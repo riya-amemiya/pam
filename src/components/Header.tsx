@@ -1,10 +1,13 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { match } from "ts-pattern";
 import Image from "next/image";
 import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
+import LogoutIcon from "@mui/icons-material/Logout";
+import HomeIcon from "@mui/icons-material/Home";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Button } from "@/stories/Button";
 const Header = () => {
   const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -15,33 +18,7 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const reducer = (data: typeof session) => {
-    return match(data)
-      .with(null, () => {
-        return (
-          <MenuItem
-            onClick={() => {
-              setAnchorEl(null);
-              signIn();
-            }}
-          >
-            ログイン
-          </MenuItem>
-        );
-      })
-      .otherwise(() => {
-        return (
-          <MenuItem
-            onClick={() => {
-              setAnchorEl(null);
-              signOut();
-            }}
-          >
-            ログアウト
-          </MenuItem>
-        );
-      });
-  };
+
   return (
     <header
       className="absolute top-0"
@@ -70,7 +47,7 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          {session?.user?.image && (
+          {session?.user?.image ? (
             <Image
               alt="プロフィール画像"
               className="rounded-full cursor-pointer"
@@ -79,6 +56,16 @@ const Header = () => {
               src={session?.user?.image}
               width={50}
             />
+          ) : (
+            <Button
+              className="mr-2"
+              onClick={() => {
+                setAnchorEl(null);
+                signIn();
+              }}
+            >
+              ログイン
+            </Button>
           )}
         </div>
       </div>
@@ -98,16 +85,26 @@ const Header = () => {
       >
         <MenuItem>
           <Link href="/">
-            <p>ホーム</p>
+            <HomeIcon />
+            ホーム
           </Link>
         </MenuItem>
 
         <MenuItem>
           <Link href="/dashboard">
-            <p>ダッシュボード</p>
+            <AccountCircleIcon />
+            ダッシュボード
           </Link>
         </MenuItem>
-        {reducer(session)}
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            signOut();
+          }}
+        >
+          <LogoutIcon />
+          ログアウト
+        </MenuItem>
       </Menu>
     </header>
   );
