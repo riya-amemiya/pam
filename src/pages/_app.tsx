@@ -22,9 +22,6 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
   } = useSWRMutation<GetUserDataRes>("/api/prisma/getUserData", fetcherGet);
   if (!user && session) {
     getUserData();
-    console.log("====================================");
-    console.log(userData);
-    console.log("====================================");
     if (!isMutating && userData) {
       setUser({
         email: session.user.email || "",

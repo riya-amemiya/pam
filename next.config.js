@@ -6,7 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    appDir: false,
+    appDir: true,
     legacyBrowsers: false,
     outputFileTracingExcludes: {
       "*": [
