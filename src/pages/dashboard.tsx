@@ -66,6 +66,7 @@ const Dashboard: NextPage = () => {
 
       <form
         onSubmit={(e) => {
+          e.preventDefault();
           const target = e.target as typeof e.target & {
             GitHub?: { value: string };
           };
