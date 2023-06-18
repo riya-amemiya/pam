@@ -28,7 +28,7 @@ const Dashboard: NextPage = () => {
       "/api/prisma/setSNSAccount",
       fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
     );
-  const { data: user, isLoading: isGetUserDataLoading } = useSWR(
+  const { data: userData, isLoading: isGetUserDataLoading } = useSWR(
     "/api/prisma/getUserData",
     fetcherGet<GetUserDataRes>,
   );
@@ -50,7 +50,13 @@ const Dashboard: NextPage = () => {
       </Button>
       <ul>
         <li>カウント: {count}</li>
-        <li>ロール: {user?.role[0]?.roleName || "loading..."}</li>
+        <li>
+          ロール:{" "}
+          {(userData &&
+            userData?.statusCode === 200 &&
+            userData?.role[0]?.roleName) ||
+            "loading..."}
+        </li>
         <li>ステータス: {status}</li>
         <li>ユーザー: {session?.user?.name || "loading..."}</li>
         <li>
@@ -68,10 +74,10 @@ const Dashboard: NextPage = () => {
           });
         }}
       >
-        {user?.GitHub && (
+        {userData && userData?.statusCode === 200 && userData.user.GitHub && (
           <TextField
             className="text-blue-500"
-            defaultValue={user?.GitHub || ""}
+            defaultValue={userData.user?.GitHub || ""}
             name="GitHub"
             placeholder="GitHub Account Name"
             type="text"

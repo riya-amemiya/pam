@@ -11,7 +11,7 @@ export const getUserDataService = async (session: Session) => {
   const role = await getRoleService(session);
   const post = await getPostService(session);
   return {
-    ...user,
+    user,
     role,
     post,
   };
