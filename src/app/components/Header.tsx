@@ -10,9 +10,10 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ForumIcon from "@mui/icons-material/Forum";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import { Button } from "@/stories/Button";
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -50,7 +51,9 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          {session?.user?.image ? (
+          {status === "loading" ? (
+            <RefreshIcon className="animate-spin" />
+          ) : session?.user?.image ? (
             <Image
               alt="プロフィール画像"
               className="rounded-full cursor-pointer"
