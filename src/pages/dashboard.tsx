@@ -14,7 +14,7 @@ import { fetcherGet } from "@/lib/fetcherGet";
 import { DateWrapper } from "umt/module/Date/DateWrapper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { GetUserDataRes } from "types/prisma/getUserDataType";
 
 const Dashboard: NextPage = () => {
@@ -32,6 +32,7 @@ const Dashboard: NextPage = () => {
     "/api/prisma/getUserData",
     fetcherGet<GetUserDataRes>,
   );
+  const { mutate: mutateGetUserData } = useSWRConfig();
   const [count, setCount] = useState(0);
   const now = new DateWrapper().getDateObj();
   return (
@@ -65,14 +66,15 @@ const Dashboard: NextPage = () => {
       </ul>
 
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           const target = e.target as typeof e.target & {
             GitHub?: { value: string };
           };
-          setSNSAccount({
+          await setSNSAccount({
             GitHubLink: target.GitHub?.value || "",
           });
+          await mutateGetUserData("/api/prisma/getUserData");
         }}
       >
         {userData && userData?.statusCode === 200 && userData.user.GitHub && (
