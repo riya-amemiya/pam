@@ -54,7 +54,7 @@ const Dashboard: NextPage = () => {
           ロール:{" "}
           {(userData &&
             userData?.statusCode === 200 &&
-            userData?.role[0]?.roleName) ||
+            userData?.user.role[0]?.roleName) ||
             "loading..."}
         </li>
         <li>ステータス: {status}</li>
