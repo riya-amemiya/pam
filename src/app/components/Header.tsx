@@ -1,3 +1,5 @@
+"use client";
+
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -7,6 +9,7 @@ import Link from "next/link";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ForumIcon from "@mui/icons-material/Forum";
 import { Button } from "@/stories/Button";
 const Header = () => {
   const { data: session } = useSession();
@@ -94,6 +97,12 @@ const Header = () => {
           <Link href="/dashboard">
             <AccountCircleIcon />
             ダッシュボード
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link href="/chat">
+            <ForumIcon />
+            チャット
           </Link>
         </MenuItem>
         <MenuItem

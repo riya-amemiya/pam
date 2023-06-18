@@ -6,12 +6,17 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
+  let returnData: GetUserDataRes = {
+    statusCode: 401,
+    user: null,
+    role: null,
+    post: null,
+  };
   if (session) {
-    const data: GetUserDataRes = {
+    returnData = {
       ...(await getUserDataService(session)),
       statusCode: 200,
     };
-    return NextResponse.json(data);
   }
-  return NextResponse.json({ status: 401 });
+  return NextResponse.json(returnData);
 }
