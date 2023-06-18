@@ -3,5 +3,5 @@ export type SetSNSAccountReq = {
 };
 
 export type SetSNSAccountRes = {
-  statusCode: number;
+  statusCode: 200 | 401;
 };

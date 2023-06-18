@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
-import type { NextApiRequest, NextApiResponse } from 'next/types';
+// import type { NextApiRequest, NextApiResponse } from 'next/types';
 import GoogleProvider from 'next-auth/providers/google';
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -24,6 +24,9 @@ export const authOptions: NextAuthOptions = {
     }
   }
 }
-const authHandler = ( req: NextApiRequest, res: NextApiResponse ) => NextAuth( req, res, authOptions );
-export default authHandler
+// const authHandler = ( req: NextApiRequest, res: NextApiResponse ) => NextAuth( req, res, authOptions );
+// export default authHandler
 
+const handler = NextAuth(authOptions);
+
+export {handler as GET,handler as POST}

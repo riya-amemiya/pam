@@ -1,7 +1,8 @@
 import SEO from "./SEO";
-import Header from "./Header";
+
 import { Looding } from "../stories/Looding/Looding";
 import { ReactNode } from "react";
+import Header from "@/app/components/Header";
 const Layout = ({
   children,
   looding,

@@ -6,7 +6,7 @@ import type {
 } from "next/types";
 import { getServerSession } from "next-auth/next";
 import Layout from "@/components/Layout";
-import { authOptions } from "./api/auth/[...nextauth]";
+import { authOptions } from "../app/api/auth/[...nextauth]/route";
 import GoogleIcon from "@mui/icons-material/Google";
 const Login: NextPage<{
   providers: InferGetServerSidePropsType<typeof getServerSideProps>;

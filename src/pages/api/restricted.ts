@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextApiRequest, NextApiResponse } from "next/types";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
