@@ -1,6 +1,6 @@
 export const Looding = ({
   borderColor = "#2D9CDB",
-}: { borderColor: string }) => {
+}: { borderColor?: string }) => {
   return (
     <div className="h-full w-full">
       <div className="flex items-center justify-center h-full w-full self-center">
