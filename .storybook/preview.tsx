@@ -5,29 +5,29 @@ import { darkTheme, lightTheme } from "../src/lib/themes";
 import Template from "./template.mdx";
 import "../src/styles/globals.scss";
 export const decorators = [
-	withThemeFromJSXProvider({
-		themes: {
-			light: lightTheme,
-			dark: darkTheme,
-		},
-		defaultTheme: "light",
-		Provider: ThemeProvider,
-		GlobalStyles: CssBaseline,
-	}),
+  withThemeFromJSXProvider({
+    themes: {
+      light: lightTheme,
+      dark: darkTheme,
+    },
+    defaultTheme: "light",
+    Provider: ThemeProvider,
+    GlobalStyles: CssBaseline,
+  }),
 ];
 const preview: Preview = {
-	parameters: {
-		actions: { argTypesRegex: "^on[A-Z].*" },
-		controls: {
-			matchers: {
-				color: /(background|color)$/i,
-				date: /Date$/,
-			},
-		},
-		docs: {
-			page: Template,
-		},
-	},
+  parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    docs: {
+      page: Template,
+    },
+  },
 };
 
 export default preview;

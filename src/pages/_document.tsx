@@ -1,15 +1,15 @@
 import { Head, Html, Main, NextScript } from "next/document";
 
 function Document() {
-	return (
-		<Html lang="ja">
-			<Head />
-			<body>
-				<Main />
-				<NextScript />
-			</body>
-		</Html>
-	);
+  return (
+    <Html lang="ja">
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
 
 export default Document;

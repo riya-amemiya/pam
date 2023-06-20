@@ -1,94 +1,98 @@
 import Layout from "@/components/Layout";
 import {
-	GetPostRes,
-	NewPostReq,
-	NewPostRes,
-	SetSNSAccountReq,
-	SetSNSAccountRes,
+  NewPostReq,
+  NewPostRes,
+  SetSNSAccountReq,
+  SetSNSAccountRes,
 } from "types/prisma";
 import { useSession } from "next-auth/react";
-import { type NextPage } from "next/types";
+import { NextPage } from "next/types";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { fetcherPost } from "@/lib/fetcherPost";
 import { fetcherGet } from "@/lib/fetcherGet";
-import { useRecoilValue } from "recoil";
-import { userState } from "@/atom/userState";
 import { DateWrapper } from "umt/module/Date/DateWrapper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
+import useSWR, { useSWRConfig } from "swr";
+import { GetUserDataRes } from "types/prisma/getUserDataType";
+
 const Dashboard: NextPage = () => {
-	const { data: session, status } = useSession();
-	const { trigger: newPost } = useSWRMutation(
-		"/api/prisma/newPost",
-		fetcherPost<NewPostReq, NewPostRes>,
-	);
-	const { trigger: getPost, data: postData } = useSWRMutation(
-		"/api/prisma/getPost",
-		fetcherGet<GetPostRes>,
-	);
-	const { trigger: setSNSAccount } = useSWRMutation(
-		"/api/prisma/setSNSAccount",
-		fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
-	);
-	const [count, setCount] = useState(0);
-	const user = useRecoilValue(userState);
-	const now = new DateWrapper().getDateObj();
-	return (
-		<Layout looding={!user} title="ダッシュボード">
-			<h1 className="animate__animated animate__backInLeft">Dashboard</h1>
-			<p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
-			<Button
-				onClick={() => {
-					setCount(count + 1);
-					newPost({ title: "Test", content: "Test" });
-				}}
-				variant="contained"
-				color="primary"
-			>
-				newPost
-			</Button>
-			<Button
-				color="primary"
-				onClick={() => {
-					getPost();
-					console.log("====================================");
-					console.log(postData);
-					console.log("====================================");
-				}}
-				variant="outlined"
-			>
-				getPost
-			</Button>
-			<p>カウント: {count}</p>
-			<p>ロール: {user?.role || "loading..."}</p>
-			<p>ステータス: {status}</p>
-			<p>ユーザー: {user?.name || "loading..."}</p>
-			<p>
-				{now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
-			</p>
-			<form
-				onSubmit={(e) => {
-					const target = e.target as typeof e.target & {
-						GitHub?: { value: string };
-					};
-					setSNSAccount({
-						GitHubLink: target.GitHub?.value || "",
-					});
-				}}
-			>
-				<TextField
-					className="text-blue-500"
-					name="GitHub"
-					placeholder="GitHub Account Name"
-					type="text"
-				/>
-				<Button size="large" type="submit">
-					Submit
-				</Button>
-			</form>
-		</Layout>
-	);
+  const { data: session, status } = useSession();
+  const { trigger: newPost } = useSWRMutation(
+    "/api/prisma/newPost",
+    fetcherPost<NewPostReq, NewPostRes>,
+  );
+  const { trigger: setSNSAccount, isMutating: isSetSNSAccountLoading } =
+    useSWRMutation(
+      "/api/prisma/setSNSAccount",
+      fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
+    );
+  const { data: userData, isLoading: isGetUserDataLoading } = useSWR(
+    "/api/prisma/getUserData",
+    fetcherGet<GetUserDataRes>,
+  );
+  const { mutate: mutateGetUserData } = useSWRConfig();
+  const [count, setCount] = useState(0);
+  const now = new DateWrapper().getDateObj();
+  return (
+    <Layout
+      looding={isSetSNSAccountLoading || isGetUserDataLoading}
+      title="ダッシュボード"
+    >
+      <p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
+      <Button
+        onClick={() => {
+          setCount(count + 1);
+          newPost({ title: "Test", content: "Test" });
+        }}
+      >
+        newPost
+      </Button>
+      <ul>
+        <li>カウント: {count}</li>
+        <li>
+          ロール:{" "}
+          {(userData &&
+            userData?.statusCode === 200 &&
+            userData?.user.role[0]?.roleName) ||
+            "loading..."}
+        </li>
+        <li>ステータス: {status}</li>
+        <li>ユーザー: {session?.user?.name || "loading..."}</li>
+        <li>
+          {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
+        </li>
+      </ul>
+
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const target = e.target as typeof e.target & {
+            GitHub?: { value: string };
+          };
+          await setSNSAccount({
+            GitHubLink: target.GitHub?.value || "",
+          });
+          await mutateGetUserData("/api/prisma/getUserData");
+        }}
+      >
+        {userData && userData?.statusCode === 200 && userData.user.GitHub && (
+          <TextField
+            className="text-blue-500"
+            defaultValue={userData.user?.GitHub || ""}
+            name="GitHub"
+            placeholder="GitHub Account Name"
+            type="text"
+          />
+        )}
+
+        <Button size="large" type="submit">
+          Submit
+        </Button>
+      </form>
+    </Layout>
+  );
 };
 
 export default Dashboard;

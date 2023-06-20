@@ -1,6 +1,6 @@
-import type { RoleName } from "@prisma/client";
+import type { UserRelationRole } from "@prisma/client";
 
 export type GetRoleRes = {
-	statusCode: number;
-	roleName: RoleName;
+  statusCode: number;
+  role: UserRelationRole[] | null;
 };
