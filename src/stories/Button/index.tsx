@@ -1,6 +1,8 @@
 import React from "react";
-// import useMediaQuery from "@mui/material/useMediaQuery";
+
 import MuiButton, { ButtonProps } from "@mui/material/Button";
+// import useMediaQuery from "@mui/material/useMediaQuery";
+
 import { tv } from "tailwind-variants";
 
 const style = tv({

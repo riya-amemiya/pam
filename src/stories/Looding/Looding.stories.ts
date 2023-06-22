@@ -8,9 +8,7 @@ const meta: Meta<typeof Looding> = {
   component: Looding,
   tags: ["autodocs"],
   argTypes: {
-    backgroundColor: {
-      control: "color",
-    },
+    borderColor: { control: "color" },
   },
 };
 

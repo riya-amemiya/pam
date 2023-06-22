@@ -5,20 +5,22 @@ import {
   SetSNSAccountReq,
   SetSNSAccountRes,
 } from "types/prisma";
-import { useSession } from "next-auth/react";
-import { NextPage } from "next/types";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next/types";
 import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { fetcherPost } from "@/lib/fetcherPost";
-import { fetcherGet } from "@/lib/fetcherGet";
 import { DateWrapper } from "umt/module/Date/DateWrapper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
-import useSWR from "swr";
+import { useSWRConfig } from "swr";
 import { GetUserDataRes } from "types/prisma/getUserDataType";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { prisma } from "@/lib/prisma";
 
-const Dashboard: NextPage = () => {
-  const { data: session, status } = useSession();
+const Dashboard = ({
+  data: userData,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { trigger: newPost } = useSWRMutation(
     "/api/prisma/newPost",
     fetcherPost<NewPostReq, NewPostRes>,
@@ -28,18 +30,12 @@ const Dashboard: NextPage = () => {
       "/api/prisma/setSNSAccount",
       fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
     );
-  const { data: userData, isLoading: isGetUserDataLoading } = useSWR(
-    "/api/prisma/getUserData",
-    fetcherGet<GetUserDataRes>,
-  );
+  const { mutate: mutateGetUserData } = useSWRConfig();
   const [count, setCount] = useState(0);
   const now = new DateWrapper().getDateObj();
   return (
-    <Layout
-      looding={isSetSNSAccountLoading || isGetUserDataLoading}
-      title="ダッシュボード"
-    >
-      <p>ようこそ, {session ? session?.user?.email : "loading.."}</p>
+    <Layout looding={isSetSNSAccountLoading} title="ダッシュボード">
+      <p>ようこそ, {userData.user?.email}</p>
       <Button
         onClick={() => {
           setCount(count + 1);
@@ -54,24 +50,25 @@ const Dashboard: NextPage = () => {
           ロール:{" "}
           {(userData &&
             userData?.statusCode === 200 &&
-            userData?.role[0]?.roleName) ||
+            userData?.user.role[0]?.roleName) ||
             "loading..."}
         </li>
-        <li>ステータス: {status}</li>
-        <li>ユーザー: {session?.user?.name || "loading..."}</li>
+        <li>ユーザー: {userData.user?.name}</li>
         <li>
           {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
         </li>
       </ul>
 
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
+          e.preventDefault();
           const target = e.target as typeof e.target & {
             GitHub?: { value: string };
           };
-          setSNSAccount({
+          await setSNSAccount({
             GitHubLink: target.GitHub?.value || "",
           });
+          await mutateGetUserData("/api/prisma/getUserData");
         }}
       >
         {userData && userData?.statusCode === 200 && userData.user.GitHub && (
@@ -93,3 +90,43 @@ const Dashboard: NextPage = () => {
 };
 
 export default Dashboard;
+
+export const getServerSideProps: GetServerSideProps<{ data: GetUserDataRes }> =
+  async ({ res, req }) => {
+    const session = await getServerSession(req, res, authOptions);
+    let returnData: GetUserDataRes = {
+      statusCode: 401,
+      user: null,
+    };
+    if (session) {
+      const user = await prisma.user.findFirstOrThrow({
+        where: {
+          email: session.user?.email,
+        },
+        include: {
+          Post: true,
+          UserRelationRole: true,
+        },
+      });
+
+      if (session) {
+        returnData = {
+          ...{
+            user: {
+              ...user,
+              role: user.UserRelationRole,
+              post: user.Post,
+            },
+          },
+          statusCode: 200,
+        };
+      }
+    }
+    return {
+      props: {
+        data: {
+          ...JSON.parse(JSON.stringify(returnData)),
+        },
+      },
+    };
+  };

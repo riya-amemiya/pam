@@ -9,8 +9,6 @@ export async function GET() {
   let returnData: GetUserDataRes = {
     statusCode: 401,
     user: null,
-    role: null,
-    post: null,
   };
   if (session) {
     returnData = {
