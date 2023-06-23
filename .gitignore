@@ -40,3 +40,5 @@ node_modules
 
 public/sitemap*
 .env*.local
+
+robots.txt
