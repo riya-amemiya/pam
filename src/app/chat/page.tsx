@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/stories/Button";
+import { parseMarkdown } from "@/utils/parseMarkdown";
 import TextField from "@mui/material/TextField";
 import { useChat } from "ai/react";
 import { useState } from "react";
@@ -15,7 +16,7 @@ export default function Chat() {
     <div>
       {messages.map((m) => (
         <div key={m.id}>
-          {m.role}: {m.content}
+          {m.role}: {parseMarkdown(m.content)}
         </div>
       ))}
 
