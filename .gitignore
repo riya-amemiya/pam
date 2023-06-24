@@ -39,3 +39,6 @@ node_modules
 .idea
 
 public/sitemap*
+.env*.local
+
+robots.txt

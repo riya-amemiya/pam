@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-styling";
 import { darkTheme, lightTheme } from "../src/lib/themes";
+import Template from "./template.mdx";
 import "../src/styles/globals.scss";
 export const decorators = [
   withThemeFromJSXProvider({
@@ -22,6 +23,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+    docs: {
+      page: Template,
     },
   },
 };
