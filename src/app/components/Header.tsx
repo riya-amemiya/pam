@@ -43,7 +43,7 @@ const Header = () => {
                 className="rounded-full cursor-pointer"
                 height={25}
                 onClick={handleClick}
-                src={"/logo.png"}
+                src={"/logos/logo.png"}
                 width={25}
               />
               <span>PAM</span>

@@ -68,7 +68,7 @@ const Layout = ({
         <main
           className={`${className} h-full w-full`}
           style={{
-            marginTop: "50px",
+            marginTop: "60px",
           }}
         >
           {children}

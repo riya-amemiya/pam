@@ -16,7 +16,7 @@ export default function RootLayout({
           <Header />
           <div
             style={{
-              marginTop: "50px",
+              marginTop: "60px",
             }}
           >
             {children}
