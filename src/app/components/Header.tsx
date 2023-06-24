@@ -90,20 +90,20 @@ const Header = () => {
         }}
       >
         <MenuItem>
-          <Link href="/">
+          <Link href="/" onClick={handleClose}>
             <HomeIcon />
             ホーム
           </Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href="/dashboard">
+          <Link href="/dashboard" onClick={handleClose}>
             <AccountCircleIcon />
             ダッシュボード
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link href="/chat">
+          <Link href="/chat" onClick={handleClose}>
             <ForumIcon />
             チャット
           </Link>

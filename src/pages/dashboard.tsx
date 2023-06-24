@@ -34,7 +34,7 @@ const Dashboard = ({
   const [count, setCount] = useState(0);
   const now = new DateWrapper().getDateObj();
   return (
-    <Layout looding={isSetSNSAccountLoading} title="ダッシュボード">
+    <Layout loading={isSetSNSAccountLoading} title="ダッシュボード">
       <p>ようこそ, {userData.user?.email}</p>
       <Button
         onClick={() => {

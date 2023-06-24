@@ -1,5 +1,4 @@
 "use client";
-
 import { darkTheme, lightTheme } from "@/lib/themes";
 import { ThemeProvider } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
