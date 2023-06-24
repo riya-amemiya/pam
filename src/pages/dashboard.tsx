@@ -1,15 +1,8 @@
 import Layout from "@/components/Layout";
-import {
-  NewPostReq,
-  NewPostRes,
-  SetSNSAccountReq,
-  SetSNSAccountRes,
-} from "types/prisma";
+import { SetSNSAccountReq, SetSNSAccountRes } from "types/prisma";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next/types";
-import { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { fetcherPost } from "@/lib/fetcherPost";
-import { DateWrapper } from "umt/module/Date/DateWrapper";
 import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
 import { useSWRConfig } from "swr";
@@ -17,74 +10,83 @@ import { GetUserDataRes } from "types/prisma/getUserDataType";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
-
+import Avatar from "@mui/material/Avatar";
+import GitHubIcon from "@mui/icons-material/GitHub";
 const Dashboard = ({
   data: userData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { trigger: newPost } = useSWRMutation(
-    "/api/prisma/newPost",
-    fetcherPost<NewPostReq, NewPostRes>,
-  );
   const { trigger: setSNSAccount, isMutating: isSetSNSAccountLoading } =
     useSWRMutation(
       "/api/prisma/setSNSAccount",
       fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
     );
   const { mutate: mutateGetUserData } = useSWRConfig();
-  const [count, setCount] = useState(0);
-  const now = new DateWrapper().getDateObj();
   return (
     <Layout loading={isSetSNSAccountLoading} title="ダッシュボード">
-      <p>ようこそ, {userData.user?.email}</p>
-      <Button
-        onClick={() => {
-          setCount(count + 1);
-          newPost({ title: "Test", content: "Test" });
-        }}
-      >
-        newPost
-      </Button>
-      <ul>
-        <li>カウント: {count}</li>
-        <li>
-          ロール:{" "}
-          {(userData &&
-            userData?.statusCode === 200 &&
-            userData?.user.role[0]?.roleName) ||
-            "loading..."}
-        </li>
-        <li>ユーザー: {userData.user?.name}</li>
-        <li>
-          {now.year}年{now.month}月{now.day}日 {now.hour}:{now.minute}
-        </li>
-      </ul>
+      <div className="flex justify-center">
+        <div>
+          <div className="flex items-center">
+            <div>
+              <Avatar
+                src={userData.user?.image as string}
+                sx={{
+                  width: 100,
+                  height: 100,
+                }}
+              />
+            </div>
+            <div>
+              <h1 className="text-4xl">{userData.user?.name}</h1>
+            </div>
+          </div>
 
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const target = e.target as typeof e.target & {
-            GitHub?: { value: string };
-          };
-          await setSNSAccount({
-            GitHubLink: target.GitHub?.value || "",
-          });
-          await mutateGetUserData("/api/prisma/getUserData");
-        }}
-      >
-        {userData && userData?.statusCode === 200 && userData.user.GitHub && (
-          <TextField
-            className="text-blue-500"
-            defaultValue={userData.user?.GitHub || ""}
-            name="GitHub"
-            placeholder="GitHub Account Name"
-            type="text"
-          />
-        )}
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const target = e.target as typeof e.target & {
+                GitHub?: { value: string };
+              };
+              await setSNSAccount({
+                GitHubLink: target.GitHub?.value || "",
+              });
+              await mutateGetUserData("/api/prisma/getUserData");
+            }}
+          >
+            <div>
+              <div className="flex justify-center items-center">
+                {userData &&
+                  userData?.statusCode === 200 &&
+                  userData.user.GitHub && (
+                    <TextField
+                      className="text-blue-500"
+                      defaultValue={userData.user?.GitHub || ""}
+                      name="GitHub"
+                      placeholder="GitHub Account Name"
+                      type="text"
+                    />
+                  )}
+                <a
+                  href={`https://github.com/${userData.user?.GitHub}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GitHubIcon
+                    sx={{
+                      fontSize: 50,
+                    }}
+                  />
+                </a>
+              </div>
+            </div>
 
-        <Button size="large" type="submit">
-          Submit
-        </Button>
-      </form>
+            <div className="flex justify-center">
+              <Button size="large" type="submit">
+                Submit
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
     </Layout>
   );
 };
