@@ -1,5 +1,6 @@
 "use client";
 
+import Layout from "%/components/Layout";
 import { Button } from "@/stories/Button";
 import TextField from "@mui/material/TextField";
 import { useChat } from "ai/react";
@@ -12,7 +13,7 @@ export default function Chat() {
   });
 
   return (
-    <div>
+    <Layout>
       {messages.map((m) => (
         <div key={m.id}>
           {m.role}: {m.content}
@@ -28,6 +29,6 @@ export default function Chat() {
         />
         <Button type="submit">Send</Button>
       </form>
-    </div>
+    </Layout>
   );
 }
