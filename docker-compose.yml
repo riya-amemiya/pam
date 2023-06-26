@@ -5,12 +5,18 @@ volumes:
 
 services:
   db:
-    image: postgres:14
-    container_name: blog-training-db
-    volumes:
-      - db-data:/var/lib/postgresql/blog_training_db_development/data
+    platform: linux/amd64
+    image: mysql:8.0
+    # restart: always
     ports:
-      - "15432:5432"
+      - "4406:3306"
+    user: 1000:1000
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      MYSQL_DATABASE: coeteco_reserve_development
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./db/data:/var/lib/mysql
+    networks:
+      - coeteco_reserve_network
+    # command: --bind-address=0.0.0.0
+    command: mysqld --innodb_use_native_aio=0

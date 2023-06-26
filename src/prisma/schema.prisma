@@ -4,8 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
@@ -24,6 +25,7 @@ model Account {
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -32,6 +34,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -69,6 +73,8 @@ model Post {
   authorId        String?
   author          User?             @relation(fields: [authorId], references: [id], onDelete: Cascade)
   PostRelationTag PostRelationTag[]
+
+  @@index([authorId])
 }
 
 model Role {
@@ -89,6 +95,9 @@ model UserRelationRole {
   roleName  RoleName
   role      Role     @relation(fields: [roleName], references: [name])
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([roleName])
+  @@index([userId])
 }
 
 model Tag {
@@ -109,6 +118,9 @@ model PostRelationTag {
   tagName   String
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   tag       Tag      @relation(fields: [tagName], references: [name])
+
+  @@index([tagName])
+  @@index([postId])
 }
 
 enum RoleName {
