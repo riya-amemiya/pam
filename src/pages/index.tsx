@@ -51,7 +51,7 @@ const Home: NextPage<Props> = () => {
             <ul className="flex justify-center flex-wrap">
               {useTech.map(({ name, fileName, link }) => {
                 return (
-                  <li key={name} className="w-1/2 md:w-1/3">
+                  <li className="w-1/2 md:w-1/3" key={name}>
                     <Card
                       className="h-60 flex justify-center items-center flex-col m-5"
                       sx={{
@@ -60,20 +60,20 @@ const Home: NextPage<Props> = () => {
                     >
                       <CardMedia className="flex justify-center">
                         <Image
-                          width={120}
+                          alt={`${name}のロゴ`}
                           height={120}
                           src={`/logos/${fileName}`}
-                          alt={`${name}のロゴ`}
+                          width={120}
                         />
                       </CardMedia>
                       <CardContent>
                         <Link
-                          href={link}
                           className="text-2xl inline-block"
-                          underline="hover"
+                          href={link}
                           style={{
                             cursor: "pointer",
                           }}
+                          underline="hover"
                         >
                           {name}
                         </Link>

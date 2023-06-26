@@ -67,8 +67,8 @@ const Dashboard = ({
                   )}
                 <a
                   href={`https://github.com/${userData.user?.GitHub}`}
-                  target="_blank"
                   rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <GitHubIcon
                     sx={{

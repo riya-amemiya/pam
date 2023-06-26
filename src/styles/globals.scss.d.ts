@@ -1,3 +1,3 @@
-export const mb2: string;
-export const next: string;
-export const storybookRoot: string;
+export declare const mb2: string;
+export declare const next: string;
+export declare const storybookRoot: string;
