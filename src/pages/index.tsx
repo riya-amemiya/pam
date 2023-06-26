@@ -32,10 +32,10 @@ const UseTechComponent = ({
     <li>
       <Card
         className="h-60 flex justify-center items-center flex-col m-5"
+        onClick={handleOpen}
         sx={{
           maxHeight: 300,
         }}
-        onClick={handleOpen}
       >
         <CardMedia className="flex justify-center">
           <Image
@@ -58,7 +58,7 @@ const UseTechComponent = ({
           </Link>
         </CardContent>
       </Card>
-      <Modal open={open} onClose={handleClose}>
+      <Modal onClose={handleClose} open={open}>
         <Box className="absolute top-1/2 left-1/2 flex justify-center -translate-x-1/2 -translate-y-1/2 bg-white w-1/2 h-1/2">
           <div className="flex justify-center items-center flex-col">
             <Image
@@ -124,12 +124,12 @@ const Home: NextPage<Props> = () => {
             <ul className="flex justify-center flex-wrap">
               {useTech.map(({ name, fileName, link, description }) => {
                 return (
-                  <div key={name} className="w-1/2 md:w-1/3">
+                  <div className="w-1/2 md:w-1/3" key={name}>
                     <UseTechComponent
-                      name={name}
+                      description={description}
                       fileName={fileName}
                       link={link}
-                      description={description}
+                      name={name}
                     />
                   </div>
                 );
