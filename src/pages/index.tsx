@@ -15,13 +15,11 @@ interface Props {
 }
 
 const UseTechComponent = ({
-  key,
   name,
   description,
   fileName,
   link,
 }: {
-  key: string;
   name: string;
   description?: ReactNode;
   fileName: string;
@@ -31,7 +29,7 @@ const UseTechComponent = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <li className="w-1/2 md:w-1/3" key={key}>
+    <li>
       <Card
         className="h-60 flex justify-center items-center flex-col m-5"
         sx={{
@@ -126,13 +124,14 @@ const Home: NextPage<Props> = () => {
             <ul className="flex justify-center flex-wrap">
               {useTech.map(({ name, fileName, link, description }) => {
                 return (
-                  <UseTechComponent
-                    name={name}
-                    fileName={fileName}
-                    link={link}
-                    key={name}
-                    description={description}
-                  />
+                  <div key={name} className="w-1/2 md:w-1/3">
+                    <UseTechComponent
+                      name={name}
+                      fileName={fileName}
+                      link={link}
+                      description={description}
+                    />
+                  </div>
                 );
               })}
             </ul>
