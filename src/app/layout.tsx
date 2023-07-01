@@ -3,16 +3,18 @@ import "@/styles/globals.scss";
 import "animate.css";
 import Header from "./components/Header";
 import { ClientProvider } from "./components/ClientProvider";
-
-export default function RootLayout({
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="ja">
       <body>
-        <ClientProvider>
+        <ClientProvider session={session}>
           <Header />
           <div
             style={{
