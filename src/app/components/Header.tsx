@@ -42,7 +42,6 @@ const Header = () => {
                 alt="ロゴ"
                 className="rounded-full cursor-pointer"
                 height={25}
-                onClick={handleClick}
                 src={"/logos/logo.png"}
                 width={25}
               />

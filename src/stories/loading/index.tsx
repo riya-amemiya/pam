@@ -1,4 +1,4 @@
-export const Looding = ({
+export const Loading = ({
   borderColor = "#2D9CDB",
 }: { borderColor?: string }) => {
   return (
@@ -12,4 +12,3 @@ export const Looding = ({
     </div>
   );
 };
-export default Looding;

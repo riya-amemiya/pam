@@ -29,7 +29,7 @@
         "./src/*"
       ],
       "$/*": [
-        "./src/components/*"
+        "./src/stories/*"
       ],
       "%/*": [
         "./src/app/*"

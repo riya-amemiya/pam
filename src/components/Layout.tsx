@@ -1,5 +1,5 @@
 import SEO from "./SEO";
-import { Looding } from "../stories/Looding/Looding";
+import { Loading } from "$/loading";
 import { ReactNode, useEffect, useState } from "react";
 import Header from "@/app/components/Header";
 import { useRouter } from "next/router";
@@ -77,7 +77,7 @@ const Layout = ({
       <div
         className={`${loading || pageLoading ? "" : "hidden"} h-full w-full`}
       >
-        <Looding />
+        <Loading />
       </div>
     </div>
   );
