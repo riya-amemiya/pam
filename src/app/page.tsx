@@ -45,7 +45,7 @@ export default function Home() {
       <div className="text-center">
         <h1 className="text-4xl">Amemiya Riyaの実験室</h1>
         <div>
-          <ul className="flex justify-center flex-wrap">
+          <section className="flex justify-center flex-wrap">
             {useTech.map(({ name, fileName, link, description }) => {
               return (
                 <div className="w-1/2 md:w-1/3" key={name}>
@@ -58,7 +58,7 @@ export default function Home() {
                 </div>
               );
             })}
-          </ul>
+          </section>
         </div>
       </div>
     </Layout>

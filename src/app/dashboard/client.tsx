@@ -16,9 +16,6 @@ export const DashboardClient = ({
     fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
   );
   const { mutate: mutateGetUserData } = useSWRConfig();
-  console.log("====================================");
-  console.log(userData);
-  console.log("====================================");
   return (
     <div>
       <div className="flex items-center">
@@ -73,10 +70,12 @@ export const DashboardClient = ({
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <Button size="large" type="submit">
-            Submit
-          </Button>
+        <div>
+          <div className="flex justify-center">
+            <Button size="large" type="submit">
+              Submit
+            </Button>
+          </div>
         </div>
       </form>
     </div>
