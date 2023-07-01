@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
-import { Looding } from "./Looding";
+import { Loading } from ".";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof Looding> = {
+const meta: Meta<typeof Loading> = {
   title: "Example/Looding",
-  component: Looding,
+  component: Loading,
   tags: ["autodocs"],
   argTypes: {
     borderColor: { control: "color" },
@@ -13,7 +12,7 @@ const meta: Meta<typeof Looding> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Looding>;
+type Story = StoryObj<typeof Loading>;
 
 export const Primary: Story = {
   args: {},

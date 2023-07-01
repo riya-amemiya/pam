@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Looding from "@/stories/Looding/Looding";
+import { Loading } from "$/loading";
 
 const Layout = ({
   children,
@@ -16,7 +16,7 @@ const Layout = ({
         <main className={`${className || ""} h-full w-full`}>{children}</main>
       </div>
       <div className={`${looding ? "" : "hidden"} h-full w-full`}>
-        <Looding />
+        <Loading />
       </div>
     </div>
   );
