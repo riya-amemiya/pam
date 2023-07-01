@@ -1,8 +1,8 @@
 import "the-new-css-reset/css/reset.css";
 import "@/styles/globals.scss";
 import "animate.css";
-import Header from "./components/Header";
-import { ClientProvider } from "./components/ClientProvider";
+import Header from "@/components/Header";
+import { ClientProvider } from "@/components/ClientProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { generateMetadata } from "@/utils/generateMetadata";

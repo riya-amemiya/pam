@@ -5,7 +5,7 @@ import {
   signIn,
 } from "next-auth/react";
 
-import Layout from "%/components/Layout";
+import Layout from "@/components/Layout";
 import GoogleIcon from "@mui/icons-material/Google";
 
 import { BuiltInProviderType } from "next-auth/providers";
