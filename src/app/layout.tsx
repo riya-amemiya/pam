@@ -1,8 +1,8 @@
 import "the-new-css-reset/css/reset.css";
 import "@/styles/globals.scss";
 import "animate.css";
-import Header from "./components/Header";
-import { ClientProvider } from "./components/ClientProvider";
+import Header from "@/components/Header";
+import { ClientProvider } from "@/components/ClientProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { generateMetadata } from "@/utils/generateMetadata";
@@ -20,10 +20,10 @@ export default async function RootLayout({
         <ClientProvider session={session}>
           <Header />
           <div
+            className="w-full h-full"
             style={{
               marginTop: "60px",
             }}
-            className="w-full h-full"
           >
             {children}
           </div>

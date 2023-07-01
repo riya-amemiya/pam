@@ -1,4 +1,4 @@
-import Layout from "%/components/Layout";
+import Layout from "@/components/Layout";
 import { GetUserDataRes } from "types/prisma/getUserDataType";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";

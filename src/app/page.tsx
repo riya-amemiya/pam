@@ -1,4 +1,4 @@
-import Layout from "%/components/Layout";
+import Layout from "@/components/Layout";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
 

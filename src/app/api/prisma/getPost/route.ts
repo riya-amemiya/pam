@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 
-import { getPostService } from "../service/getPost.service";
+import { getPostService } from "%/api/prisma/service/getPost.service";
 import type { GetPostRes } from "types/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
