@@ -111,18 +111,21 @@ export const getServerSideProps: GetServerSideProps<{ data: GetUserDataRes }> =
         },
       });
 
-      if (session) {
-        returnData = {
-          ...{
-            user: {
-              ...user,
-              role: user.UserRelationRole,
-              post: user.Post,
-            },
+      returnData = {
+        ...{
+          user: {
+            ...user,
+            role: user.UserRelationRole,
+            post: user.Post,
           },
-          statusCode: 200,
-        };
-      }
+        },
+        statusCode: 200,
+      };
+    }
+    if (returnData.user?.role.filter((role) => role.roleName !== "ADMIN")) {
+      return {
+        notFound: true,
+      };
     }
     return {
       props: {
