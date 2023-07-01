@@ -20,10 +20,10 @@ export default async function RootLayout({
         <ClientProvider session={session}>
           <Header />
           <div
+            className="w-full h-full"
             style={{
               marginTop: "60px",
             }}
-            className="w-full h-full"
           >
             {children}
           </div>
