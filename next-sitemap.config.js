@@ -6,11 +6,8 @@ module.exports = {
     policies: [
       {
         userAgent: "*",
-        disallow: ["/dashboard/*"],
-      },
-      {
-        userAgent: "*",
         allow: "/",
+        disallow: ["/dashboard/*"],
       },
     ],
   },

@@ -5,6 +5,9 @@ import Header from "./components/Header";
 import { ClientProvider } from "./components/ClientProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { generateMetadata } from "@/utils/generateMetadata";
+import { Analytics } from "@vercel/analytics/react";
+export const metadata = generateMetadata({});
 export default async function RootLayout({
   children,
 }: {
@@ -20,10 +23,12 @@ export default async function RootLayout({
             style={{
               marginTop: "60px",
             }}
+            className="w-full h-full"
           >
             {children}
           </div>
         </ClientProvider>
+        <Analytics />
       </body>
     </html>
   );

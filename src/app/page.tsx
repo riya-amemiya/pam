@@ -1,6 +1,10 @@
 import Layout from "%/components/Layout";
+import { generateMetadata } from "@/utils/generateMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
 
+export const metadata = generateMetadata({
+  title: "Home",
+});
 export default function Home() {
   const useTech = [
     {
