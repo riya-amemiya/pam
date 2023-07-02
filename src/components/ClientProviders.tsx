@@ -1,7 +1,7 @@
 "use client";
 import { darkTheme, lightTheme } from "@/lib/themes";
 import { ThemeProvider } from "@emotion/react";
-import { useMediaQuery } from "@mui/material";
+import { CssBaseline, useMediaQuery } from "@mui/material";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
@@ -18,6 +18,7 @@ export const ClientProviders = ({
     <SessionProvider session={session}>
       <RecoilRoot>
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+          <CssBaseline />
           {children}
         </ThemeProvider>
       </RecoilRoot>
