@@ -2,9 +2,8 @@ import "the-new-css-reset/css/reset.css";
 import "@/styles/globals.scss";
 import "animate.css";
 import Header from "@/components/Header";
-import { ClientProvider } from "@/components/ClientProvider";
+import { ClientProviders } from "@/components/ClientProviders";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { Analytics } from "@vercel/analytics/react";
 export const metadata = generateMetadata({});
@@ -13,11 +12,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   return (
     <html lang="ja">
       <body>
-        <ClientProvider session={session}>
+        <ClientProviders session={session}>
           <Header />
           <div
             className="w-full h-full"
@@ -27,7 +26,7 @@ export default async function RootLayout({
           >
             {children}
           </div>
-        </ClientProvider>
+        </ClientProviders>
         <Analytics />
       </body>
     </html>
