@@ -64,6 +64,7 @@ export const UseTechComponent = ({
               height={120}
               src={`/logos/${fileName}`}
               width={120}
+              loading="eager"
             />
             <Typography className="text-2xl m-5">
               {description ? description : ""}
