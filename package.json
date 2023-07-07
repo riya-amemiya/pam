@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "format": "rome format .",
-    "dev": "WATCHPACK_POLLING=true prisma generate && next dev --turbo --show-all",
+    "dev": "WATCHPACK_POLLING=true prisma generate && next dev",
     "build": "prisma generate && prisma migrate deploy && yarn build:next",
     "build:next": "rm -rf .next && yarn lint && next build && yarn sitemap",
     "start": "next start",
