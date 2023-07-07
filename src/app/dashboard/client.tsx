@@ -6,8 +6,8 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@/stories/Button";
 import Avatar from "@mui/material/Avatar";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { useSWRConfig } from "swr";
 import { GetUserDataRes } from "types/prisma/getUserDataType";
+
 export const DashboardClient = ({
   data: userData,
 }: { data: GetUserDataRes }) => {
@@ -15,7 +15,6 @@ export const DashboardClient = ({
     "/api/prisma/setSNSAccount",
     fetcherPost<SetSNSAccountReq, SetSNSAccountRes>,
   );
-  const { mutate: mutateGetUserData } = useSWRConfig();
   return (
     <div>
       <div className="flex items-center">
@@ -32,7 +31,6 @@ export const DashboardClient = ({
           <h1 className="text-4xl">{userData.user?.name}</h1>
         </div>
       </div>
-
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -42,7 +40,6 @@ export const DashboardClient = ({
           await setSNSAccount({
             GitHubLink: target.GitHub?.value || "",
           });
-          await mutateGetUserData("/api/prisma/getUserData");
         }}
       >
         <div>
