@@ -62,9 +62,9 @@ export const UseTechComponent = ({
             <Image
               alt={`${name}のロゴ`}
               height={120}
+              loading="eager"
               src={`/logos/${fileName}`}
               width={120}
-              loading="eager"
             />
             <Typography className="text-2xl m-5">
               {description ? description : ""}
