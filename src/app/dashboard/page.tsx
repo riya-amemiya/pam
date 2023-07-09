@@ -5,6 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 import { DashboardClient } from "./client";
 import { generateMetadata } from "@/utils/generateMetadata";
+import { redirect } from "next/navigation";
 
 export const metadata = generateMetadata({
   title: "Dashboard",
@@ -38,6 +39,8 @@ export default async function Dashboard() {
       },
       statusCode: 200,
     };
+  } else {
+    redirect("/login");
   }
   return (
     <Layout>

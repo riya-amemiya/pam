@@ -11,6 +11,15 @@ export const generateMetadata = (metadata: Metadata): Metadata => {
     openGraph: {
       title,
       description,
+      locale: "ja_JP",
+      type: "website",
+      siteName: "Amemiya Riyaの実験室",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      creator: "Riya31377928",
     },
     creator: "Amemiya Riya",
   };

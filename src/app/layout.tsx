@@ -13,9 +13,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log("====================================");
-  console.log(metadata);
-  console.log("====================================");
   const session = await getServerSession(authOptions);
   return (
     <html lang="ja">
