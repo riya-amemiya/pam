@@ -7,9 +7,7 @@ import { getServerSession } from "next-auth";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { Analytics } from "@vercel/analytics/react";
 import { authOptions } from "%/api/auth/[...nextauth]/route";
-export const metadata = generateMetadata({
-  metadataBase: new URL(process.env.NEXT_PUBLIC_VERCEL_URL as string),
-});
+export const metadata = generateMetadata({});
 export default async function RootLayout({
   children,
 }: {
