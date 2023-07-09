@@ -10,6 +10,7 @@ import {
   UpdateUserDataReq,
   UpdateUserDataRes,
 } from "types/prisma/updateUserDataType";
+import { useRouter } from "next/navigation";
 
 export const DashboardClient = ({
   data: userData,
@@ -18,6 +19,7 @@ export const DashboardClient = ({
     "/api/prisma/updateUserData",
     fetcherPost<UpdateUserDataReq, UpdateUserDataRes>,
   );
+  const router = useRouter();
   return (
     <div>
       <div className="flex items-center">
@@ -47,6 +49,7 @@ export const DashboardClient = ({
               target.OPENAI_API_KEY?.value &&
               btoa(encodeURIComponent(target.OPENAI_API_KEY?.value)),
           });
+          router.refresh();
         }}
       >
         <div>

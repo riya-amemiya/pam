@@ -8,6 +8,7 @@ import { prisma } from "@/lib/prisma";
 export const metadata = generateMetadata({
   title: "Chat",
 });
+export const fetchCache = "only-no-store";
 export default async function Chat() {
   const session = await getServerSession(authOptions);
   if (!session) {
