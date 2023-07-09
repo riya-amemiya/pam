@@ -4,6 +4,7 @@ import ChatClient from "./client";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "%/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { prisma } from "@/lib/prisma";
 export const metadata = generateMetadata({
   title: "Chat",
 });
@@ -12,9 +13,16 @@ export default async function Chat() {
   if (!session) {
     redirect("/login");
   }
+  const user = await prisma.user.findFirstOrThrow({
+    where: {
+      email: session.user?.email,
+    },
+  });
   return (
     <Layout>
-      <ChatClient />
+      {user.OPENAI_API_KEY && (
+        <ChatClient apiKey={decodeURIComponent(atob(user.OPENAI_API_KEY))} />
+      )}
     </Layout>
   );
 }
