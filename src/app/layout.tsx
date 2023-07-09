@@ -6,13 +6,14 @@ import { ClientProviders } from "@/components/ClientProviders";
 import { getServerSession } from "next-auth";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { Analytics } from "@vercel/analytics/react";
+import { authOptions } from "%/api/auth/[...nextauth]/route";
 export const metadata = generateMetadata({});
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return (
     <html lang="ja">
       <body>
