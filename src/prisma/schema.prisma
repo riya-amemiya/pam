@@ -48,6 +48,7 @@ model User {
   accounts         Account[]
   Post             Post[]
   sessions         Session[]
+  OPENAI_API_KEY   String?
   UserRelationRole UserRelationRole[]
 }
 
