@@ -23,10 +23,10 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
         <div className="w-1/2 md:w-1/3">
           <Select
             className="w-full"
-            value={model}
             onChange={(e) => {
               setModel(e.target.value as string);
             }}
+            value={model}
           >
             <MenuItem value="gpt-3.5-turbo">gpt-3.5-turbo</MenuItem>
             <MenuItem value="gpt-3.5-turbo-16k">gpt-3.5-turbo-16k</MenuItem>
@@ -42,13 +42,13 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
 
           <form onSubmit={handleSubmit}>
             <TextField
+              className="w-full"
               multiline={true}
               onChange={handleInputChange}
               placeholder="Say something..."
               value={input}
-              className="w-full"
             />
-            <Button type="submit" className="w-full">
+            <Button className="w-full" type="submit">
               Send
             </Button>
           </form>

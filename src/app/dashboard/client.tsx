@@ -56,9 +56,9 @@ export const DashboardClient = ({
                 <div>
                   <div className="mb-5">
                     <TextField
-                      label="GitHub"
                       className="text-blue-500"
                       defaultValue={userData.user?.GitHub || ""}
+                      label="GitHub"
                       name="GitHub"
                       placeholder="GitHub Account Name"
                       type="text"
@@ -79,7 +79,6 @@ export const DashboardClient = ({
                 <div>
                   <div className="mb-5">
                     <TextField
-                      label="OPENAI_API_KEY"
                       className="text-blue-500"
                       defaultValue={
                         userData.user?.OPENAI_API_KEY
@@ -88,6 +87,7 @@ export const DashboardClient = ({
                             )
                           : ""
                       }
+                      label="OPENAI_API_KEY"
                       name="OPENAI_API_KEY"
                       type="password"
                     />
