@@ -1,5 +1,6 @@
 const withInterceptStdout = require("next-intercept-stdout");
 const million = require("million/compiler");
+const { withKumaUI } = require("@kuma-ui/next-plugin");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
@@ -29,8 +30,10 @@ const nextConfig = {
   },
 };
 
-module.exports = million.next(
-  withInterceptStdout(nextConfig, (text) =>
-    text.includes("Duplicate atom key") ? "" : text,
+module.exports = withKumaUI(
+  million.next(
+    withInterceptStdout(nextConfig, (text) =>
+      text.includes("Duplicate atom key") ? "" : text,
+    ),
   ),
 );
