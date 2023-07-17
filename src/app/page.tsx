@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
+import { Box } from "@kuma-ui/core";
 
 export const metadata = generateMetadata({
   title: "Home",
@@ -46,7 +47,7 @@ export default function Home() {
   ];
   return (
     <Layout>
-      <div className="text-center">
+      <Box textAlign={"center"}>
         <h1 className="text-4xl">Amemiya Riyaの実験室</h1>
         <div>
           <section className="flex justify-center flex-wrap">
@@ -64,7 +65,7 @@ export default function Home() {
             })}
           </section>
         </div>
-      </div>
+      </Box>
     </Layout>
   );
 }
