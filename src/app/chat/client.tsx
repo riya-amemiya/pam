@@ -2,6 +2,7 @@
 
 import { Button } from "@/stories/Button";
 import { parseMarkdown } from "@/utils/parseMarkdown";
+import { Flex } from "@kuma-ui/core";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
@@ -19,7 +20,7 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <Flex alignItems={"center"} flexDir={"column"}>
         <div className="w-1/2 md:w-1/3">
           <Select
             className="w-full"
@@ -53,7 +54,7 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
             </Button>
           </form>
         </div>
-      </div>
+      </Flex>
     </>
   );
 }
