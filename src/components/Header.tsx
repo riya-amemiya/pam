@@ -36,15 +36,15 @@ const Header = () => {
       }}
     >
       <Box
-        height="100%"
-        width="100%"
-        display="flex"
-        justify="space-between"
         alignItems="center"
+        display="flex"
+        height="100%"
+        justify="space-between"
+        width="100%"
       >
         <div>
           <Link href="/">
-            <Box display="flex" alignItems="center">
+            <Box alignItems="center" display="flex">
               <Image
                 alt="ロゴ"
                 className="rounded-full cursor-pointer"

@@ -7,10 +7,10 @@ import Image from "next/image";
 import Link from "@mui/material/Link";
 import Modal from "@mui/material/Modal";
 import { ReactNode, useState } from "react";
-
 import Typography from "@mui/material/Typography";
 import { Button } from "@/stories/Button";
 import { Box } from "@kuma-ui/core";
+
 export const UseTechComponent = ({
   name,
   description,
@@ -59,16 +59,19 @@ export const UseTechComponent = ({
       </Card>
       <Modal onClose={handleClose} open={open}>
         <Box
-          position="absolute"
+          className="bg-white w-full md:w-3/4 h-1/2 xl:w-1/2"
           display="flex"
           justify="center"
-          className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-full md:w-3/4 h-1/2 xl:w-1/2"
+          left="50%"
+          position="absolute"
+          top="50%"
+          transform="translate(-50%, -50%)"
         >
           <Box
-            display="flex"
-            justify="center"
             alignItems="center"
+            display="flex"
             flexDir="column"
+            justify="center"
           >
             <Image
               alt={`${name}のロゴ`}

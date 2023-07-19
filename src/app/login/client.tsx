@@ -20,7 +20,7 @@ export const LoginClient = ({
 }) => {
   return (
     <Layout>
-      <Box display="flex" flexDir="column" alignItems="center" justify="center">
+      <Box alignItems="center" display="flex" flexDir="column" justify="center">
         {Object.values(providers).map((provider, index) => {
           const providerId =
             provider?.id as unknown as ClientSafeProvider["id"];
@@ -30,8 +30,8 @@ export const LoginClient = ({
             // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <div key={index}>
               <Button
-                display="flex"
                 alignItems="center"
+                display="flex"
                 onClick={() => signIn(providerId)}
                 type="button"
               >

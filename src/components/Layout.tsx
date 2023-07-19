@@ -13,17 +13,17 @@ const Layout = ({
 }) => {
   return (
     <Box height="100%" width="100%">
-      <Box height="100%" width="100%" className={`${looding ? "hidden" : ""}`}>
+      <Box className={`${looding ? "hidden" : ""}`} height="100%" width="100%">
         <Box
           as="main"
+          className={`${className || ""}`}
           height="100%"
           width="100%"
-          className={`${className || ""}`}
         >
           {children}
         </Box>
       </Box>
-      <Box height="100%" width="100%" className={`${looding ? "" : "hidden"}`}>
+      <Box className={`${looding ? "" : "hidden"}`} height="100%" width="100%">
         <Loading />
       </Box>
     </Box>
