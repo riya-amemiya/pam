@@ -50,7 +50,7 @@ export default function Home() {
       <Box textAlign={"center"}>
         <h1 className="text-4xl">Amemiya Riyaの実験室</h1>
         <div>
-          <section className="flex justify-center flex-wrap">
+          <Box as="section" display="flex" justify="center" flexWrap="wrap">
             {useTech.map(({ name, fileName, link, description }) => {
               return (
                 <div className="w-1/2 md:w-1/3" key={name}>
@@ -63,7 +63,7 @@ export default function Home() {
                 </div>
               );
             })}
-          </section>
+          </Box>
         </div>
       </Box>
     </Layout>
