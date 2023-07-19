@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { DashboardClient } from "./client";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { redirect } from "next/navigation";
+import { Box } from "@kuma-ui/core";
 
 export const metadata = generateMetadata({
   title: "Dashboard",
@@ -44,9 +45,9 @@ export default async function Dashboard() {
   }
   return (
     <Layout>
-      <div className="flex justify-center">
+      <Box display="flex" justify="center">
         <DashboardClient data={userData} />
-      </div>
+      </Box>
     </Layout>
   );
 }

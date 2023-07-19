@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Loading } from "$/loading";
+import { Box } from "@kuma-ui/core";
 
 const Layout = ({
   children,
@@ -11,14 +12,21 @@ const Layout = ({
   className?: string;
 }) => {
   return (
-    <div className="h-full w-full">
-      <div className={`${looding ? "hidden" : ""} h-full w-full`}>
-        <main className={`${className || ""} h-full w-full`}>{children}</main>
-      </div>
-      <div className={`${looding ? "" : "hidden"} h-full w-full`}>
+    <Box height="100%" width="100%">
+      <Box className={`${looding ? "hidden" : ""}`} height="100%" width="100%">
+        <Box
+          as="main"
+          className={`${className || ""}`}
+          height="100%"
+          width="100%"
+        >
+          {children}
+        </Box>
+      </Box>
+      <Box className={`${looding ? "" : "hidden"}`} height="100%" width="100%">
         <Loading />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

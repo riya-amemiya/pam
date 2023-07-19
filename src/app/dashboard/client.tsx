@@ -11,6 +11,7 @@ import {
   UpdateUserDataRes,
 } from "types/prisma/updateUserDataType";
 import { useRouter } from "next/navigation";
+import { Box } from "@kuma-ui/core";
 
 export const DashboardClient = ({
   data: userData,
@@ -22,7 +23,7 @@ export const DashboardClient = ({
   const router = useRouter();
   return (
     <div>
-      <div className="flex items-center">
+      <Box alignItems={"center"} display={"flex"}>
         <div>
           <Avatar
             src={userData.user?.image as string}
@@ -35,7 +36,7 @@ export const DashboardClient = ({
         <div>
           <h1 className="text-4xl">{userData.user?.name}</h1>
         </div>
-      </div>
+      </Box>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -53,9 +54,14 @@ export const DashboardClient = ({
         }}
       >
         <div>
-          <div className="flex justify-center items-center">
+          <Box alignItems={"center"} display={"flex"} justify={"center"}>
             {userData && userData?.statusCode === 200 && (
-              <div className="flex flex-col items-center justify-center">
+              <Box
+                alignItems={"center"}
+                display={"flex"}
+                flexDir={"column"}
+                justify={"center"}
+              >
                 <div>
                   <div className="mb-5">
                     <TextField
@@ -96,9 +102,9 @@ export const DashboardClient = ({
                     />
                   </div>
                 </div>
-              </div>
+              </Box>
             )}
-          </div>
+          </Box>
         </div>
 
         <div>

@@ -12,6 +12,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ForumIcon from "@mui/icons-material/Forum";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { Button } from "@/stories/Button";
+import { Box } from "@kuma-ui/core";
 const Header = () => {
   const { data: session, status } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,10 +35,16 @@ const Header = () => {
         cursor: "default",
       }}
     >
-      <div className="h-full w-full flex justify-between items-center">
+      <Box
+        alignItems="center"
+        display="flex"
+        height="100%"
+        justify="space-between"
+        width="100%"
+      >
         <div>
           <Link href="/">
-            <div className="flex items-center">
+            <Box alignItems="center" display="flex">
               <Image
                 alt="ロゴ"
                 className="rounded-full cursor-pointer"
@@ -46,7 +53,7 @@ const Header = () => {
                 width={25}
               />
               <span>PAM</span>
-            </div>
+            </Box>
           </Link>
         </div>
         <div>
@@ -73,7 +80,7 @@ const Header = () => {
             </Button>
           )}
         </div>
-      </div>
+      </Box>
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{

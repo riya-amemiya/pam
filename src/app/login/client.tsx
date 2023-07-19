@@ -9,6 +9,7 @@ import Layout from "@/components/Layout";
 import GoogleIcon from "@mui/icons-material/Google";
 
 import { BuiltInProviderType } from "next-auth/providers";
+import { Box, Button } from "@kuma-ui/core";
 export const LoginClient = ({
   providers,
 }: {
@@ -19,7 +20,7 @@ export const LoginClient = ({
 }) => {
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center">
+      <Box alignItems="center" display="flex" flexDir="column" justify="center">
         {Object.values(providers).map((provider, index) => {
           const providerId =
             provider?.id as unknown as ClientSafeProvider["id"];
@@ -28,18 +29,19 @@ export const LoginClient = ({
           return (
             // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <div key={index}>
-              <button
-                className="flex items-center"
+              <Button
+                alignItems="center"
+                display="flex"
                 onClick={() => signIn(providerId)}
                 type="button"
               >
                 <span>{providerName === "Google" && <GoogleIcon />}</span>
                 <span>ログイン</span>
-              </button>
+              </Button>
             </div>
           );
         })}
-      </div>
+      </Box>
     </Layout>
   );
 };
