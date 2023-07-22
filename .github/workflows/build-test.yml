@@ -108,6 +108,7 @@ jobs:
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]

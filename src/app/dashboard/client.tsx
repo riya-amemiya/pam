@@ -39,11 +39,13 @@ export const DashboardClient = ({
       <AutoForm
         fieldConfig={{
           GitHub: {
+            description: "GitHubのユーザー名を入力してください",
             inputProps: {
               defaultValue: userData.user?.GitHub || "",
             },
           },
           OPENAI_API_KEY: {
+            description: "OpenAIのAPIキーを入力してください",
             inputProps: {
               type: "password",
               defaultValue: userData.user?.OPENAI_API_KEY

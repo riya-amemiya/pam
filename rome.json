@@ -35,7 +35,7 @@
 			"./scripts/*.js",
 			"next.config.js",
 			"./src/gql/*",
-			"./src/components/ui"
+			"./src/components/ui/*.tsx"
 		],
 		"rules": {
 			"recommended": true,
