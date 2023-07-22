@@ -78,7 +78,12 @@ export const UseTechComponent = ({
             <Typography className="text-2xl m-5">
               {description ? description : ""}
             </Typography>
-            <Button onClick={handleClose}>閉じる</Button>
+            <Button
+              className="bg-blue-500 hover:bg-blue-700"
+              onClick={handleClose}
+            >
+              閉じる
+            </Button>
           </Box>
         </Box>
       </Modal>
