@@ -7,7 +7,7 @@
     "dev": "WATCHPACK_POLLING=true prisma generate && next dev",
     "build": "prisma generate && prisma migrate deploy && yarn build:next",
     "build:turbo": "turbo run build",
-    "build:next": "rm -rf .next && next build",
+    "build:next": "next build",
     "build:next:turbo": "turbo run build:next",
     "build:next:full": "rm -rf .next && yarn lint && next build",
     "build:next:full:turbo": "turbo run build:next",
