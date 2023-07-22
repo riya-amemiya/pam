@@ -42,7 +42,7 @@ jobs:
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Install dependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
-              run: rm -rf yarn.lock && yarn install --frozen-lockfile --check-files && yarn prisma generate && yarn list
+              run: rm -rf yarn.lock && yarn install --check-files && yarn prisma generate && yarn list
             - name: Cache Save devDependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
               id: cache-save-dev-depends
@@ -54,6 +54,9 @@ jobs:
         needs: setup
         name: JavaScript Lint
         runs-on: ${{ matrix.os }}
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
@@ -76,6 +79,9 @@ jobs:
         needs: setup
         name: JavaScript Test
         runs-on: ${{ matrix.os }}
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
@@ -94,11 +100,14 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Run tests with yarn
-              run: yarn test:turbo --shard ${{ matrix.shard }}
+              run: yarn test:turbo -- -- --shard ${{ matrix.shard }}
     build:
         needs: [test, lint]
         name: JavaScript Build
         runs-on: ${{ matrix.os }}
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]

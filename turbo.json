@@ -33,18 +33,30 @@
                 "NEXT_PUBLIC_*"
             ]
         },
-        "test": {
-            "dependsOn": [
-                "build:next"
+        "lint:nofix": {
+            "inputs": [
+                "src/**"
             ],
+            "env": [
+                "NEXT_PUBLIC_*"
+            ]
+        },
+        "test": {
             "inputs": [
                 "src/**/*.test.tsx",
                 "src/**/*.test.ts",
                 "src/**/*.test.js"
             ]
+        },
+        "dev": {
+            "persistent": true
         }
     },
     "globalDependencies": [
-        "tsconfig.json"
+        "tsconfig.json",
+        "jest.config.js",
+        ".eslintrc",
+        ".env.*",
+        "rome.json"
     ]
 }
