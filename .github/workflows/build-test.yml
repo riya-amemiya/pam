@@ -100,7 +100,7 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Run tests with yarn
-              run: yarn test:turbo -- --shard ${{ matrix.shard }}
+              run: yarn test:turbo -- -- --shard ${{ matrix.shard }}
     build:
         needs: [test, lint]
         name: JavaScript Build

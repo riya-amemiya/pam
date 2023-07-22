@@ -33,6 +33,14 @@
                 "NEXT_PUBLIC_*"
             ]
         },
+        "lint:nofix": {
+            "inputs": [
+                "src/**"
+            ],
+            "env": [
+                "NEXT_PUBLIC_*"
+            ]
+        },
         "test": {
             "dependsOn": [
                 "build:next"
