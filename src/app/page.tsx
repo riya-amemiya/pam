@@ -28,7 +28,11 @@ export default async function Home() {
             <SwiperClient>
               {data.contents.map(({ title, logo, link, description }) => {
                 return (
-                  <Box width="75%" className="mx-auto pb-3">
+                  <Box
+                    className="mx-auto pb-3"
+                    key={title + description}
+                    width="75%"
+                  >
                     <UseTechComponent
                       description={description}
                       link={link}
