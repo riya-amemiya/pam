@@ -29,7 +29,7 @@ export default async function Home() {
               {data.contents.map(({ title, logo, link, description }) => {
                 return (
                   <Box
-                    className="mx-auto pb-3"
+                    className="mx-auto pb-6 md:pb-3"
                     key={title + description}
                     width="75%"
                   >
