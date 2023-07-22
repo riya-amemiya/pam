@@ -34,7 +34,8 @@
 			"*.json",
 			"./scripts/*.js",
 			"next.config.js",
-			"./src/gql/*"
+			"./src/gql/*",
+			"./src/components/ui"
 		],
 		"rules": {
 			"recommended": true,
