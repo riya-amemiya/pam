@@ -49,7 +49,7 @@ const Header = () => {
                 alt="ロゴ"
                 className="rounded-full cursor-pointer"
                 height={25}
-                src={"/logos/logo.png"}
+                src={"/logos/logo_mini.png"}
                 width={25}
               />
               <span>PAM</span>
