@@ -38,9 +38,9 @@ export const UseTechComponent = ({
           <Image
             alt={`${title}のロゴ`}
             height={120}
+            loading="eager"
             src={src}
             width={120}
-            loading="eager"
           />
         </CardMedia>
         <CardContent>
