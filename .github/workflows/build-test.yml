@@ -56,7 +56,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
@@ -81,7 +81,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
@@ -107,7 +107,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         env:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+            TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
