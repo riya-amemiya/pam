@@ -4,6 +4,9 @@ export const generateMetadata = (metadata: Metadata): Metadata => {
   const description =
     metadata.description ||
     "Amemiya Riyaの実験室は、Amemiya Riyaが実験的に作成した技術検証Webサイトです。";
+  const other = {
+    "google-site-verification": process.env.GOOGLE_SITE_VERIFICATION || "",
+  };
   return {
     ...metadata,
     title,
@@ -22,5 +25,6 @@ export const generateMetadata = (metadata: Metadata): Metadata => {
       creator: "Riya31377928",
     },
     creator: "Amemiya Riya",
+    other: { ...other },
   };
 };
