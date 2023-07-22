@@ -2,17 +2,21 @@ import Layout from "@/components/Layout";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
 import { Box } from "@kuma-ui/core";
-import { microcmsClient } from "@/lib/microcmsClient";
 import { microcmsCardsType } from "@/test/microcmsCardsType";
 
 export const metadata = generateMetadata({
   title: "Home",
 });
 
+async function getMicrocms(endpoint: string): Promise<microcmsCardsType> {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/microcms/${endpoint}`,
+  );
+  return await data.json();
+}
+
 export default async function Home() {
-  const data: microcmsCardsType = await microcmsClient.get({
-    endpoint: "cards",
-  });
+  const data: microcmsCardsType = await getMicrocms("cards");
   return (
     <Layout>
       <Box textAlign={"center"}>
