@@ -39,7 +39,7 @@ jobs:
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('package.json') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Install dependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
               run: rm -rf yarn.lock && yarn install --check-files && yarn prisma generate && yarn list
@@ -49,7 +49,7 @@ jobs:
               uses: actions/cache/save@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('package.json') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
     lint:
         needs: setup
         name: JavaScript Lint
@@ -72,7 +72,7 @@ jobs:
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('package.json') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Lint with yarn
               run: yarn lint:nofix:turbo
     test:
@@ -98,7 +98,7 @@ jobs:
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('package.json') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Run tests with yarn
               run: yarn test:turbo -- -- --shard ${{ matrix.shard }}
     build:
@@ -123,6 +123,6 @@ jobs:
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
+                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('package.json') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Build with yarn
               run: yarn build:next:turbo
