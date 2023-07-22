@@ -60,7 +60,7 @@ export const UseTechComponent = ({
       </Card>
       <Modal onClose={handleClose} open={open}>
         <Box
-          className="bg-white w-full md:w-3/4 h-1/2 xl:w-1/2"
+          className="bg-white w-11/12 md:w-3/4 h-2/5 xl:w-1/2 xl:h-1/2"
           display="flex"
           justify="center"
           left="50%"

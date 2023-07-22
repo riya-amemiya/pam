@@ -70,6 +70,7 @@
     "remark-gemoji": "^7.0.1",
     "remark-gfm": "^3.0.1",
     "sharp": "^0.32.2",
+    "swiper": "^10.0.4",
     "swr": "^2.2.0",
     "tailwind-merge": "^1.14.0",
     "tailwind-variants": "^0.1.13",

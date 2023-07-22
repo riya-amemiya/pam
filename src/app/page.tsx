@@ -3,6 +3,7 @@ import { generateMetadata } from "@/utils/generateMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
 import { Box } from "@kuma-ui/core";
 import { microcmsCardsType } from "@/test/microcmsCardsType";
+import { SwiperClient } from "@/components/SwiperClient";
 
 export const metadata = generateMetadata({
   title: "Home",
@@ -20,23 +21,30 @@ export default async function Home() {
   return (
     <Layout>
       <Box textAlign={"center"}>
-        <h1 className="text-4xl">Amemiya Riyaの実験室</h1>
-        <div>
-          <Box as="section" display="flex" flexWrap="wrap" justify="center">
-            {data.contents.map(({ title, logo, link, description }) => {
-              return (
-                <div className="w-1/2 md:w-1/3" key={title}>
-                  <UseTechComponent
-                    description={description}
-                    link={link}
-                    src={logo.url}
-                    title={title}
-                  />
-                </div>
-              );
-            })}
-          </Box>
-        </div>
+        <h1 className="text-3xl md:text-4xl">Amemiya Riyaの実験室</h1>
+        <section>
+          <h2 className="text-2xl md:text-3xl">使っている技術</h2>
+          <div className="w-full xl:w-2/3 md:w-3/4 mx-auto">
+            <SwiperClient>
+              {data.contents.map(({ title, logo, link, description }) => {
+                return (
+                  <Box
+                    className="mx-auto pb-3"
+                    key={title + description}
+                    width="75%"
+                  >
+                    <UseTechComponent
+                      description={description}
+                      link={link}
+                      src={logo.url}
+                      title={title}
+                    />
+                  </Box>
+                );
+              })}
+            </SwiperClient>
+          </div>
+        </section>
       </Box>
     </Layout>
   );
