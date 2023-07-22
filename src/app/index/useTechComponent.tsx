@@ -12,14 +12,14 @@ import { Button } from "@/stories/Button";
 import { Box } from "@kuma-ui/core";
 
 export const UseTechComponent = ({
-  name,
+  title,
   description,
-  fileName,
+  src,
   link,
 }: {
-  name: string;
+  title: string;
   description?: ReactNode;
-  fileName: string;
+  src: string;
   link: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -35,12 +35,7 @@ export const UseTechComponent = ({
         }}
       >
         <CardMedia className="flex justify-center">
-          <Image
-            alt={`${name}のロゴ`}
-            height={120}
-            src={`/logos/${fileName}`}
-            width={120}
-          />
+          <Image alt={`${title}のロゴ`} height={120} src={src} width={120} />
         </CardMedia>
         <CardContent>
           <h2>
@@ -52,7 +47,7 @@ export const UseTechComponent = ({
               }}
               underline="hover"
             >
-              {name}
+              {title}
             </Link>
           </h2>
         </CardContent>
@@ -74,10 +69,10 @@ export const UseTechComponent = ({
             justify="center"
           >
             <Image
-              alt={`${name}のロゴ`}
+              alt={`${title}のロゴ`}
               height={120}
               loading="eager"
-              src={`/logos/${fileName}`}
+              src={src}
               width={120}
             />
             <Typography className="text-2xl m-5">
