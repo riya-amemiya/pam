@@ -24,8 +24,8 @@ export default async function Home() {
                 <div className="w-1/2 md:w-1/3" key={title}>
                   <UseTechComponent
                     description={description}
-                    src={logo.url}
                     link={link}
+                    src={logo.url}
                     title={title}
                   />
                 </div>
