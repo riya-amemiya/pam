@@ -5,8 +5,14 @@
             "outputs": [
                 ".next/**",
                 "!.next/cache/**"
+            ],
+            "inputs": [
+                "src/**"
             ]
         },
         "lint": {}
-    }
+    },
+    "globalDependencies": [
+        "tsconfig.json"
+    ]
 }
