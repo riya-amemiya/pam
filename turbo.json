@@ -42,9 +42,16 @@
                 "src/**/*.test.ts",
                 "src/**/*.test.js"
             ]
+        },
+        "dev": {
+            "persistent": true
         }
     },
     "globalDependencies": [
-        "tsconfig.json"
+        "tsconfig.json",
+        "jest.config.js",
+        ".eslintrc",
+        ".env.*",
+        "rome.json"
     ]
 }

@@ -54,6 +54,9 @@ jobs:
         needs: setup
         name: JavaScript Lint
         runs-on: ${{ matrix.os }}
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
@@ -76,6 +79,9 @@ jobs:
         needs: setup
         name: JavaScript Test
         runs-on: ${{ matrix.os }}
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
@@ -94,11 +100,14 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Run tests with yarn
-              run: yarn test:turbo --shard ${{ matrix.shard }}
+              run: yarn test:turbo -- --shard ${{ matrix.shard }}
     build:
         needs: [test, lint]
         name: JavaScript Build
         runs-on: ${{ matrix.os }}
+        env:
+            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+            TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
