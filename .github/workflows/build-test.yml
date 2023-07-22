@@ -71,7 +71,7 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Lint with yarn
-              run: yarn lint:nofix
+              run: yarn lint:nofix:trubo
     test:
         needs: setup
         name: JavaScript Test
@@ -94,7 +94,7 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Run tests with yarn
-              run: yarn test --shard ${{ matrix.shard }}
+              run: yarn test:trubo --shard ${{ matrix.shard }}
     build:
         needs: [test, lint]
         name: JavaScript Build
@@ -116,4 +116,4 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Build with yarn
-              run: yarn next build
+              run: yarn build:next:turbo
