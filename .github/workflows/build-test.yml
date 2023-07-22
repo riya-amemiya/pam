@@ -42,7 +42,7 @@ jobs:
                   key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}-${{ hashFiles('./src/prisma/schema.prisma') }}
             - name: Install dependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
-              run: rm -rf yarn.lock && yarn install --frozen-lockfile --check-files && yarn prisma generate && yarn list
+              run: rm -rf yarn.lock && yarn install --check-files && yarn prisma generate && yarn list
             - name: Cache Save devDependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
               id: cache-save-dev-depends
