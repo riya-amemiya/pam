@@ -37,18 +37,6 @@ export const DashboardClient = ({
         </div>
       </Box>
       <AutoForm
-        onSubmit={async (e) => {
-          await updateUserData({
-            GitHub: e.GitHub,
-            OPENAI_API_KEY:
-              e.OPENAI_API_KEY && btoa(encodeURIComponent(e.OPENAI_API_KEY)),
-          });
-          router.refresh();
-        }}
-        formSchema={z.object({
-          GitHub: z.string().optional(),
-          OPENAI_API_KEY: z.string().optional(),
-        })}
         fieldConfig={{
           GitHub: {
             inputProps: {
@@ -63,6 +51,18 @@ export const DashboardClient = ({
                 : "",
             },
           },
+        }}
+        formSchema={z.object({
+          GitHub: z.string().optional(),
+          OPENAI_API_KEY: z.string().optional(),
+        })}
+        onSubmit={async (e) => {
+          await updateUserData({
+            GitHub: e.GitHub,
+            OPENAI_API_KEY:
+              e.OPENAI_API_KEY && btoa(encodeURIComponent(e.OPENAI_API_KEY)),
+          });
+          router.refresh();
         }}
       >
         <div>

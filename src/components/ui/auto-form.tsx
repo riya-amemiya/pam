@@ -35,11 +35,11 @@ import { Switch } from "./switch";
  * Beautify a camelCase string.
  * e.g. "myString" -> "My String"
  */
-function beautifyObjectName(string: string) {
-  let output = string.replace(/([A-Z])/g, " $1");
-  output = output.charAt(0).toUpperCase() + output.slice(1);
-  return output;
-}
+// function beautifyObjectName(string: string) {
+//   let output = string.replace(/([A-Z])/g, " $1");
+//   output = output.charAt(0).toUpperCase() + output.slice(1);
+//   return output;
+// }
 
 /**
  * Get the type name of the lowest level Zod type.
@@ -301,7 +301,7 @@ function AutoFormEnum({
         {isRequired && <span className="text-destructive"> *</span>}
       </FormLabel>
       <FormControl>
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <Select defaultValue={field.value} onValueChange={field.onChange}>
           <SelectTrigger>
             <SelectValue className="w-full">
               {field.value ?? "Select an option"}
@@ -309,7 +309,7 @@ function AutoFormEnum({
           </SelectTrigger>
           <SelectContent>
             {values.map((value: any) => (
-              <SelectItem value={value} key={value}>
+              <SelectItem key={value} value={value}>
                 {value}
               </SelectItem>
             ))}
@@ -370,8 +370,8 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
         return (
           <FormField
             control={form.control}
-            name={name}
             key={name}
+            name={name}
             render={({ field }) => {
               const inputType =
                 fieldConfigItem.fieldType ??
@@ -383,21 +383,21 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
                 <React.Fragment key={name}>
                   {fieldConfigItem.startAdornment}
                   <InputComponent
-                    zodInputProps={zodInputProps}
                     field={field}
                     fieldConfigItem={fieldConfigItem}
-                    label={
-                      item._def.description ??
-                      // beautifyObjectName(name)
-                      name
-                    }
-                    isRequired={isRequired}
-                    zodItem={item}
                     fieldProps={{
                       ...zodInputProps,
                       ...field,
                       ...fieldConfigItem.inputProps,
                     }}
+                    isRequired={isRequired}
+                    label={
+                      item._def.description ??
+                      // beautifyObjectName(name)
+                      name
+                    }
+                    zodInputProps={zodInputProps}
+                    zodItem={item}
                   />
                   {fieldConfigItem.endAdornment}
                 </React.Fragment>
@@ -450,7 +450,7 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn("space-y-5", className)}
         onChange={() => {
           const values = form.getValues();
           const parsedValues = formSchema.safeParse(values);
@@ -458,12 +458,12 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
             onValuesChangeProp?.(parsedValues.data);
           }
         }}
-        className={cn("space-y-5", className)}
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <AutoFormObject
-          schema={formSchema}
-          form={form}
           fieldConfig={fieldConfig}
+          form={form}
+          schema={formSchema}
         />
 
         {children}
