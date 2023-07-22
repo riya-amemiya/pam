@@ -359,9 +359,6 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
     <>
       {Object.keys(shape).map((name) => {
         const item = shape[name] as z.ZodAny;
-        console.log("====================================");
-        console.log(shape);
-        console.log("====================================");
         const fieldConfigItem = fieldConfig?.[name] ?? {};
         const zodInputProps = zodToHtmlInputProps(item);
         const isRequired =

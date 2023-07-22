@@ -45,7 +45,7 @@ export const DashboardClient = ({
             },
           },
           OPENAI_API_KEY: {
-            description: "OpenAIのAPIキーを入力してください",
+            description: "sk-から始まるAPIキーを入力してください",
             inputProps: {
               type: "password",
               defaultValue: userData.user?.OPENAI_API_KEY
@@ -55,8 +55,8 @@ export const DashboardClient = ({
           },
         }}
         formSchema={z.object({
-          GitHub: z.string().optional(),
-          OPENAI_API_KEY: z.string().optional(),
+          GitHub: z.string().optional().describe("GitHub"),
+          OPENAI_API_KEY: z.string().optional().describe("OPENAI_API_KEY"),
         })}
         onSubmit={async (e) => {
           await updateUserData({
