@@ -39,11 +39,13 @@ export const DashboardClient = ({
       <AutoForm
         fieldConfig={{
           GitHub: {
+            description: "GitHubのユーザー名を入力してください",
             inputProps: {
               defaultValue: userData.user?.GitHub || "",
             },
           },
           OPENAI_API_KEY: {
+            description: "sk-から始まるAPIキーを入力してください",
             inputProps: {
               type: "password",
               defaultValue: userData.user?.OPENAI_API_KEY
@@ -53,8 +55,8 @@ export const DashboardClient = ({
           },
         }}
         formSchema={z.object({
-          GitHub: z.string().optional(),
-          OPENAI_API_KEY: z.string().optional(),
+          GitHub: z.string().optional().describe("GitHub"),
+          OPENAI_API_KEY: z.string().optional().describe("OPENAI_API_KEY"),
         })}
         onSubmit={async (e) => {
           await updateUserData({

@@ -35,11 +35,11 @@ import { Switch } from "./switch";
  * Beautify a camelCase string.
  * e.g. "myString" -> "My String"
  */
-// function beautifyObjectName(string: string) {
-//   let output = string.replace(/([A-Z])/g, " $1");
-//   output = output.charAt(0).toUpperCase() + output.slice(1);
-//   return output;
-// }
+function beautifyObjectName(string: string) {
+  let output = string.replace(/([A-Z])/g, " $1");
+  output = output.charAt(0).toUpperCase() + output.slice(1);
+  return output;
+}
 
 /**
  * Get the type name of the lowest level Zod type.
@@ -391,11 +391,7 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
                       ...fieldConfigItem.inputProps,
                     }}
                     isRequired={isRequired}
-                    label={
-                      item._def.description ??
-                      // beautifyObjectName(name)
-                      name
-                    }
+                    label={item._def.description ?? beautifyObjectName(name)}
                     zodInputProps={zodInputProps}
                     zodItem={item}
                   />
