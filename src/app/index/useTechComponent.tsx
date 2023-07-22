@@ -8,8 +8,8 @@ import Link from "@mui/material/Link";
 import Modal from "@mui/material/Modal";
 import { ReactNode, useState } from "react";
 import Typography from "@mui/material/Typography";
-import { Button } from "@/stories/Button";
 import { Box } from "@kuma-ui/core";
+import { Button } from "@/components/ui/button";
 
 export const UseTechComponent = ({
   title,
@@ -78,7 +78,10 @@ export const UseTechComponent = ({
             <Typography className="text-2xl m-5">
               {description ? description : ""}
             </Typography>
-            <Button onClick={handleClose} size="large">
+            <Button
+              className="bg-blue-500 hover:bg-blue-700"
+              onClick={handleClose}
+            >
               閉じる
             </Button>
           </Box>
