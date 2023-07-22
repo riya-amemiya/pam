@@ -35,7 +35,13 @@ export const UseTechComponent = ({
         }}
       >
         <CardMedia className="flex justify-center">
-          <Image alt={`${title}のロゴ`} height={120} src={src} width={120} />
+          <Image
+            alt={`${title}のロゴ`}
+            height={120}
+            src={src}
+            width={120}
+            loading="eager"
+          />
         </CardMedia>
         <CardContent>
           <h2>
@@ -68,13 +74,7 @@ export const UseTechComponent = ({
             flexDir="column"
             justify="center"
           >
-            <Image
-              alt={`${title}のロゴ`}
-              height={120}
-              loading="eager"
-              src={src}
-              width={120}
-            />
+            <Image alt={`${title}のロゴ`} height={120} src={src} width={120} />
             <Typography className="text-2xl m-5">
               {description ? description : ""}
             </Typography>
