@@ -386,7 +386,11 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
                     zodInputProps={zodInputProps}
                     field={field}
                     fieldConfigItem={fieldConfigItem}
-                    label={item._def.description ?? beautifyObjectName(name)}
+                    label={
+                      item._def.description ??
+                      // beautifyObjectName(name)
+                      name
+                    }
                     isRequired={isRequired}
                     zodItem={item}
                     fieldProps={{
