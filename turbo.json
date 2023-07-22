@@ -42,9 +42,6 @@
             ]
         },
         "test": {
-            "dependsOn": [
-                "build:next"
-            ],
             "inputs": [
                 "src/**/*.test.tsx",
                 "src/**/*.test.ts",
