@@ -1,0 +1,50 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "build": {
+            "outputs": [
+                ".next/**",
+                "!.next/cache/**"
+            ],
+            "inputs": [
+                "src/**"
+            ],
+            "env": [
+                "NEXT_PUBLIC_*"
+            ]
+        },
+        "build:next": {
+            "outputs": [
+                ".next/**",
+                "!.next/cache/**"
+            ],
+            "inputs": [
+                "src/**"
+            ],
+            "env": [
+                "NEXT_PUBLIC_*"
+            ]
+        },
+        "lint": {
+            "inputs": [
+                "src/**"
+            ],
+            "env": [
+                "NEXT_PUBLIC_*"
+            ]
+        },
+        "test": {
+            "dependsOn": [
+                "build:next"
+            ],
+            "inputs": [
+                "src/**/*.test.tsx",
+                "src/**/*.test.ts",
+                "src/**/*.test.js"
+            ]
+        }
+    },
+    "globalDependencies": [
+        "tsconfig.json"
+    ]
+}
