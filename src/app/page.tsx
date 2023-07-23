@@ -26,15 +26,10 @@ export default async function Home() {
           <h2 className="text-2xl md:text-3xl">使っている技術</h2>
           <div className="w-full xl:w-2/3 md:w-3/4 mx-auto">
             <SwiperClient>
-              {data.contents.map(({ title, logo, link, description }) => {
+              {data.contents.map(({ title, logo, link }) => {
                 return (
-                  <Box
-                    className="mx-auto pb-6 md:pb-3"
-                    key={title + description}
-                    width="75%"
-                  >
+                  <Box className="mx-auto pb-6 md:pb-3" key={title} width="75%">
                     <UseTechComponent
-                      description={description}
                       link={link}
                       src={logo.url}
                       title={title}
