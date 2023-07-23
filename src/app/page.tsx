@@ -34,6 +34,7 @@ export default async function Home() {
                 alt={"アイコン"}
                 className="mx-auto"
                 height={500}
+                loading="eager"
                 src={"/icon.jpeg"}
                 width={500}
               />
@@ -45,7 +46,7 @@ export default async function Home() {
             </CardContent>
           </Card>
         </Section>
-        <section>
+        <Section>
           <h2 className="text-2xl md:text-3xl">使っている技術</h2>
           <div className="w-full xl:w-2/3 md:w-3/4 mx-auto">
             <SwiperClient>
@@ -62,7 +63,7 @@ export default async function Home() {
               })}
             </SwiperClient>
           </div>
-        </section>
+        </Section>
       </Box>
     </Layout>
   );
