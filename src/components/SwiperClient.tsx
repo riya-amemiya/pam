@@ -12,12 +12,12 @@ import "swiper/css/autoplay";
 export const SwiperClient = ({ children }: { children: JSX.Element[] }) => {
   return (
     <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      navigation={true}
       autoplay={{
         delay: 2500,
         disableOnInteraction: false,
       }}
+      modules={[Navigation, Pagination, Autoplay]}
+      navigation={true}
       pagination={{ clickable: true }}
     >
       {children.map((child, index) => {

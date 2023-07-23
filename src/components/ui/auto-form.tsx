@@ -408,7 +408,7 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 
 export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
   return (
-    <Button type="submit" className="bg-blue-500 hover:bg-blue-700">
+    <Button className="bg-blue-500 hover:bg-blue-700" type="submit">
       {children ?? "Submit"}
     </Button>
   );
