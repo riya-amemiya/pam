@@ -19,12 +19,12 @@ export const UseTechComponent = ({
       <Link
         className="text-2xl"
         href={link}
+        rel="noopener noreferrer"
         style={{
           cursor: "pointer",
         }}
-        underline="none"
         target="_blank"
-        rel="noopener noreferrer"
+        underline="none"
       >
         <Card
           className="h-60 flex justify-center items-center flex-col m-2 md:m-5"
