@@ -34,9 +34,9 @@ export default async function Home() {
                 alt={"アイコン"}
                 className="mx-auto"
                 height={500}
+                loading="eager"
                 src={"/icon.jpeg"}
                 width={500}
-                loading="eager"
               />
             </CardMedia>
             <CardContent>
