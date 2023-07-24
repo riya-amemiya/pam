@@ -5,9 +5,6 @@ import { Box } from "@kuma-ui/core";
 import { microcmsCardsType } from "@/test/microcmsCardsType";
 import { SwiperClient } from "@/components/SwiperClient";
 import Image from "next/image";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
 import { Section } from "@/components/Section";
 
 export const metadata = generateMetadata({
@@ -28,8 +25,8 @@ export default async function Home() {
       <Box textAlign={"center"}>
         <h1 className="text-3xl md:text-4xl mb-3">Amemiya Riyaの実験室</h1>
         <Section>
-          <Card className="w-3/4 xl:w-1/2 mx-auto rounded-2xl">
-            <CardMedia>
+          <div className="w-11/12 xl:w-1/2 mx-auto flex flex-col md:flex-row">
+            <div className="w-full md:w-1/2">
               <Image
                 alt={"アイコン"}
                 className="mx-auto"
@@ -38,13 +35,24 @@ export default async function Home() {
                 src={"/icon.jpeg"}
                 width={500}
               />
-            </CardMedia>
-            <CardContent>
-              <p className="text-lg md:text-xl">
-                Cから始めた一般プログラマーです。RustとWeb系が特に好きです。
-              </p>
-            </CardContent>
-          </Card>
+            </div>
+            <div className="w-full md:w-1/2">
+              <Box
+                display="flex"
+                justify="center"
+                alignItems="center"
+                width="100%"
+                height="100%"
+              >
+                <div>
+                  <p className="text-lg md:text-xl">
+                    Cから始めた一般プログラマーです。 <br />
+                    RustとWeb系が特に好きです。
+                  </p>
+                </div>
+              </Box>
+            </div>
+          </div>
         </Section>
         <Section>
           <h2 className="text-2xl md:text-3xl">使っている技術</h2>
