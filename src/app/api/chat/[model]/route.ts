@@ -10,10 +10,10 @@ export async function POST(
 ) {
   const model = params.model;
   // Extract the `messages` from the body of the request
-  const { messages, apiKey } = await req.json();
+  const { messages } = await req.json();
 
   const config = new Configuration({
-    apiKey,
+    apiKey: req.headers.get("authorization") || "",
   });
 
   const openai = new OpenAIApi(config);

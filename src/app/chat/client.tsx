@@ -12,8 +12,8 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
   const [model, setModel] = useState("gpt-3.5-turbo-16k");
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: `/api/chat/${model}`,
-    body: {
-      apiKey,
+    headers: {
+      Authorization: apiKey || "",
     },
   });
 
