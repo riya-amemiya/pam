@@ -25,15 +25,15 @@ const Header = () => {
   };
 
   return (
-    <header
-      className="absolute top-0"
-      style={{
-        backgroundColor: "white",
-        height: "50px",
-        width: "100%",
-        color: "black",
-        cursor: "default",
-      }}
+    <Box
+      as="header"
+      position="absolute"
+      top="0px"
+      height="50px"
+      width="100%"
+      bgColor="white"
+      color="black"
+      cursor="default"
     >
       <Box
         alignItems="center"
@@ -124,7 +124,7 @@ const Header = () => {
           ログアウト
         </MenuItem>
       </Menu>
-    </header>
+    </Box>
   );
 };
 

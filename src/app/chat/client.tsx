@@ -20,7 +20,7 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
   return (
     <>
       <Flex alignItems={"center"} flexDir={"column"}>
-        <div className="w-1/2 md:w-1/3">
+        <div className="w-3/4 md:w-1/2">
           <Select
             className="w-full"
             onChange={(e) => {
@@ -33,7 +33,7 @@ export default function ChatClient({ apiKey }: { apiKey: string | null }) {
             <MenuItem value="gpt-4">gpt-4</MenuItem>
           </Select>
         </div>
-        <div className="w-1/2 md:w-1/3">
+        <div className="w-3/4 md:w-1/2">
           {messages.map((m) => (
             <div key={m.id}>
               {m.role}: {parseMarkdown(m.content)}
