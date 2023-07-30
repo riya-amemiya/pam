@@ -54,6 +54,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
+    "htmr": "^1.0.2",
     "lucide-react": "^0.263.1",
     "microcms-js-sdk": "^2.5.0",
     "million": "^2.5.2-beta.0",
