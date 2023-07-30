@@ -1,5 +1,5 @@
 "use client";
-
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -12,7 +12,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ForumIcon from "@mui/icons-material/Forum";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { Button } from "@/stories/Button";
-import { Box } from "@kuma-ui/core";
+import { Box, Flex } from "@kuma-ui/core";
+
 const Header = () => {
   const { data: session, status } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -25,15 +26,15 @@ const Header = () => {
   };
 
   return (
-    <header
-      className="absolute top-0"
-      style={{
-        backgroundColor: "white",
-        height: "50px",
-        width: "100%",
-        color: "black",
-        cursor: "default",
-      }}
+    <Box
+      as="header"
+      bgColor="white"
+      color="black"
+      cursor="default"
+      height="50px"
+      position="absolute"
+      top="0px"
+      width="100%"
     >
       <Box
         alignItems="center"
@@ -57,28 +58,37 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          {status === "loading" ? (
-            <RefreshIcon className="animate-spin" />
-          ) : session?.user?.image ? (
-            <Image
-              alt="プロフィール画像"
-              className="rounded-full cursor-pointer"
-              height={50}
-              onClick={handleClick}
-              src={session?.user?.image}
-              width={50}
-            />
-          ) : (
-            <Button
-              className="mr-2"
-              onClick={() => {
-                setAnchorEl(null);
-                signIn();
-              }}
-            >
-              ログイン
-            </Button>
-          )}
+          <Flex alignItems="center" justify="center">
+            <div className="mr-3">
+              <Link href="/news">
+                <NewspaperIcon className="text-gray-500" fontSize="large" />
+              </Link>
+            </div>
+            <div>
+              {status === "loading" ? (
+                <RefreshIcon className="animate-spin" />
+              ) : session?.user?.image ? (
+                <Image
+                  alt="プロフィール画像"
+                  className="rounded-full cursor-pointer"
+                  height={50}
+                  onClick={handleClick}
+                  src={session?.user?.image}
+                  width={50}
+                />
+              ) : (
+                <Button
+                  className="mr-2"
+                  onClick={() => {
+                    setAnchorEl(null);
+                    signIn();
+                  }}
+                >
+                  ログイン
+                </Button>
+              )}
+            </div>
+          </Flex>
         </div>
       </Box>
       <Menu
@@ -95,25 +105,24 @@ const Header = () => {
           horizontal: "left",
         }}
       >
-        <MenuItem>
-          <Link href="/" onClick={handleClose}>
+        <Link href="/" onClick={handleClose}>
+          <MenuItem>
             <HomeIcon />
             ホーム
-          </Link>
-        </MenuItem>
-
-        <MenuItem>
-          <Link href="/dashboard" onClick={handleClose}>
+          </MenuItem>
+        </Link>
+        <Link href="/dashboard" onClick={handleClose}>
+          <MenuItem>
             <AccountCircleIcon />
             ダッシュボード
-          </Link>
-        </MenuItem>
-        <MenuItem>
-          <Link href="/chat" onClick={handleClose}>
+          </MenuItem>
+        </Link>
+        <Link href="/chat" onClick={handleClose}>
+          <MenuItem>
             <ForumIcon />
             チャット
-          </Link>
-        </MenuItem>
+          </MenuItem>
+        </Link>
         <MenuItem
           onClick={() => {
             setAnchorEl(null);
@@ -124,7 +133,7 @@ const Header = () => {
           ログアウト
         </MenuItem>
       </Menu>
-    </header>
+    </Box>
   );
 };
 
