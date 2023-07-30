@@ -38,11 +38,11 @@ export default async function Home() {
             </div>
             <div className="w-full md:w-1/2">
               <Box
-                display="flex"
-                justify="center"
                 alignItems="center"
-                width="100%"
+                display="flex"
                 height="100%"
+                justify="center"
+                width="100%"
               >
                 <div>
                   <p className="text-lg md:text-xl">

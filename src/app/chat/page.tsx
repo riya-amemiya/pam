@@ -22,7 +22,13 @@ export default async function Chat() {
   return (
     <Layout>
       {user.OPENAI_API_KEY && (
-        <ChatClient apiKey={decodeURIComponent(atob(user.OPENAI_API_KEY))} />
+        <ChatClient
+          EDEN_AI_API_KEY={
+            user.EDEN_AI_API_KEY &&
+            decodeURIComponent(atob(user.EDEN_AI_API_KEY))
+          }
+          OPENAI_API_KEY={decodeURIComponent(atob(user.OPENAI_API_KEY))}
+        />
       )}
     </Layout>
   );

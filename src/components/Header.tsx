@@ -27,13 +27,13 @@ const Header = () => {
   return (
     <Box
       as="header"
-      position="absolute"
-      top="0px"
-      height="50px"
-      width="100%"
       bgColor="white"
       color="black"
       cursor="default"
+      height="50px"
+      position="absolute"
+      top="0px"
+      width="100%"
     >
       <Box
         alignItems="center"

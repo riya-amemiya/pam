@@ -4,6 +4,7 @@
     "testing-library"
   ],
   "rules": {
-    "react/jsx-sort-props": "warn"
+    "react/jsx-sort-props": "warn",
+    "reac-hooks/exhaustive-deps": "off"
   }
 }

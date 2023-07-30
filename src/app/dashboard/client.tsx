@@ -54,10 +54,21 @@ export const DashboardClient = ({
                 : "",
             },
           },
+          EDEN_AI_API_KEY: {
+            description: "edenaiのapiキーを入力してください",
+            inputProps: {
+              type: "password",
+              autoComplete: "new-password",
+              defaultValue: userData.user?.EDEN_AI_API_KEY
+                ? decodeURIComponent(atob(userData.user?.EDEN_AI_API_KEY))
+                : "",
+            },
+          },
         }}
         formSchema={z.object({
           GitHub: z.string().optional().describe("GitHub"),
           OPENAI_API_KEY: z.string().optional().describe("OPENAI_API_KEY"),
+          EDEN_AI_API_KEY: z.string().optional().describe("EDEN_AI_API_KEY"),
         })}
         onSubmit={async (e) => {
           const callback = async () => {
@@ -65,6 +76,9 @@ export const DashboardClient = ({
               GitHub: e.GitHub,
               OPENAI_API_KEY:
                 e.OPENAI_API_KEY && btoa(encodeURIComponent(e.OPENAI_API_KEY)),
+              EDEN_AI_API_KEY:
+                e.EDEN_AI_API_KEY &&
+                btoa(encodeURIComponent(e.EDEN_AI_API_KEY)),
             });
             router.refresh();
           };
