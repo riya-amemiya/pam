@@ -16,6 +16,8 @@ export default async function NewsId({ params }: { params: { id: string } }) {
   });
   const content = data
     .contents[0] as unknown as microcmsNewsType["contents"][0];
+  const createdAt = format(new Date(content.createdAt), "yyyy-MM-dd");
+  const updatedAt = format(new Date(content.updatedAt), "yyyy-MM-dd");
   return (
     <Box textAlign="center">
       <Image
@@ -25,8 +27,8 @@ export default async function NewsId({ params }: { params: { id: string } }) {
         src={content.thumbnail.url || ""}
         width={"250"}
       />
-      <p>{format(new Date(content.createdAt), "yyyy-MM-dd")}</p>
-      <p>{format(new Date(content.updatedAt), "yyyy-MM-dd")}</p>
+      <p>{createdAt}</p>
+      <p>{createdAt !== updatedAt && updatedAt}</p>
       <main>{htmr(content?.main || "")}</main>
     </Box>
   );
