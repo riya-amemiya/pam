@@ -2,11 +2,12 @@ import { getMicrocms } from "@/lib/getMicrocms";
 import { generateMetadata } from "@/utils/generateMetadata";
 import { microcmsNewsType } from "types/microcmsNewsType";
 import Image from "next/image";
-import { Box } from "@kuma-ui/core";
+import { Box, Flex } from "@kuma-ui/core";
 import htmr from "htmr";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
-
+import UpdateIcon from "@mui/icons-material/Update";
+import CreateIcon from "@mui/icons-material/Create";
 export const metadata = generateMetadata({
   title: "News",
 });
@@ -31,9 +32,30 @@ export default async function NewsId({ params }: { params: { id: string } }) {
         src={content.thumbnail.url || ""}
         width={"250"}
       />
-      <p>{createdAt}</p>
-      <p>{createdAt !== updatedAt && updatedAt}</p>
-      <main>{htmr(content?.main || "")}</main>
+      <Flex justify="center" alignItems="center">
+        <Flex justify="center" alignItems="center" m="0.5rem">
+          <CreateIcon />
+          <p>{createdAt}</p>
+        </Flex>
+        {createdAt !== updatedAt && (
+          <Flex justify="center" alignItems="center" m="0.5rem">
+            <UpdateIcon />
+            <p>{updatedAt}</p>
+          </Flex>
+        )}
+      </Flex>
+      <main>
+        {htmr(content?.main || "", {
+          transform: {
+            h1: ({ children }) => {
+              return <h1 className="text-4xl">{children}</h1>;
+            },
+            h2: ({ children }) => {
+              return <h2 className="text-2xl">{children}</h2>;
+            },
+          },
+        })}
+      </main>
     </Box>
   );
 }
