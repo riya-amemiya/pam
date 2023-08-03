@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Box } from "@kuma-ui/core";
 import htmr from "htmr";
 import { format } from "date-fns";
+import { notFound } from "next/navigation";
 
 export const metadata = generateMetadata({
   title: "News",
@@ -14,6 +15,9 @@ export default async function NewsId({ params }: { params: { id: string } }) {
   const data = await getMicrocms<microcmsNewsType>("news", {
     ids: params.id,
   });
+  if (data.contents.length === 0) {
+    notFound();
+  }
   const content = data
     .contents[0] as unknown as microcmsNewsType["contents"][0];
   return (
