@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getSNSAccountService } from "%/api/prisma/service/getSNSAccount.service";
+import { getSNSAccountService } from "%/api/db/service/getSNSAccount.service";
 import { GetSNSAccountRes } from "types/prisma";
 import { NextResponse } from "next/server";
 
