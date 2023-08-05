@@ -17,7 +17,7 @@ export const DashboardClient = ({
   data: userData,
 }: { data: GetUserDataRes }) => {
   const { trigger: updateUserData } = useSWRMutation(
-    "/api/prisma/updateUserData",
+    "/api/db/updateUserData",
     fetcherPost<UpdateUserDataReq, UpdateUserDataRes>,
   );
   const router = useRouter();

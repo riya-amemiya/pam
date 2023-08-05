@@ -1,7 +1,7 @@
 import { NewPostReq, NewPostRes } from "types/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { newPostService } from "%/api/prisma/service/newPost.service";
+import { newPostService } from "%/api/db/service/newPost.service";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
