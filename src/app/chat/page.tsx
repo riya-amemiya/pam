@@ -1,11 +1,11 @@
 import Layout from "@/components/Layout";
-import { generateMetadata } from "@/utils/generateMetadata";
+import { getMetadata } from "@/utils/getMetadata";
 import ChatClient from "./client";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "%/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-export const metadata = generateMetadata({
+export const metadata = getMetadata({
   title: "Chat",
 });
 export const fetchCache = "only-no-store";

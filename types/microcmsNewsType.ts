@@ -1,5 +1,5 @@
 export interface microcmsNewsType {
-  contents: Content[];
+  contents: Content[] | [];
   totalCount: number;
   offset: number;
   limit: number;

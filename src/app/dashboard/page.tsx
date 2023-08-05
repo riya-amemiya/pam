@@ -4,11 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 import { DashboardClient } from "./client";
-import { generateMetadata } from "@/utils/generateMetadata";
+import { getMetadata } from "@/utils/getMetadata";
 import { redirect } from "next/navigation";
 import { Box } from "@kuma-ui/core";
 
-export const metadata = generateMetadata({
+export const metadata = getMetadata({
   title: "Dashboard",
 });
 

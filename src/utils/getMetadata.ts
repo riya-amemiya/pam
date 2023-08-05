@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-export const generateMetadata = (metadata: Metadata): Metadata => {
+export const getMetadata = (metadata: Metadata): Metadata => {
   const title = `${metadata.title} | Amemiya Riyaの実験室`;
   const description =
     metadata.description ||
