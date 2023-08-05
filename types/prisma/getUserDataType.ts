@@ -4,7 +4,7 @@ export type GetUserDataRes =
   | {
       user: User & {
         role: UserRelationRole[];
-        post: Post[];
+        posts: Post[];
       };
       statusCode: 200;
     }

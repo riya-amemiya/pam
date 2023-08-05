@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Account {
-  id                String  @id @default(dbgenerated("cuid()"))
+  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
@@ -27,7 +27,7 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(dbgenerated("cuid()"))
+  id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -35,9 +35,9 @@ model Session {
 }
 
 model User {
-  id               String             @id @default(dbgenerated("cuid()"))
+  id               String             @id @default(cuid())
   name             String?
-  email            String?            @unique
+  email            String             @unique
   emailVerified    DateTime?
   image            String?
   GitHub           String?
@@ -62,7 +62,7 @@ model VerificationToken {
 }
 
 model Post {
-  id              String            @id @default(dbgenerated("cuid()"))
+  id              String            @id @default(cuid())
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   published       Boolean           @default(false)
@@ -74,7 +74,7 @@ model Post {
 }
 
 model Role {
-  id               String             @id @default(dbgenerated("cuid()"))
+  id               String             @id @default(cuid())
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   name             RoleName           @unique
@@ -84,7 +84,7 @@ model Role {
 }
 
 model UserRelationRole {
-  id        String   @id @default(dbgenerated("cuid()"))
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String
@@ -94,7 +94,7 @@ model UserRelationRole {
 }
 
 model Tag {
-  id              String            @id @default(dbgenerated("cuid()"))
+  id              String            @id @default(cuid())
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   name            String            @unique
@@ -104,7 +104,7 @@ model Tag {
 }
 
 model PostRelationTag {
-  id        String   @id @default(dbgenerated("cuid()"))
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   postId    String

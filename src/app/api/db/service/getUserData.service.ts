@@ -1,20 +1,30 @@
 import type { Session } from "next-auth";
-import { prisma } from "@/lib/prisma";
+import { kysely } from "@/kysely";
+import { User } from "@prisma/client";
 export const getUserDataService = async (session: Session) => {
-  const user = await prisma.user.findFirstOrThrow({
-    where: {
-      email: session.user?.email,
-    },
-    include: {
-      Post: true,
-      UserRelationRole: true,
-    },
-  });
+  const user = (
+    await kysely
+      .selectFrom("User")
+      .where("email", "=", session.user?.email as string)
+      .selectAll()
+      .limit(1)
+      .execute()
+  )[0] as User;
+  const posts = await kysely
+    .selectFrom("Post")
+    .where("authorId", "=", user.id)
+    .selectAll()
+    .execute();
+  const role = await kysely
+    .selectFrom("UserRelationRole")
+    .where("userId", "=", user.id)
+    .selectAll()
+    .execute();
   return {
     user: {
       ...user,
-      role: user.UserRelationRole,
-      post: user.Post,
+      role,
+      posts,
     },
   };
 };
