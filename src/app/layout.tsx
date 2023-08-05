@@ -4,10 +4,10 @@ import "animate.css";
 import Header from "@/components/Header";
 import { ClientProviders } from "@/components/ClientProviders";
 import { getServerSession } from "next-auth";
-import { generateMetadata } from "@/utils/generateMetadata";
+import { getMetadata } from "@/utils/getMetadata";
 import { Analytics } from "@vercel/analytics/react";
 import { authOptions } from "%/api/auth/[...nextauth]/route";
-export const metadata = generateMetadata({});
+export const metadata = getMetadata({});
 export default async function RootLayout({
   children,
 }: {

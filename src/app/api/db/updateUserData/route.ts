@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
-import { updateUserDataService } from "%/api/prisma/service/updateUserData.service";
+import { updateUserDataService } from "%/api/db/service/updateUserData.service";
 import {
   UpdateUserDataReq,
   UpdateUserDataRes,

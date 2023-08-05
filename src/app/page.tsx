@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { generateMetadata } from "@/utils/generateMetadata";
+import { getMetadata } from "@/utils/getMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
 import { Box } from "@kuma-ui/core";
 import { microcmsCardsType } from "types/microcmsCardsType";
@@ -8,7 +8,7 @@ import Image from "next/image";
 import { Section } from "@/components/Section";
 import { getMicrocms } from "@/lib/getMicrocms";
 
-export const metadata = generateMetadata({
+export const metadata = getMetadata({
   title: "Home",
 });
 

@@ -1,5 +1,5 @@
 import { getMicrocms } from "@/lib/getMicrocms";
-import { generateMetadata } from "@/utils/generateMetadata";
+import { getMetadata } from "@/utils/getMetadata";
 import { Box } from "@kuma-ui/core";
 import { microcmsNewsType } from "types/microcmsNewsType";
 import { format } from "date-fns";
@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = generateMetadata({
+export const metadata = getMetadata({
   title: "News",
 });
 

@@ -2,13 +2,13 @@ import Layout from "@/components/Layout";
 import { GetUserDataRes } from "types/prisma/getUserDataType";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { prisma } from "@/lib/prisma";
 import { DashboardClient } from "./client";
-import { generateMetadata } from "@/utils/generateMetadata";
+import { getMetadata } from "@/utils/getMetadata";
 import { redirect } from "next/navigation";
 import { Box } from "@kuma-ui/core";
+import { getUserDataService } from "../api/db/service/getUserData.service";
 
-export const metadata = generateMetadata({
+export const metadata = getMetadata({
   title: "Dashboard",
 });
 
@@ -21,23 +21,8 @@ export default async function Dashboard() {
     user: null,
   };
   if (session) {
-    const user = await prisma.user.findFirstOrThrow({
-      where: {
-        email: session.user?.email,
-      },
-      include: {
-        Post: true,
-        UserRelationRole: true,
-      },
-    });
     userData = {
-      ...{
-        user: {
-          ...user,
-          role: user.UserRelationRole,
-          post: user.Post,
-        },
-      },
+      ...(await getUserDataService(session)),
       statusCode: 200,
     };
   } else {

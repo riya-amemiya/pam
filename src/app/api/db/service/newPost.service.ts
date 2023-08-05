@@ -7,17 +7,17 @@ export const newPostService = async (session: Session, data: NewPostReq) => {
       where: { email: session?.user?.email || "" },
     })
     .then((user) => user?.id);
-  const newPost = await prisma.post.create({
+  await prisma.post.create({
     data: {
       title: data.title,
       content: data.content,
       authorId: userId,
+      PostRelationTag: {
+        create: {
+          tagName: "default",
+        },
+      },
     },
   });
-  await prisma.postRelationTag.create({
-    data: {
-      postId: newPost.id,
-      tagName: "default",
-    },
-  });
+  return true;
 };

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getRoleService } from "%/api/prisma/service/getRole.service";
+import { getRoleService } from "%/api/db/service/getRole.service";
 import { NextResponse } from "next/server";
 import { GetRoleRes } from "types/prisma";
 

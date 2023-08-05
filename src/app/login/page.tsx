@@ -3,8 +3,8 @@ import { LoginClient } from "./client";
 import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "%/api/auth/[...nextauth]/route";
-import { generateMetadata } from "@/utils/generateMetadata";
-export const metadata = generateMetadata({
+import { getMetadata } from "@/utils/getMetadata";
+export const metadata = getMetadata({
   title: "Login",
 });
 export default async function Login() {
