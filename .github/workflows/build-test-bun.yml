@@ -1,4 +1,4 @@
-name: JavaScript CI
+name: JavaScript CI with Bun
 on:
     workflow_dispatch:
     push:
