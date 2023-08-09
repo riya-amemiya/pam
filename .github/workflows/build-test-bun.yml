@@ -84,7 +84,7 @@ jobs:
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
-                bun-version: [18.x, 20.x]
+                bun-version: [0.7.0]
                 os: [ubuntu-latest]
                 shard: [1/2, 2/2]
         steps:
@@ -111,7 +111,7 @@ jobs:
             MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
         strategy:
             matrix:
-                bun-version: [18.x, 20.x]
+                bun-version: [0.7.0]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
