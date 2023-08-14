@@ -3,22 +3,31 @@ import "@/styles/globals.scss";
 import "animate.css";
 import Header from "@/components/Header";
 import { ClientProviders } from "@/components/ClientProviders";
-import { getServerSession } from "next-auth";
 import { getMetadata } from "@/utils/getMetadata";
 import { Analytics } from "@vercel/analytics/react";
-import { authOptions } from "%/api/auth/[...nextauth]/route";
+import { Database } from "types/supabase";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+
 export const metadata = getMetadata({});
+export const dynamic = "force-dynamic";
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const supabase = createServerComponentClient<Database>({
+    cookies,
+  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html lang="ja">
       <body>
-        <ClientProviders session={session}>
-          <Header />
+        <ClientProviders>
+          <Header user={user} />
           <div
             className="w-full h-full"
             style={{

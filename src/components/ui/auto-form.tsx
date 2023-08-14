@@ -409,9 +409,23 @@ function AutoFormObject<SchemaType extends z.ZodObject<any, any>>({
 export function AutoFormSubmit({
   children,
   className = "bg-blue-500 hover:bg-blue-700",
-}: { children?: React.ReactNode; className?: string }) {
+  formAction,
+  type = "submit",
+  onClick,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+  formAction?: string;
+  type?: "submit" | "reset" | "button";
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}) {
   return (
-    <Button className={className} type="submit">
+    <Button
+      className={className}
+      formAction={formAction}
+      onClick={onClick}
+      type={type}
+    >
       {children ?? "Submit"}
     </Button>
   );
@@ -425,6 +439,8 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
   fieldConfig,
   children,
   className,
+  action,
+  method,
 }: {
   formSchema: SchemaType;
   values?: Partial<z.infer<SchemaType>>;
@@ -433,6 +449,8 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
   fieldConfig?: FieldConfig<z.infer<SchemaType>>;
   children?: React.ReactNode;
   className?: string;
+  action?: string;
+  method?: "get" | "post";
 }) {
   const defaultValues: DefaultValues<z.infer<typeof formSchema>> =
     getDefaultValues(formSchema);
@@ -453,7 +471,9 @@ function AutoForm<SchemaType extends z.ZodObject<any, any>>({
   return (
     <Form {...form}>
       <form
+        action={action}
         className={cn("space-y-5", className)}
+        method={method}
         onChange={() => {
           const values = form.getValues();
           const parsedValues = formSchema.safeParse(values);

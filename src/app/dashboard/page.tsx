@@ -1,13 +1,12 @@
 import Layout from "@/components/Layout";
-import { GetUserDataRes } from "types/prisma/getUserDataType";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { cookies } from "next/headers";
+
 import { DashboardClient } from "./client";
 import { getMetadata } from "@/utils/getMetadata";
-import { redirect } from "next/navigation";
 import { Box } from "@kuma-ui/core";
 import { getUserDataService } from "../api/db/service/getUserData.service";
-
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "types/supabase";
 export const metadata = getMetadata({
   title: "Dashboard",
 });
@@ -15,23 +14,29 @@ export const metadata = getMetadata({
 export const dynamic = "force-dynamic";
 
 export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
-  let userData: GetUserDataRes = {
-    statusCode: 401,
-    user: null,
-  };
-  if (session) {
-    userData = {
-      ...(await getUserDataService(session)),
-      statusCode: 200,
-    };
-  } else {
-    redirect("/login");
-  }
+  const supabase = createServerComponentClient<Database>({
+    cookies,
+  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const userData = await getUserDataService(supabase);
+
   return (
     <Layout>
       <Box display="flex" justify="center">
-        <DashboardClient data={userData} />
+        <DashboardClient
+          data={{
+            user: {
+              EDEN_AI_API_KEY: userData.user?.EDEN_AI_API_KEY,
+              GitHub: userData.user?.GitHub,
+              OPENAI_API_KEY: userData.user?.OPENAI_API_KEY,
+              avatar_url: user?.user_metadata.avatar_url,
+              name: user?.user_metadata.full_name,
+              id: user?.id as string,
+            },
+          }}
+        />
       </Box>
     </Layout>
   );
