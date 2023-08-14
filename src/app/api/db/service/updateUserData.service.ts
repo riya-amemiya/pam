@@ -1,13 +1,20 @@
-import { prisma } from "@/lib/prisma";
-import type { Session } from "next-auth";
-import { UpdateUserDataReq } from "types/prisma/updateUserDataType";
+import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "types/supabase";
 
 export const updateUserDataService = async (
-  session: Session,
-  data: UpdateUserDataReq,
+  supabase: SupabaseClient<Database>,
+  data: {
+    id: string;
+    GitHub?: string;
+    OPENAI_API_KEY?: string;
+    EDEN_AI_API_KEY?: string;
+  },
 ) => {
-  return await prisma.user.update({
-    where: { email: session?.user?.email || "" },
-    data,
+  const { error } = await supabase.from("UserData").upsert({
+    ...data,
   });
+  if (error) {
+    return false;
+  }
+  return true;
 };

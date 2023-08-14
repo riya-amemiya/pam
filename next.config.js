@@ -8,6 +8,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     appDir: true,
+    serverActions: true,
     legacyBrowsers: false,
     outputFileTracingExcludes: {
       "*": [

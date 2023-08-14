@@ -1,32 +1,33 @@
 "use client";
-import useSWRMutation from "swr/mutation";
-import { fetcherPost } from "@/lib/fetcherPost";
 import Avatar from "@mui/material/Avatar";
-import { GetUserDataRes } from "types/prisma/getUserDataType";
-import {
-  UpdateUserDataReq,
-  UpdateUserDataRes,
-} from "types/prisma/updateUserDataType";
 import { useRouter } from "next/navigation";
-import { Box } from "@kuma-ui/core";
+import { Box, Flex } from "@kuma-ui/core";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import * as z from "zod";
 import toast, { Toaster } from "react-hot-toast";
+import { updateUserData } from "@/actions/updateUserData";
 
 export const DashboardClient = ({
   data: userData,
-}: { data: GetUserDataRes }) => {
-  const { trigger: updateUserData } = useSWRMutation(
-    "/api/db/updateUserData",
-    fetcherPost<UpdateUserDataReq, UpdateUserDataRes>,
-  );
+}: {
+  data: {
+    user: {
+      EDEN_AI_API_KEY: string | null;
+      GitHub: string | null;
+      OPENAI_API_KEY: string | null;
+      avatar_url: string | null;
+      name: string | null;
+      id: string;
+    };
+  };
+}) => {
   const router = useRouter();
   return (
     <div>
       <Box alignItems={"center"} display={"flex"}>
         <div>
           <Avatar
-            src={userData.user?.image as string}
+            src={userData.user?.avatar_url || ""}
             sx={{
               width: 100,
               height: 100,
@@ -73,6 +74,7 @@ export const DashboardClient = ({
         onSubmit={async (e) => {
           const callback = async () => {
             await updateUserData({
+              id: userData.user.id,
               GitHub: e.GitHub,
               OPENAI_API_KEY:
                 e.OPENAI_API_KEY && btoa(encodeURIComponent(e.OPENAI_API_KEY)),
@@ -90,9 +92,9 @@ export const DashboardClient = ({
         }}
       >
         <div>
-          <div className="flex justify-center">
+          <Flex justify="center">
             <AutoFormSubmit>Submit</AutoFormSubmit>
-          </div>
+          </Flex>
         </div>
       </AutoForm>
       <Toaster />

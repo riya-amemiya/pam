@@ -1,15 +1,13 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getRoleService } from "%/api/db/service/getRole.service";
 import { NextResponse } from "next/server";
-import { GetRoleRes } from "types/prisma";
-
+import { GetRoleRes } from "types/db";
+import { cookies } from "next/headers";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "types/supabase";
 export async function GET() {
-  const session = await getServerSession(authOptions);
   let returnData: GetRoleRes = { statusCode: 401, role: null };
-  if (session) {
-    const role = await getRoleService(session);
-    returnData = { statusCode: 200, role };
-  }
+  const supabase = createRouteHandlerClient<Database>({ cookies });
+  const role = await getRoleService(supabase);
+  returnData = { statusCode: 200, role };
   return NextResponse.json(returnData);
 }
