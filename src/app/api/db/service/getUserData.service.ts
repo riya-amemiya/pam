@@ -1,30 +1,39 @@
-import type { Session } from "next-auth";
-import { kysely } from "@/kysely";
-import { User } from "@prisma/client";
-export const getUserDataService = async (session: Session) => {
-  const user = (
-    await kysely
-      .selectFrom("User")
-      .where("email", "=", session.user?.email as string)
-      .selectAll()
-      .limit(1)
-      .execute()
-  )[0] as User;
-  const posts = await kysely
-    .selectFrom("Post")
-    .where("authorId", "=", user.id)
-    .selectAll()
-    .execute();
-  const role = await kysely
-    .selectFrom("UserRelationRole")
-    .where("userId", "=", user.id)
-    .selectAll()
-    .execute();
+import { SupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "types/supabase";
+export const getUserDataService = async (
+  supabase: SupabaseClient<Database>,
+) => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      user: {
+        EDEN_AI_API_KEY: null,
+        GitHub: null,
+        OPENAI_API_KEY: null,
+      },
+    };
+  }
+  const { data: userData } = await supabase
+    .from("UserData")
+    .select()
+    .eq("id", user?.id as string);
+  if (!userData) {
+    return {
+      user: {
+        EDEN_AI_API_KEY: null,
+        GitHub: null,
+        OPENAI_API_KEY: null,
+      },
+    };
+  }
   return {
     user: {
-      ...user,
-      role,
-      posts,
+      EDEN_AI_API_KEY: userData[0]?.EDEN_AI_API_KEY || null,
+      GitHub: userData[0]?.GitHub || null,
+      OPENAI_API_KEY: userData[0]?.OPENAI_API_KEY || null,
     },
   };
 };

@@ -1,20 +1,14 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getUserDataService } from "%/api/db/service/getUserData.service";
-import { GetUserDataRes } from "types/prisma/getUserDataType";
 import { NextResponse } from "next/server";
-
+import { GetUserDataRes } from "types/db/getUserDataType";
+import { cookies } from "next/headers";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "types/supabase";
 export async function GET() {
-  const session = await getServerSession(authOptions);
-  let returnData: GetUserDataRes = {
-    statusCode: 401,
-    user: null,
+  const supabase = createRouteHandlerClient<Database>({ cookies });
+  const returnData: GetUserDataRes = {
+    ...(await getUserDataService(supabase)),
+    statusCode: 200,
   };
-  if (session) {
-    returnData = {
-      ...(await getUserDataService(session)),
-      statusCode: 200,
-    };
-  }
   return NextResponse.json(returnData);
 }
