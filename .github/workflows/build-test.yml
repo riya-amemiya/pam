@@ -109,6 +109,8 @@ jobs:
             TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
             MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+            NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         strategy:
             matrix:
                 node-version: [18.x, 20.x]
