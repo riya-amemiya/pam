@@ -1,15 +1,9 @@
-import { getMetadata } from "@/utils/getMetadata";
+import { Box } from "@kuma-ui/core";
 
-export const metadata = getMetadata({
-  title: "Tools",
-});
-
-export const dynamic = "force-dynamic";
-
-export default async function Dashboard() {
+export default async function Tools() {
   return (
-    <div>
-      <h1>Tools</h1>
-    </div>
+    <Box mt="8px">
+      <h1>便利ツール集</h1>
+    </Box>
   );
 }

@@ -44,6 +44,22 @@
     {
       "selector": "View",
       "as": "div"
+    },
+    {
+      "selector": "List",
+      "as": "ul"
+    },
+    {
+      "selector": "ListItem",
+      "as": "li"
+    },
+    {
+      "selector": "ListButton",
+      "as": "button"
+    },
+    {
+      "selector": "ListText",
+      "as": "span"
     }
   ],
   "rules": {

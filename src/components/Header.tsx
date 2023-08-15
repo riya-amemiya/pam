@@ -18,6 +18,7 @@ import AutoForm, { AutoFormSubmit } from "./ui/auto-form";
 import * as z from "zod";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "types/supabase";
+import BuildIcon from "@mui/icons-material/Build";
 import { useRouter } from "next/navigation";
 const Header = ({ user }: { user: User | null }) => {
   const [Modal, modalOpen] = useModal("__next", {
@@ -83,10 +84,9 @@ const Header = ({ user }: { user: User | null }) => {
                     className="rounded-full cursor-pointer"
                     height={50}
                     onClick={handleClick}
-                    onError={(e) => {
-                      e.currentTarget.src = "/logos/logo_mini.png";
-                    }}
-                    src={user.user_metadata.avatar_url}
+                    src={
+                      user.user_metadata.avatar_url || "/logos/logo_mini.png"
+                    }
                     width={50}
                   />
                 ) : (
@@ -134,6 +134,12 @@ const Header = ({ user }: { user: User | null }) => {
             <MenuItem>
               <ForumIcon />
               チャット
+            </MenuItem>
+          </Link>
+          <Link href="/tools" onClick={handleClose}>
+            <MenuItem>
+              <BuildIcon />
+              ツール
             </MenuItem>
           </Link>
           <MenuItem

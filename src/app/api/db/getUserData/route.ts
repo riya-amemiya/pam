@@ -1,4 +1,4 @@
-import { getUserDataService } from "%/api/db/service/getUserData.service";
+import { getUserDataService } from "@/app/api/db/service/getUserData.service";
 import { NextResponse } from "next/server";
 import { GetUserDataRes } from "types/db/getUserDataType";
 import { cookies } from "next/headers";

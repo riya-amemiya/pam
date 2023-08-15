@@ -1,4 +1,4 @@
-import { getRoleService } from "%/api/db/service/getRole.service";
+import { getRoleService } from "@/app/api/db/service/getRole.service";
 import { NextResponse } from "next/server";
 import { GetRoleRes } from "types/db";
 import { cookies } from "next/headers";
