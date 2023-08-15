@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { cookies } from "next/headers";
 
 import { DashboardClient } from "./client";
@@ -23,21 +22,19 @@ export default async function Dashboard() {
   const userData = await getUserDataService(supabase);
 
   return (
-    <Layout>
-      <Box display="flex" justify="center">
-        <DashboardClient
-          data={{
-            user: {
-              EDEN_AI_API_KEY: userData.user?.EDEN_AI_API_KEY,
-              GitHub: userData.user?.GitHub,
-              OPENAI_API_KEY: userData.user?.OPENAI_API_KEY,
-              avatar_url: user?.user_metadata.avatar_url,
-              name: user?.user_metadata.full_name,
-              id: user?.id as string,
-            },
-          }}
-        />
-      </Box>
-    </Layout>
+    <Box display="flex" justify="center">
+      <DashboardClient
+        data={{
+          user: {
+            EDEN_AI_API_KEY: userData.user?.EDEN_AI_API_KEY,
+            GitHub: userData.user?.GitHub,
+            OPENAI_API_KEY: userData.user?.OPENAI_API_KEY,
+            avatar_url: user?.user_metadata.avatar_url,
+            name: user?.user_metadata.full_name,
+            id: user?.id as string,
+          },
+        }}
+      />
+    </Box>
   );
 }

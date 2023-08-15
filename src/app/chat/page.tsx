@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { getMetadata } from "@/utils/getMetadata";
 import ChatClient from "./client";
 import { cookies } from "next/headers";
@@ -12,7 +11,7 @@ export default async function Chat() {
   const supabase = createServerComponentClient({ cookies });
   const userData = await getUserDataService(supabase);
   return (
-    <Layout>
+    <>
       {userData.user.OPENAI_API_KEY && (
         <ChatClient
           EDEN_AI_API_KEY={
@@ -24,6 +23,6 @@ export default async function Chat() {
           )}
         />
       )}
-    </Layout>
+    </>
   );
 }
