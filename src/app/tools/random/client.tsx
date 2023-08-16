@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/stories/atoms/Button";
+import { Input } from "@/stories/atoms/Input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { random } from "umt/module/Math/random";
@@ -12,30 +12,30 @@ export default function ToolsRandomClient() {
   const [min, setMin] = useState(0);
   return (
     <form
+      className="w-1/2"
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      className="w-1/2"
     >
       <div className="space-y-1">
         <Label>最大値</Label>
         <Input
-          value={max}
+          min={min}
           onChange={(e) => {
             setMax(Number(e.target.value));
           }}
           type="number"
-          min={min}
+          value={max}
         />
       </div>
       <div className="space-y-1">
         <Label>最小値</Label>
         <Input
-          value={min}
           onChange={(e) => {
             setMin(Number(e.target.value));
           }}
           type="number"
+          value={min}
         />
       </div>
       <div className="space-y-1">
@@ -44,9 +44,9 @@ export default function ToolsRandomClient() {
       </div>
       <div className="mt-2">
         <Button
-          type="submit"
-          onClick={() => setValue(random(max, min))}
           className="bg-blue-500 hover:bg-blue-700"
+          onClick={() => setValue(random(max, min))}
+          type="submit"
         >
           Random
         </Button>

@@ -10,7 +10,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ForumIcon from "@mui/icons-material/Forum";
-import { Button } from "@/stories/Button";
+import { Button } from "@/stories/atoms/Button";
 import { Box, Flex } from "@kuma-ui/core";
 import { User } from "@supabase/supabase-js";
 import { useModal } from "react-hooks-use-modal";

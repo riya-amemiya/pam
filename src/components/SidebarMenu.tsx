@@ -11,7 +11,7 @@ const SidebarMenu = () => {
   return (
     <ListSubheader>
       <ListItem>
-        <Link href={"/tools"} className="w-full h-full">
+        <Link className="w-full h-full" href={"/tools"}>
           <ListItemButton>
             <ListItemText
               primary="Home"
@@ -23,7 +23,7 @@ const SidebarMenu = () => {
         </Link>
       </ListItem>
       <ListItem>
-        <Link href={"/tools/random"} className="w-full h-full">
+        <Link className="w-full h-full" href={"/tools/random"}>
           <ListItemButton>
             <ListItemText
               primary="random"
