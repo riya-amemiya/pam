@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { getMetadata } from "@/utils/getMetadata";
 import { UseTechComponent } from "./index/useTechComponent";
 import { Box } from "@kuma-ui/core";
@@ -15,58 +14,52 @@ export const metadata = getMetadata({
 export default async function Home() {
   const data = await getMicrocms<microcmsCardsType>("cards");
   return (
-    <Layout>
-      <Box textAlign={"center"}>
-        <h1 className="text-3xl md:text-4xl mb-3">Amemiya Riyaの実験室</h1>
-        <Section>
-          <div className="w-11/12 xl:w-1/2 mx-auto flex flex-col md:flex-row">
-            <div className="w-full md:w-1/2">
-              <Image
-                alt={"アイコン"}
-                className="mx-auto"
-                height={500}
-                loading="eager"
-                src={"/icon.jpeg"}
-                width={500}
-              />
-            </div>
-            <div className="w-full md:w-1/2">
-              <Box
-                alignItems="center"
-                display="flex"
-                height="100%"
-                justify="center"
-                width="100%"
-              >
-                <div>
-                  <p className="text-lg md:text-xl">
-                    Cから始めた一般プログラマーです。 <br />
-                    RustとWeb系が特に好きです。
-                  </p>
-                </div>
-              </Box>
-            </div>
+    <Box textAlign={"center"}>
+      <h1 className="text-3xl md:text-4xl mb-3">Amemiya Riyaの実験室</h1>
+      <Section>
+        <div className="w-11/12 xl:w-1/2 mx-auto flex flex-col md:flex-row">
+          <div className="w-full md:w-1/2">
+            <Image
+              alt={"アイコン"}
+              className="mx-auto"
+              height={500}
+              loading="eager"
+              src={"/icon.jpeg"}
+              width={500}
+            />
           </div>
-        </Section>
-        <Section>
-          <h2 className="text-2xl md:text-3xl">使っている技術</h2>
-          <div className="w-full xl:w-2/3 md:w-3/4 mx-auto">
-            <SwiperClient>
-              {data.contents.map(({ title, logo, link }) => {
-                return (
-                  <Box className="mx-auto pb-6 md:pb-3" key={title} width="75%">
-                    <UseTechComponent
-                      link={link}
-                      src={logo.url}
-                      title={title}
-                    />
-                  </Box>
-                );
-              })}
-            </SwiperClient>
+          <div className="w-full md:w-1/2">
+            <Box
+              alignItems="center"
+              display="flex"
+              height="100%"
+              justify="center"
+              width="100%"
+            >
+              <div>
+                <p className="text-lg md:text-xl">
+                  Cから始めた一般プログラマーです。 <br />
+                  RustとWeb系が特に好きです。
+                </p>
+              </div>
+            </Box>
           </div>
-        </Section>
-      </Box>
-    </Layout>
+        </div>
+      </Section>
+      <Section>
+        <h2 className="text-2xl md:text-3xl">使っている技術</h2>
+        <div className="w-full xl:w-2/3 md:w-3/4 mx-auto">
+          <SwiperClient>
+            {data.contents.map(({ title, logo, link }) => {
+              return (
+                <Box className="mx-auto pb-6 md:pb-3" key={title} width="75%">
+                  <UseTechComponent link={link} src={logo.url} title={title} />
+                </Box>
+              );
+            })}
+          </SwiperClient>
+        </div>
+      </Section>
+    </Box>
   );
 }

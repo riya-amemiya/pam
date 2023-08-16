@@ -24,8 +24,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "./button";
-import { Input } from "./input";
+import { Button } from "../../stories/atoms/Button";
+import { Input } from "../../stories/atoms/Input";
 import { Checkbox } from "./checkbox";
 import { DatePicker } from "./date-picker";
 import { cn } from "@/lib/utils";

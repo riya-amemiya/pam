@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Database } from "types/supabase";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Box } from "@kuma-ui/core";
 
 export const metadata = getMetadata({});
 export const dynamic = "force-dynamic";
@@ -28,14 +29,9 @@ export default async function RootLayout({
       <body>
         <ClientProviders>
           <Header user={user} />
-          <div
-            className="w-full h-full"
-            style={{
-              marginTop: "60px",
-            }}
-          >
+          <Box height="100%" marginTop={"60px"} width="100%">
             {children}
-          </div>
+          </Box>
         </ClientProviders>
         <Analytics />
       </body>

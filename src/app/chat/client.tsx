@@ -10,7 +10,7 @@ import { parseMarkdown } from "@/utils/parseMarkdown";
 import { Box, Flex } from "@kuma-ui/core";
 import MuiButton from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/stories/atoms/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import toast, { Toaster } from "react-hot-toast";
 import { randomString } from "@/utils/randomString";
