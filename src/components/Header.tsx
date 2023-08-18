@@ -212,7 +212,7 @@ const Header = ({ user }: { user: User | null }) => {
                         email,
                         password,
                         options: {
-                          emailRedirectTo: `${location.origin}/api/auth/callback`,
+                          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
                         },
                       });
                       router.refresh();
