@@ -1,14 +1,15 @@
-import "the-new-css-reset/css/reset.css";
-import "@/styles/globals.scss";
-import "animate.css";
-import Header from "@/components/Header";
-import { ClientProviders } from "@/components/ClientProviders";
-import { getMetadata } from "@/utils/getMetadata";
-import { Analytics } from "@vercel/analytics/react";
-import { Database } from "types/supabase";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { Box } from "@kuma-ui/core";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Analytics } from "@vercel/analytics/react";
+import { cookies } from "next/headers";
+
+import { ClientProviders } from "@/components/ClientProviders";
+import Header from "@/components/Header";
+import "@/styles/globals.scss";
+import { getMetadata } from "@/utils/getMetadata";
+import "animate.css";
+import "the-new-css-reset/css/reset.css";
+import { Database } from "types/supabase";
 
 export const metadata = getMetadata({});
 export const dynamic = "force-dynamic";

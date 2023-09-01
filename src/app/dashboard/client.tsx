@@ -1,11 +1,12 @@
 "use client";
+import { Box, Flex } from "@kuma-ui/core";
 import Avatar from "@mui/material/Avatar";
 import { useRouter } from "next/navigation";
-import { Box, Flex } from "@kuma-ui/core";
-import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
-import * as z from "zod";
 import toast, { Toaster } from "react-hot-toast";
+import * as z from "zod";
+
 import { updateUserData } from "@/actions/updateUserData";
+import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 
 export const DashboardClient = ({
   data: userData,

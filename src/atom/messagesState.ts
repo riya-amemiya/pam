@@ -1,5 +1,5 @@
-import { atom } from "recoil";
 import type { Message } from "ai/react";
+import { atom } from "recoil";
 
 export const messagesState = atom<Message[]>({
   key: "messagesState",

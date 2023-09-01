@@ -1,4 +1,5 @@
 {
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"javascript": {
 		"globals": [
 			"describe",
@@ -44,11 +45,13 @@
 				"useKeyWithClickEvents": "off"
 			},
 			"complexity": {
+				"noForEach": "error",
 				"noUselessFragments": "warn",
-				"useSimplifiedLogicExpression": "error"
+				"useSimplifiedLogicExpression": "error",
+				"useSimpleNumberKeys": "error"
 			},
 			"correctness": {
-				"noUndeclaredVariables": "warn",
+				"noUndeclaredVariables": "off",
 				"noUnusedVariables": "off"
 			},
 			"style": {
@@ -63,24 +66,41 @@
 				"useSingleCaseStatement": "error"
 			},
 			"suspicious": {
-				"noRedundantUseStrict": "off"
+				"noRedundantUseStrict": "warn",
+				"noConsoleLog": "warn"
 			},
 			"nursery": {
 				"noAccumulatingSpread": "error",
 				"noBannedTypes": "error",
 				"noConfusingArrow": "error",
 				"noConstantCondition": "error",
-				"noDuplicateJsxProps": "error",
-				"noForEach": "error",
+				"noControlCharactersInRegex": "error",
+				"noDuplicateJsonKeys": "error",
+				"noExcessiveComplexity": "off",
+				"noFallthroughSwitchClause": "error",
+				"noGlobalIsFinite": "error",
+				"noGlobalIsNan": "error",
+				"noNonoctalDecimalEscape": "error",
 				"noSelfAssign": "error",
-				"useCamelCase": "warn",
+				"noStaticOnlyClass": "error",
+				"noUnsafeDeclarationMerging": "error",
+				"noUselessEmptyExport": "error",
+				"noUselessThisAlias": "error",
+				"noVoid": "error",
+				"useArrowFunction": "warn",
 				"useExhaustiveDependencies": "off",
+				"useGetterReturn": "error",
 				"useGroupedTypeImport": "error",
 				"useHookAtTopLevel": "error",
-				"useIsNan": "error",
+				"useIsArray": "error",
 				"useLiteralEnumMembers": "error",
-				"useLiteralKeys": "error",
-				"useSimpleNumberKeys": "error"
+				"useNamingConvention": {
+					"level": "off",
+					"options": {
+						"strictCase": true,
+						"enumMemberCase": "CONSTANT_CASE"
+					}
+				}
 			}
 		}
 	}

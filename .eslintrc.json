@@ -1,10 +1,32 @@
 {
   "extends": "next/core-web-vitals",
   "plugins": [
-    "testing-library"
+    "testing-library",
+    "import"
   ],
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
   "rules": {
-    "react/jsx-sort-props": "warn",
-    "react-hooks/exhaustive-deps": "off"
+    "react/jsx-sort-props": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always"
+      }
+    ]
   }
 }

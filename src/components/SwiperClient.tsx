@@ -1,13 +1,13 @@
 "use client";
-import { Swiper } from "swiper/react";
-import { SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
+import { Swiper } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 
 export const SwiperClient = ({ children }: { children: JSX.Element[] }) => {
   return (

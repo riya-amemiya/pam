@@ -57,6 +57,6 @@
         "jest.config.js",
         ".eslintrc",
         ".env.*",
-        "rome.json"
+        "biome.json"
     ]
 }

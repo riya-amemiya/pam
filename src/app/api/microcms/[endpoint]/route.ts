@@ -1,6 +1,7 @@
+import { NextResponse } from "next/server";
+
 import { microcmsClient } from "@/lib/microcmsClient";
 import { microcmsCardsType } from "types/microcmsCardsType";
-import { NextResponse } from "next/server";
 
 export const runtime = "edge";
 

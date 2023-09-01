@@ -1,12 +1,13 @@
+import { Box, Flex } from "@kuma-ui/core";
+import CreateIcon from "@mui/icons-material/Create";
+import UpdateIcon from "@mui/icons-material/Update";
+import { format } from "date-fns";
+import htmr from "htmr";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+
 import { getMicrocms } from "@/lib/getMicrocms";
 import { microcmsNewsType } from "types/microcmsNewsType";
-import Image from "next/image";
-import { Box, Flex } from "@kuma-ui/core";
-import htmr from "htmr";
-import { format } from "date-fns";
-import { notFound } from "next/navigation";
-import UpdateIcon from "@mui/icons-material/Update";
-import CreateIcon from "@mui/icons-material/Create";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const data = await getMicrocms<microcmsNewsType>("news", {

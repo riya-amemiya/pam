@@ -1,8 +1,9 @@
 "use server";
-import { updateUserDataService } from "@/app/api/db/service/updateUserData.service";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "types/supabase";
 import { cookies } from "next/headers";
+
+import { updateUserDataService } from "@/app/api/db/service/updateUserData.service";
+import { Database } from "types/supabase";
 export const updateUserData = async (data: {
   id: string;
   GitHub?: string | undefined;

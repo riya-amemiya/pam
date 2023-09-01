@@ -1,11 +1,13 @@
+import { Box } from "@kuma-ui/core";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-import { DashboardClient } from "./client";
 import { getMetadata } from "@/utils/getMetadata";
-import { Box } from "@kuma-ui/core";
-import { getUserDataService } from "../api/db/service/getUserData.service";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "types/supabase";
+
+import { getUserDataService } from "../api/db/service/getUserData.service";
+
+import { DashboardClient } from "./client";
 export const metadata = getMetadata({
   title: "Dashboard",
 });
