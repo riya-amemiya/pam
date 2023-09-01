@@ -1,10 +1,11 @@
-// import SidebarMenu from "@/components/SidebarMenu";
+import { Box, Flex } from "@kuma-ui/core";
 import dynamic from "next/dynamic";
+
+import { getMetadata } from "@/utils/getMetadata";
+
 const SidebarMenu = dynamic(() => import("@/components/SidebarMenu"), {
   ssr: false,
 });
-import { getMetadata } from "@/utils/getMetadata";
-import { Box, Flex } from "@kuma-ui/core";
 
 export const metadata = getMetadata({
   title: "Tools",

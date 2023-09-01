@@ -1,6 +1,6 @@
-import type { StorybookConfig } from "@storybook/nextjs";
 import path from "path";
 import KumaUIWebpackPlugin from "@kuma-ui/webpack-plugin";
+import type { StorybookConfig } from "@storybook/nextjs";
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [

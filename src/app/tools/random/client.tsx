@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@/stories/atoms/Button";
-import { Input } from "@/stories/atoms/Input";
-import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { random } from "umt/module/Math/random";
+
+import { Label } from "@/components/ui/label";
+import { Button } from "@/stories/atoms/Button";
+import { Input } from "@/stories/atoms/Input";
 
 export default function ToolsRandomClient() {
   const [value, setValue] = useState(0);

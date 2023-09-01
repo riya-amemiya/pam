@@ -1,8 +1,10 @@
-import { getMetadata } from "@/utils/getMetadata";
-import ChatClient from "./client";
-import { cookies } from "next/headers";
-import { getUserDataService } from "@/app/api/db/service/getUserData.service";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+
+import { getUserDataService } from "@/app/api/db/service/getUserData.service";
+import { getMetadata } from "@/utils/getMetadata";
+
+import ChatClient from "./client";
 export const metadata = getMetadata({
   title: "Chat",
 });

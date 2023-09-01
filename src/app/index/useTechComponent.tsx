@@ -1,9 +1,9 @@
 "use client";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import Image from "next/image";
+import CardMedia from "@mui/material/CardMedia";
 import Link from "@mui/material/Link";
+import Image from "next/image";
 
 export const UseTechComponent = ({
   title,

@@ -1,8 +1,9 @@
 "use client";
-import { darkTheme, lightTheme } from "@/lib/themes";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline, useMediaQuery } from "@mui/material";
 import { RecoilRoot } from "recoil";
+
+import { darkTheme, lightTheme } from "@/lib/themes";
 
 export const ClientProviders = ({
   children,

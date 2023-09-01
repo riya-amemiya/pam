@@ -1,4 +1,5 @@
 import { StreamingTextResponse } from "ai";
+
 import { openAIChat } from "./openai";
 
 // IMPORTANT! Set the runtime to edge
