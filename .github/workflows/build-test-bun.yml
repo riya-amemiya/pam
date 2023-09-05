@@ -27,7 +27,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                bun-version: [0.7.3]
+                bun-version: [0.8.1]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
@@ -60,7 +60,7 @@ jobs:
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
-                bun-version: [0.7.3]
+                bun-version: [0.8.1]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
@@ -85,7 +85,7 @@ jobs:
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
-                bun-version: [0.7.3]
+                bun-version: [0.8.1]
                 os: [ubuntu-latest]
                 shard: [1/2, 2/2]
         steps:
@@ -114,7 +114,7 @@ jobs:
             NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         strategy:
             matrix:
-                bun-version: [0.7.3]
+                bun-version: [0.8.1]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
