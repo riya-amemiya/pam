@@ -14,7 +14,7 @@ const customJestConfig = {
   // 除外するフォルダーを指定する
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
   // テスト実行前に実行するファイルを指定
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
   moduleNameMapper: {
     // "@/*": [
     // 	"./src/*"
