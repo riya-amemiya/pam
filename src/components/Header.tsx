@@ -28,8 +28,6 @@ const Header = ({ user }: { user: User | null }) => {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const supabase = createClientComponentClient<Database>();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -166,19 +164,11 @@ const Header = ({ user }: { user: User | null }) => {
                     description: "最低8文字以上のパスワードを入力してください",
                     inputProps: {
                       type: "password",
-                      value: password,
-                      onChange: (e) => {
-                        setPassword(e.target.value);
-                      },
                     },
                   },
                   email: {
                     inputProps: {
                       type: "email",
-                      value: email,
-                      onChange: (e) => {
-                        setEmail(e.target.value);
-                      },
                     },
                   },
                 }}
@@ -193,35 +183,17 @@ const Header = ({ user }: { user: User | null }) => {
                     ),
                 })}
                 method="post"
+                onSubmit={async ({ email, password }) => {
+                  await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                  });
+                  router.refresh();
+                }}
               >
                 <Flex justify="center">
-                  <AutoFormSubmit
-                    onClick={async () => {
-                      await supabase.auth.signInWithPassword({
-                        email,
-                        password,
-                      });
-                      router.refresh();
-                    }}
-                    type="button"
-                  >
-                    Sign in
-                  </AutoFormSubmit>
-                  <AutoFormSubmit
-                    onClick={async () => {
-                      await supabase.auth.signUp({
-                        email,
-                        password,
-                        options: {
-                          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`,
-                        },
-                      });
-                      router.refresh();
-                    }}
-                    type="button"
-                  >
-                    Sign up
-                  </AutoFormSubmit>
+                  <AutoFormSubmit type="submit">Sign in</AutoFormSubmit>
+                  <AutoFormSubmit type="submit">Sign up</AutoFormSubmit>
                 </Flex>
               </AutoForm>
             </div>
