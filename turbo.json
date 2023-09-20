@@ -57,6 +57,7 @@
         "jest.config.js",
         ".eslintrc",
         ".env.*",
-        "biome.json"
+        "biome.json",
+        "yarn.lock"
     ]
 }
