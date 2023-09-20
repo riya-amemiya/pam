@@ -1,4 +1,4 @@
-name: JavaScript CI
+name: JavaScript CI with Bun
 on:
     workflow_dispatch:
     push:
@@ -11,45 +11,45 @@ on:
             - develop
         paths:
             - 'src/**/*'
-            - '.github/workflows/**'
+            - '.github/workflows/**/*'
             - '.storybook/**/*'
-            - 'yarn.lock'
-            - 'yarn.lock'
+            - 'bun.lockb'
             - 'tsconfig.json'
             - 'jest.config.js'
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
+
 jobs:
     setup:
         name: JavaScript Setup
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                node-version: [18.x, 20.x]
+                bun-version: [1.0.1]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
+            - name: Use Bun ${{ matrix.bun-version }}
+              uses: oven-sh/setup-bun@v1
               with:
-                  node-version: ${{ matrix.node-version }}
+                bun-version: ${{ matrix.bun-version }}
             - name: Cache Restore devDependencies
               id: cache-restore-dev-depends
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+                  key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
             - name: Install dependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
-              run: yarn install --check-files && yarn list
+              run: bun i
             - name: Cache Save devDependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
               id: cache-save-dev-depends
               uses: actions/cache/save@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+                  key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
     lint:
         needs: setup
         name: JavaScript Lint
@@ -59,22 +59,22 @@ jobs:
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
-                node-version: [18.x, 20.x]
+                bun-version: [1.0.1]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
+            - name: Use Bun ${{ matrix.bun-version }}
+              uses: oven-sh/setup-bun@v1
               with:
-                  node-version: ${{ matrix.node-version }}
+                  bun-version: ${{ matrix.bun-version }}
             - name: Cache Restore devDependencies
               id: cache-restore-dev-depends
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+                  key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
             - name: Lint with yarn
-              run: yarn lint:nofix:turbo
+              run: bun run lint:nofix:turbo
     test:
         needs: setup
         name: JavaScript Test
@@ -84,23 +84,23 @@ jobs:
             TURBO_TEAM: ${{ vars.TURBO_TEAM }}
         strategy:
             matrix:
-                node-version: [18.x, 20.x]
+                bun-version: [1.0.1]
                 os: [ubuntu-latest]
                 shard: [1/2, 2/2]
         steps:
             - uses: actions/checkout@v3
-            - name: Use Node.js  ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
+            - name: Use Bun ${{ matrix.bun-version }}
+              uses: oven-sh/setup-bun@v1
               with:
-                  node-version: ${{ matrix.node-version }}
+                  bun-version: ${{ matrix.bun-version }}
             - name: Cache Restore devDependencies
               id: cache-restore-dev-depends
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
-            - name: Run tests with yarn
-              run: yarn test:turbo -- -- --shard ${{ matrix.shard }}
+                  key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
+            - name: Run tests with bun
+              run: bun run test:turbo -- -- --shard ${{ matrix.shard }}
     build:
         needs: [test, lint]
         name: JavaScript Build
@@ -113,32 +113,19 @@ jobs:
             NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         strategy:
             matrix:
-                node-version: [18.x, 20.x]
+                bun-version: [1.0.1]
                 os: [ubuntu-latest]
         steps:
             - uses: actions/checkout@v3
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
+            - name: Use Bun ${{ matrix.bun-version }}
+              uses: oven-sh/setup-bun@v1
               with:
-                  node-version: ${{ matrix.node-version }}
+                  bun-version: ${{ matrix.bun-version }}
             - name: Cache Restore devDependencies
               id: cache-restore-dev-depends
               uses: actions/cache/restore@v3
               with:
                   path: '**/node_modules'
-                  key: dev-depends-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
-            - name: Cache Restore build
-              id: cache-restore-build
-              uses: actions/cache/restore@v3
-              with:
-                  path: '**/.next'
-                  key: build-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
-            - name: Build with yarn
-              run: yarn build:next:turbo
-            - name: Cache Save build
-              if: steps.cache-restore-build.outputs.cache-hit != 'true'
-              id: cache-save-build
-              uses: actions/cache/save@v3
-              with:
-                  path: '**/.next'
-                  key: build-node${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
+                  key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
+            - name: Build with bun
+              run: bun run build:next:turbo

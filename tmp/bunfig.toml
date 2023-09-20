@@ -1,4 +1,0 @@
-[install.lockfile]
-print = "yarn"
-[test]
-coverage = true
