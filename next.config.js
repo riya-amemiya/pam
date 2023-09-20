@@ -1,15 +1,13 @@
-const withInterceptStdout = require("next-intercept-stdout");
-const million = require("million/compiler");
 const { withKumaUI } = require("@kuma-ui/next-plugin");
+const million = require("million/compiler");
+const withInterceptStdout = require("next-intercept-stdout");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    appDir: true,
     serverActions: true,
-    legacyBrowsers: false,
     outputFileTracingExcludes: {
       "*": [
         "node_modules/@swc/core-linux-x64-gnu",

@@ -2,7 +2,8 @@
   "extends": "next/core-web-vitals",
   "plugins": [
     "testing-library",
-    "import"
+    "import",
+    "jest-dom"
   ],
   "parserOptions": {
     "sourceType": "module",

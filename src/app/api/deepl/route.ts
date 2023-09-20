@@ -5,7 +5,7 @@ import { deepl } from "./deepl";
 export async function POST(req: Request) {
   const apiKey = req.headers.get("authorization");
   if (!apiKey) {
-    return new Error("No API key provided");
+    return NextResponse.next();
   }
   const {
     text,
