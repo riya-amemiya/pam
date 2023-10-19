@@ -103,7 +103,7 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-yarn${{ matrix.node-version }}-${{ matrix.os }}-${{ hashFiles('yarn.lock') }}
             - name: Run tests with yarn
-              run: yarn test:turbo -- -- --shard ${{ matrix.shard }} && npx playwright install && yarn playwright test
+              run: yarn test:turbo -- -- --shard ${{ matrix.shard }} && npx playwright install --with-deps && yarn playwright test
     build:
         needs: [test, lint]
         name: JavaScript Build
