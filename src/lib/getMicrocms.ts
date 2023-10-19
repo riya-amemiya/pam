@@ -16,7 +16,9 @@ export async function getMicrocms<T>(
   },
 ): Promise<T> {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/microcms/${endpoint}`,
+    `${
+      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+    }/api/microcms/${endpoint}`,
     {
       method: "POST",
       body: JSON.stringify({ queries }),
