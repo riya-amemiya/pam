@@ -94,6 +94,7 @@
     "@markuplint/react-spec": "^3.10.0",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.10",
+    "@playwright/test": "^1.39.0",
     "@storybook/addon-actions": "^7.4.2",
     "@storybook/addon-essentials": "^7.4.2",
     "@storybook/addon-interactions": "^7.4.2",
