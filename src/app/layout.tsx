@@ -2,6 +2,7 @@ import { Box } from "@kuma-ui/core";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
+import { ReactNode } from "react";
 
 import { ClientProviders } from "@/components/ClientProviders";
 import Header from "@/components/Header";
@@ -16,7 +17,7 @@ export const dynamic = "force-dynamic";
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const supabase = createServerComponentClient<Database>({
     cookies,
