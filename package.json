@@ -138,6 +138,5 @@
     "turbo": "^1.10.15",
     "typed-scss-modules": "^7.1.4",
     "typescript": "5.2.2"
-  },
-  "packageManager": "yarn@3.6.4"
+  }
 }
