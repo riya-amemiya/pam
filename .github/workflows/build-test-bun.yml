@@ -42,7 +42,7 @@ jobs:
                   key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
             - name: Install dependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
-              run: bun i --frozen-lockfile
+              run: bun i --frozen-lockfile && yarn
             - name: Cache Save devDependencies
               if: steps.cache-restore-dev-depends.outputs.cache-hit != 'true'
               id: cache-save-dev-depends
@@ -73,7 +73,7 @@ jobs:
               with:
                   path: '**/node_modules'
                   key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
-            - name: Lint with yarn
+            - name: Lint with bun
               run: bun run lint:nofix:turbo
     test:
         needs: setup
