@@ -23,7 +23,7 @@ import { Button } from "@/stories/atoms/Button";
 import { parseMarkdown } from "@/utils/parseMarkdown";
 import { randomString } from "@/utils/randomString";
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute" as const,
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -122,7 +122,8 @@ export default function ChatClient({
               if (model === "none") {
                 toast.error("モデルを選択してください");
                 return false;
-              } else if (model === "deepl") {
+              }
+              if (model === "deepl") {
                 if (!EDEN_AI_API_KEY) {
                   toast.error("deeplは現在使用できません");
                   return;

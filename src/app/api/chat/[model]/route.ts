@@ -18,7 +18,6 @@ export async function POST(
     return new StreamingTextResponse(
       await openAIChat({ apiKey, model, messages, temperature, max_tokens }),
     );
-  } else {
-    throw new Error("Model not supported");
   }
+  throw new Error("Model not supported");
 }
