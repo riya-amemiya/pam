@@ -1,5 +1,8 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:security/recommended"
+  ],
   "plugins": [
     "testing-library",
     "import",
@@ -28,6 +31,7 @@
         },
         "newlines-between": "always"
       }
-    ]
+    ],
+    "security/detect-object-injection": "off"
   }
 }
