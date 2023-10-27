@@ -14,16 +14,16 @@ export default function ToolsRandomClient() {
   return (
     <form
       className="w-1/2"
-      onSubmit={(e) => {
-        e.preventDefault();
+      onSubmit={(event) => {
+        event.preventDefault();
       }}
     >
       <div className="space-y-1">
         <Label>最大値</Label>
         <Input
           min={min}
-          onChange={(e) => {
-            setMax(Number(e.target.value));
+          onChange={(event) => {
+            setMax(Number(event.target.value));
           }}
           type="number"
           value={max}
@@ -32,8 +32,8 @@ export default function ToolsRandomClient() {
       <div className="space-y-1">
         <Label>最小値</Label>
         <Input
-          onChange={(e) => {
-            setMin(Number(e.target.value));
+          onChange={(event) => {
+            setMin(Number(event.target.value));
           }}
           type="number"
           value={min}

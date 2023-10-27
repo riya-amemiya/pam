@@ -26,14 +26,14 @@ const Header = ({ user }: { user: User | null }) => {
     preventScroll: true,
   });
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorElement);
   const supabase = createClientComponentClient<Database>();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorElement(event.currentTarget);
   };
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorElement(null);
   };
 
   return (
@@ -92,7 +92,7 @@ const Header = ({ user }: { user: User | null }) => {
                   <Button
                     className="mr-2"
                     onClick={() => {
-                      setAnchorEl(null);
+                      setAnchorElement(null);
                       modalOpen();
                     }}
                   >
@@ -104,7 +104,7 @@ const Header = ({ user }: { user: User | null }) => {
           </div>
         </Box>
         <Menu
-          anchorEl={anchorEl}
+          anchorEl={anchorElement}
           anchorOrigin={{
             vertical: "top",
             horizontal: "left",
@@ -143,7 +143,7 @@ const Header = ({ user }: { user: User | null }) => {
           </Link>
           <MenuItem
             onClick={async () => {
-              setAnchorEl(null);
+              setAnchorElement(null);
               await supabase.auth.signOut();
               router.refresh();
             }}
@@ -178,7 +178,7 @@ const Header = ({ user }: { user: User | null }) => {
                     .string()
                     .min(8)
                     .regex(
-                      /(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*\d)|(?=.*[A-Z])(?=.*\d)|(?=.*\W)(?=.*[a-zA-Z])/,
+                      /(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*\d)|(?=.*[A-Z])(?=.*\d)|(?=.*\W)(?=.*[A-Za-z])/,
                       "パスワードは半角英小文字、半角英大文字、半角数字の2種類以上を含む必要があります",
                     ),
                 })}

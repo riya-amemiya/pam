@@ -72,16 +72,17 @@ export const DashboardClient = ({
           OPENAI_API_KEY: z.string().optional().describe("OPENAI_API_KEY"),
           EDEN_AI_API_KEY: z.string().optional().describe("EDEN_AI_API_KEY"),
         })}
-        onSubmit={async (e) => {
+        onSubmit={async (event) => {
           const callback = async () => {
             await updateUserData({
               id: userData.user.id,
-              GitHub: e.GitHub,
+              GitHub: event.GitHub,
               OPENAI_API_KEY:
-                e.OPENAI_API_KEY && btoa(encodeURIComponent(e.OPENAI_API_KEY)),
+                event.OPENAI_API_KEY &&
+                btoa(encodeURIComponent(event.OPENAI_API_KEY)),
               EDEN_AI_API_KEY:
-                e.EDEN_AI_API_KEY &&
-                btoa(encodeURIComponent(e.EDEN_AI_API_KEY)),
+                event.EDEN_AI_API_KEY &&
+                btoa(encodeURIComponent(event.EDEN_AI_API_KEY)),
             });
             router.refresh();
           };

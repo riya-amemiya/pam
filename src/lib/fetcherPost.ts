@@ -6,6 +6,6 @@ export const fetcherPost = <T, R>(
     arg: T;
   },
 ): Promise<R> =>
-  fetch(url, { method: "POST", body: JSON.stringify(arg) }).then((res) =>
-    res.json(),
+  fetch(url, { method: "POST", body: JSON.stringify(arg) }).then((response) =>
+    response.json(),
   );

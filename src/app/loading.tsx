@@ -1,3 +1,1 @@
-import { Loading } from "@/stories/templates/loading";
-
-export default Loading;
+export { Loading as default } from "@/stories/templates/loading";

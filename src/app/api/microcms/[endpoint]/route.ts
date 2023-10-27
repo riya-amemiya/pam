@@ -6,10 +6,10 @@ import { microcmsCardsType } from "types/microcmsCardsType";
 export const runtime = "edge";
 
 export async function POST(
-  req: Request,
+  request: Request,
   { params }: { params: { endpoint: string } },
 ) {
-  const { queries } = await req.json();
+  const { queries } = await request.json();
   const endpoint = params.endpoint;
   const data: microcmsCardsType = await microcmsClient.get({
     endpoint,
