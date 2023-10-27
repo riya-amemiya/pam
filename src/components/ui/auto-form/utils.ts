@@ -11,7 +11,7 @@ export type ZodObjectOrWrapped =
  * e.g. "myString" -> "My String"
  */
 export function beautifyObjectName(string: string) {
-  let output = string.replace(/([A-Z])/g, " $1");
+  let output = string.replaceAll(/([A-Z])/g, " $1");
   output = output.charAt(0).toUpperCase() + output.slice(1);
   return output;
 }
@@ -131,7 +131,7 @@ export function zodToHtmlInputProps(
   if (!("checks" in typedSchema._def)) return {};
 
   const { checks } = typedSchema._def;
-  const inputProps: React.InputHTMLAttributes<HTMLInputElement> = {
+  const inputProperties: React.InputHTMLAttributes<HTMLInputElement> = {
     required: true,
   };
   const type = getBaseType(schema);
@@ -139,19 +139,19 @@ export function zodToHtmlInputProps(
   for (const check of checks) {
     if (check.kind === "min") {
       if (type === "ZodString") {
-        inputProps.minLength = check.value;
+        inputProperties.minLength = check.value;
       } else {
-        inputProps.min = check.value;
+        inputProperties.min = check.value;
       }
     }
     if (check.kind === "max") {
       if (type === "ZodString") {
-        inputProps.maxLength = check.value;
+        inputProperties.maxLength = check.value;
       } else {
-        inputProps.max = check.value;
+        inputProperties.max = check.value;
       }
     }
   }
 
-  return inputProps;
+  return inputProperties;
 }

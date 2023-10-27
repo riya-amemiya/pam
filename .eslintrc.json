@@ -1,12 +1,14 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:security/recommended"
+    "plugin:security/recommended",
+    "plugin:unicorn/recommended"
   ],
   "plugins": [
     "testing-library",
     "import",
-    "jest-dom"
+    "jest-dom",
+    "unicorn"
   ],
   "parserOptions": {
     "sourceType": "module",
@@ -32,6 +34,16 @@
         "newlines-between": "always"
       }
     ],
-    "security/detect-object-injection": "off"
+    "security/detect-object-injection": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ],
+    "unicorn/no-null": "off"
   }
 }

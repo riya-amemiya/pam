@@ -18,11 +18,11 @@ export const deepl = async ({
 }> => {
   sdk.auth(apiKey);
 
-  const res = await sdk.translation_automatic_translation_create({
+  const response = await sdk.translation_automatic_translation_create({
     providers: "deepl",
     text,
     target_language,
     source_language,
   });
-  return res.data.deepl;
+  return response.data.deepl;
 };

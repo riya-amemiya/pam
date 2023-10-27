@@ -6,15 +6,16 @@ import {
   FormMessage,
 } from "../../form";
 import { Textarea } from "../../textarea";
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 
 export default function AutoFormTextarea({
   label,
   isRequired,
   fieldConfigItem,
   fieldProps,
-}: AutoFormInputComponentProps) {
-  const { showLabel: _showLabel, ...fieldPropsWithoutShowLabel } = fieldProps;
+}: AutoFormInputComponentProperties) {
+  const { showLabel: _showLabel, ...fieldPropertiesWithoutShowLabel } =
+    fieldProps;
   const showLabel = _showLabel === undefined ? true : _showLabel;
   return (
     <FormItem>
@@ -25,7 +26,7 @@ export default function AutoFormTextarea({
         </FormLabel>
       )}
       <FormControl>
-        <Textarea {...fieldPropsWithoutShowLabel} />
+        <Textarea {...fieldPropertiesWithoutShowLabel} />
       </FormControl>
       {fieldConfigItem.description && (
         <FormDescription>{fieldConfigItem.description}</FormDescription>

@@ -14,7 +14,7 @@ import {
   beautifyObjectName,
   getBaseSchema,
   getBaseType,
-  zodToHtmlInputProps,
+  zodToHtmlInputProps as zodToHtmlInputProperties,
 } from "../utils";
 
 import AutoFormArray from "./array";
@@ -78,9 +78,9 @@ export default function AutoFormObject<
         }
 
         const fieldConfigItem: FieldConfigItem = fieldConfig?.[name] ?? {};
-        const zodInputProps = zodToHtmlInputProps(item);
+        const zodInputProperties = zodToHtmlInputProperties(item);
         const isRequired =
-          zodInputProps.required ||
+          zodInputProperties.required ||
           fieldConfigItem.inputProps?.required ||
           false;
 
@@ -108,16 +108,16 @@ export default function AutoFormObject<
                     field={field}
                     fieldConfigItem={fieldConfigItem}
                     fieldProps={{
-                      ...zodInputProps,
+                      ...zodInputProperties,
                       ...field,
                       ...fieldConfigItem.inputProps,
-                      value: !fieldConfigItem.inputProps?.defaultValue
-                        ? field.value ?? ""
-                        : undefined,
+                      value: fieldConfigItem.inputProps?.defaultValue
+                        ? undefined
+                        : field.value ?? "",
                     }}
                     isRequired={isRequired}
                     label={itemName}
-                    zodInputProps={zodInputProps}
+                    zodInputProps={zodInputProperties}
                     zodItem={item}
                   />
                 </ParentElement>

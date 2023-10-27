@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../form";
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 
 export default function AutoFormDate({
   label,
@@ -14,7 +14,7 @@ export default function AutoFormDate({
   field,
   fieldConfigItem,
   fieldProps,
-}: AutoFormInputComponentProps) {
+}: AutoFormInputComponentProperties) {
   return (
     <FormItem>
       <FormLabel>

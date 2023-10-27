@@ -2,7 +2,7 @@ import * as z from "zod";
 
 import { FormControl, FormItem, FormLabel, FormMessage } from "../../form";
 import { RadioGroup, RadioGroupItem } from "../../radio-group";
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 
 export default function AutoFormRadioGroup({
   label,
@@ -10,7 +10,7 @@ export default function AutoFormRadioGroup({
   field,
   zodItem,
   fieldProps,
-}: AutoFormInputComponentProps) {
+}: AutoFormInputComponentProperties) {
   const values = (zodItem as unknown as z.ZodEnum<any>)._def.values;
 
   return (

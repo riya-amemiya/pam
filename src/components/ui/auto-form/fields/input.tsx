@@ -7,15 +7,16 @@ import {
   FormLabel,
   FormMessage,
 } from "../../form";
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 
 export default function AutoFormInput({
   label,
   isRequired,
   fieldConfigItem,
   fieldProps,
-}: AutoFormInputComponentProps) {
-  const { showLabel: _showLabel, ...fieldPropsWithoutShowLabel } = fieldProps;
+}: AutoFormInputComponentProperties) {
+  const { showLabel: _showLabel, ...fieldPropertiesWithoutShowLabel } =
+    fieldProps;
   const showLabel = _showLabel === undefined ? true : _showLabel;
   return (
     <FormItem>
@@ -26,7 +27,7 @@ export default function AutoFormInput({
         </FormLabel>
       )}
       <FormControl>
-        <Input type="text" {...fieldPropsWithoutShowLabel} />
+        <Input type="text" {...fieldPropertiesWithoutShowLabel} />
       </FormControl>
       {fieldConfigItem.description && (
         <FormDescription>{fieldConfigItem.description}</FormDescription>

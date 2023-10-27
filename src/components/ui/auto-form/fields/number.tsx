@@ -1,18 +1,18 @@
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 
 import AutoFormInput from "./input";
 
 export default function AutoFormNumber({
   fieldProps,
-  ...props
-}: AutoFormInputComponentProps) {
+  ...properties
+}: AutoFormInputComponentProperties) {
   return (
     <AutoFormInput
       fieldProps={{
         type: "number",
         ...fieldProps,
       }}
-      {...props}
+      {...properties}
     />
   );
 }

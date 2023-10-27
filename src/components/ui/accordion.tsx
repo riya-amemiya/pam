@@ -11,11 +11,11 @@ const Accordion = AccordionPrimitive.Root;
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
+>(({ className, ...properties }, reference) => (
   <AccordionPrimitive.Item
     className={cn("border-b", className)}
-    ref={ref}
-    {...props}
+    ref={reference}
+    {...properties}
   />
 ));
 AccordionItem.displayName = "AccordionItem";
@@ -23,15 +23,15 @@ AccordionItem.displayName = "AccordionItem";
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+>(({ className, children, ...properties }, reference) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       className={cn(
         "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
         className,
       )}
-      ref={ref}
-      {...props}
+      ref={reference}
+      {...properties}
     >
       {children}
       <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
@@ -43,14 +43,14 @@ AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+>(({ className, children, ...properties }, reference) => (
   <AccordionPrimitive.Content
     className={cn(
       "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
       className,
     )}
-    ref={ref}
-    {...props}
+    ref={reference}
+    {...properties}
   >
     <div className="pb-4 pt-0">{children}</div>
   </AccordionPrimitive.Content>

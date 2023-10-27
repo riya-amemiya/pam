@@ -18,7 +18,7 @@ export const DatePicker = forwardRef<
     date?: Date;
     setDate: (date?: Date) => void;
   }
->(function DatePickerCmp({ date, setDate }, ref) {
+>(function DatePickerCmp({ date, setDate }, reference) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -33,7 +33,7 @@ export const DatePicker = forwardRef<
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" ref={ref}>
+      <PopoverContent className="w-auto p-0" ref={reference}>
         <Calendar
           initialFocus
           mode="single"

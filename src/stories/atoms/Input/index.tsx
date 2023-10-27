@@ -2,13 +2,13 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-export interface InputProps
+export interface InputProperties
   extends React.InputHTMLAttributes<HTMLInputElement> {
   color?: "primary" | "error";
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, color, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProperties>(
+  ({ className, type, color, ...properties }, reference) => {
     return (
       <input
         className={cn(
@@ -16,9 +16,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className,
           color === "error" ? "text-destructive" : "text-primary",
         )}
-        ref={ref}
+        ref={reference}
         type={type}
-        {...props}
+        {...properties}
       />
     );
   },

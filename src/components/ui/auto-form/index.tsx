@@ -26,10 +26,10 @@ export function AutoFormSubmit({
 
 function AutoForm<SchemaType extends ZodObjectOrWrapped>({
   formSchema,
-  values: valuesProp,
-  onValuesChange: onValuesChangeProp,
+  values: valuesProperty,
+  onValuesChange: onValuesChangeProperty,
   onParsedValuesChange,
-  onSubmit: onSubmitProp,
+  onSubmit: onSubmitProperty,
   fieldConfig,
   children,
   className,
@@ -54,13 +54,13 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
   const form = useForm<z.infer<typeof objectFormSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues,
-    values: valuesProp,
+    values: valuesProperty,
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
-      onSubmitProp?.(parsedValues.data);
+      onSubmitProperty?.(parsedValues.data);
     }
   }
 
@@ -72,14 +72,14 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
         method={method}
         onChange={() => {
           const values = form.getValues();
-          onValuesChangeProp?.(values);
+          onValuesChangeProperty?.(values);
           const parsedValues = formSchema.safeParse(values);
           if (parsedValues.success) {
             onParsedValuesChange?.(parsedValues.data);
           }
         }}
-        onSubmit={(e) => {
-          form.handleSubmit(onSubmit)(e);
+        onSubmit={(event) => {
+          form.handleSubmit(onSubmit)(event);
         }}
       >
         <AutoFormObject

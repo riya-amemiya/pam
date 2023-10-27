@@ -12,7 +12,7 @@ export type FieldConfigItem = {
     | keyof typeof INPUT_COMPONENTS
     | React.FC<AutoFormInputComponentProps>;
 
-  renderParent?: (props: {
+  renderParent?: (properties: {
     children: React.ReactNode;
   }) => React.ReactElement | null;
 };

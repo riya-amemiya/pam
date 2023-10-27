@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../select";
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 import { getBaseSchema } from "../utils";
 
 export default function AutoFormEnum({
@@ -23,16 +23,14 @@ export default function AutoFormEnum({
   field,
   fieldConfigItem,
   zodItem,
-}: AutoFormInputComponentProps) {
+}: AutoFormInputComponentProperties) {
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def
     .values;
 
   let values: [string, string][] = [];
-  if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues);
-  } else {
-    values = baseValues.map((value) => [value, value]);
-  }
+  values = Array.isArray(baseValues)
+    ? baseValues.map((value) => [value, value])
+    : Object.entries(baseValues);
 
   function findItem(value: any) {
     return values.find((item) => item[0] === value);

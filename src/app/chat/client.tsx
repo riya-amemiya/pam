@@ -34,6 +34,33 @@ const style: SxProps<Theme> = {
   boxShadow: 24,
   p: 4,
 };
+
+const fetcher = async (
+  url: string,
+  {
+    arg,
+  }: {
+    arg: {
+      apiKey: string;
+      text: string;
+      target_language?: string | undefined;
+      source_language?: string | null | undefined;
+    };
+  },
+): Promise<{ status: "success" | "fail"; text: string }> =>
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: arg.apiKey,
+    },
+    body: JSON.stringify({
+      text: arg.text,
+      target_language: arg.target_language,
+      source_language: arg.source_language,
+    }),
+  }).then((response) => response.json());
+
 export default function ChatClient({
   OPENAI_API_KEY,
   EDEN_AI_API_KEY,
@@ -44,38 +71,14 @@ export default function ChatClient({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const fetcher = async (
-    url: string,
-    {
-      arg,
-    }: {
-      arg: {
-        apiKey: string;
-        text: string;
-        target_language?: string | undefined;
-        source_language?: string | null | undefined;
-      };
-    },
-  ): Promise<{ status: "success" | "fail"; text: string }> =>
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: arg.apiKey,
-      },
-      body: JSON.stringify({
-        text: arg.text,
-        target_language: arg.target_language,
-        source_language: arg.source_language,
-      }),
-    }).then((res) => res.json());
+
   const { trigger: callDeepl } = useSWRMutation("/api/deepl", fetcher);
   const {
-    messages: messagesRes,
+    messages: messagesResponse,
     input,
     handleInputChange,
     handleSubmit,
-    setMessages: setMessagesRes,
+    setMessages: setMessagesResponse,
   } = useChat({
     api: `/api/chat/${model}`,
     body: {
@@ -85,19 +88,19 @@ export default function ChatClient({
     },
   });
   useEffect(() => {
-    setMessagesRes(messages);
+    setMessagesResponse(messages);
   }, [model]);
   useEffect(() => {
-    setMessages(messagesRes);
-  }, [messagesRes]);
+    setMessages(messagesResponse);
+  }, [messagesResponse]);
   return (
     <>
       <Flex alignItems={"center"} flexDir={"column"}>
         <div className="w-3/4 md:w-1/2">
           <Select
             className="w-full"
-            onChange={(e) => {
-              setModel(e.target.value as string);
+            onChange={(event) => {
+              setModel(event.target.value as string);
             }}
             value={model}
           >
@@ -112,15 +115,15 @@ export default function ChatClient({
           </Select>
         </div>
         <div className="w-3/4 md:w-1/2">
-          {messagesRes.map((m) => (
+          {messagesResponse.map((m) => (
             <div key={m.id}>
               {m.role}: {parseMarkdown(m.content)}
             </div>
           ))}
 
           <form
-            onSubmit={async (e): Promise<false | void> => {
-              e.preventDefault();
+            onSubmit={async (event): Promise<false | void> => {
+              event.preventDefault();
               if (model === "none") {
                 toast.error("モデルを選択してください");
                 return false;
@@ -131,18 +134,18 @@ export default function ChatClient({
                   return;
                 }
                 const callback = async () => {
-                  const res = await callDeepl({
+                  const response = await callDeepl({
                     apiKey: EDEN_AI_API_KEY,
                     text: input,
                   });
-                  if (res.status === "success") {
-                    setMessagesRes([
-                      ...messagesRes,
+                  if (response.status === "success") {
+                    setMessagesResponse([
+                      ...messagesResponse,
                       { id: randomString(7), role: "user", content: input },
                       {
                         id: randomString(7),
                         role: "assistant",
-                        content: res.text,
+                        content: response.text,
                       },
                     ]);
                   }
@@ -155,7 +158,7 @@ export default function ChatClient({
 
                 return false;
               }
-              handleSubmit(e);
+              handleSubmit(event);
             }}
           >
             <Flex>
@@ -196,7 +199,7 @@ export default function ChatClient({
               className="w-1/2 bg-blue-500 hover:bg-blue-700"
               onClick={() => {
                 setMessages([]);
-                setMessagesRes([]);
+                setMessagesResponse([]);
               }}
             >
               <DeleteIcon />
@@ -215,9 +218,12 @@ export default function ChatClient({
                   step: 0.1,
                   defaultValue: openaiConfig.temperature,
                   value: openaiConfig.temperature,
-                  onChange: (e) => {
-                    setOpenaiConfig((prev) => {
-                      return { ...prev, temperature: Number(e.target.value) };
+                  onChange: (event) => {
+                    setOpenaiConfig((previous) => {
+                      return {
+                        ...previous,
+                        temperature: Number(event.target.value),
+                      };
                     });
                   },
                   min: 0.1,
@@ -230,9 +236,12 @@ export default function ChatClient({
                   type: "number",
                   defaultValue: openaiConfig.max_tokens,
                   value: openaiConfig.max_tokens,
-                  onChange: (e) => {
-                    setOpenaiConfig((prev) => {
-                      return { ...prev, max_tokens: Number(e.target.value) };
+                  onChange: (event) => {
+                    setOpenaiConfig((previous) => {
+                      return {
+                        ...previous,
+                        max_tokens: Number(event.target.value),
+                      };
                     });
                   },
                 },
@@ -249,11 +258,11 @@ export default function ChatClient({
                 .describe(`Temperature: ${openaiConfig.temperature}`),
               max_tokens: z.number().optional().describe("max_tokens"),
             })}
-            onSubmit={async (e) => {
-              setOpenaiConfig((prev) => {
+            onSubmit={async (event) => {
+              setOpenaiConfig((previous) => {
                 return {
-                  ...prev,
-                  temperature: e.temperature,
+                  ...previous,
+                  temperature: event.temperature,
                 };
               });
               toast.success("保存しました");

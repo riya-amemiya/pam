@@ -1,6 +1,6 @@
 import { FormControl, FormDescription, FormItem, FormLabel } from "../../form";
 import { Switch } from "../../switch";
-import { AutoFormInputComponentProps } from "../types";
+import { AutoFormInputComponentProps as AutoFormInputComponentProperties } from "../types";
 
 export default function AutoFormSwitch({
   label,
@@ -8,7 +8,7 @@ export default function AutoFormSwitch({
   field,
   fieldConfigItem,
   fieldProps,
-}: AutoFormInputComponentProps) {
+}: AutoFormInputComponentProperties) {
   return (
     <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
       <FormControl>
