@@ -1,6 +1,7 @@
 "use client";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { forwardRef } from "react";
 
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -11,16 +12,16 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/stories/atoms/Button";
 
-export function DatePicker({
-  date,
-  setDate,
-}: {
-  date?: Date;
-  setDate: (date?: Date) => void;
-}) {
+export const DatePicker = forwardRef<
+  HTMLDivElement,
+  {
+    date?: Date;
+    setDate: (date?: Date) => void;
+  }
+>(function DatePickerCmp({ date, setDate }, ref) {
   return (
     <Popover>
-      <PopoverTrigger asChild={true}>
+      <PopoverTrigger asChild>
         <Button
           className={cn(
             "w-full justify-start text-left font-normal",
@@ -32,9 +33,9 @@ export function DatePicker({
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
+      <PopoverContent className="w-auto p-0" ref={ref}>
         <Calendar
-          initialFocus={true}
+          initialFocus
           mode="single"
           onSelect={setDate}
           selected={date}
@@ -42,4 +43,4 @@ export function DatePicker({
       </PopoverContent>
     </Popover>
   );
-}
+});

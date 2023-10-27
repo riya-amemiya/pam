@@ -7,7 +7,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    serverActions: true,
     outputFileTracingExcludes: {
       "*": [
         "node_modules/@swc/core-linux-x64-gnu",

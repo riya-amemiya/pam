@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Modal from "@mui/material/Modal";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import { SxProps, Theme } from "@mui/material/styles";
 import { useChat } from "ai/react";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -22,7 +23,8 @@ import AutoForm from "@/components/ui/auto-form";
 import { Button } from "@/stories/atoms/Button";
 import { parseMarkdown } from "@/utils/parseMarkdown";
 import { randomString } from "@/utils/randomString";
-const style = {
+
+const style: SxProps<Theme> = {
   position: "absolute" as const,
   top: "50%",
   left: "50%",

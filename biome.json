@@ -36,7 +36,8 @@
 			"./scripts/*.js",
 			"next.config.js",
 			"./src/gql/*",
-			"./src/components/ui/*.tsx",
+			"./src/components/ui/**/*.tsx",
+			"./src/components/ui/**/*.ts",
 			"./types/supabase.ts"
 		],
 		"rules": {
