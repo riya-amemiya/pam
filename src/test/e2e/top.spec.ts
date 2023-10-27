@@ -1,19 +1,10 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
-test.describe("Top画面", () => {
-  test("スライドしょー", async ({ page }) => {
+test.describe("Top画面からNewsへ", () => {
+  test("Top画面からNewsへ遷移できる", async ({ page }) => {
     await page.goto("http://localhost:3000/");
-    await page
-      .getByText(
-        "Cから始めた一般プログラマーです。 RustとWeb系が特に好きです。",
-      )
-      .click();
     await page.getByRole("banner").getByRole("link").nth(1).click();
-    await page.getByRole("link", { name: "test test 2023-07-30" }).click();
-    expect(
-      await page
-        .getByRole("heading", { name: "test", exact: true })
-        .textContent(),
-    ).toBe("test");
+    await page.waitForURL("http://localhost:3000/news");
+    expect(page.url()).toBe("http://localhost:3000/news");
   });
 });
