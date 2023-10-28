@@ -1,3 +1,4 @@
+"use server";
 export async function getMicrocms<T>(
   endpoint: string,
   queries?: {

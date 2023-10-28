@@ -6,7 +6,7 @@ import htmr from "htmr";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { getMicrocms } from "@/lib/getMicrocms";
+import { getMicrocms } from "@/actions/getMicrocms";
 import { microcmsNewsType } from "types/microcmsNewsType";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
