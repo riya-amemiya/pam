@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import * as z from "zod";
 
-import { updateUserData } from "@/actions/updateUserData";
+import { updateUserData } from "%/actions/updateUserData";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 
 export const DashboardClient = ({
