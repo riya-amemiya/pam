@@ -1,7 +1,7 @@
 import { Box } from "@kuma-ui/core";
 import Image from "next/image";
 
-import { getMicrocms } from "@/actions/getMicrocms";
+import { getMicrocms } from "%/actions/getMicrocms";
 import { Section } from "@/components/Section";
 import { SwiperClient } from "@/components/SwiperClient";
 import { getMetadata } from "@/utils/getMetadata";

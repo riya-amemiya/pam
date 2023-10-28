@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getMicrocms } from "@/actions/getMicrocms";
+import { getMicrocms } from "%/actions/getMicrocms";
 import { getMetadata } from "@/utils/getMetadata";
 import { microcmsNewsType } from "types/microcmsNewsType";
 
