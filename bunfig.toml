@@ -1,5 +1,5 @@
 [test]
 coverage = true
 
-[install.lockfile]
-print = "yarn"
+# [install.lockfile]
+# print = "yarn"
