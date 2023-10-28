@@ -103,7 +103,7 @@ jobs:
                   path: '**/node_modules'
                   key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
             - name: Run tests with bun
-              run: bun run test:turbo -- -- --shard ${{ matrix.shard }} && npx playwright install && bun run playwright test
+              run: bun run test:turbo -- -- --shard ${{ matrix.shard }} && npx playwright install --with-deps && bun run playwright test
     build:
         needs: [test, lint]
         name: JavaScript Build
