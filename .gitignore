@@ -45,8 +45,9 @@ robots.txt
 
 .turbo
 
-# yarn.lock
-bun.lockb
+yarn.lock
+# bun.lockb
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
