@@ -130,5 +130,18 @@ jobs:
               with:
                   path: '**/node_modules'
                   key: dev-depends-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
+            - name: Cache Restore build
+              id: cache-build
+              uses: actions/cache/restore@v3
+              with:
+                  path: '**/.next/cache'
+                  key: build-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
             - name: Build with bun
               run: bun run build:next:turbo
+            - name: Cache Save build
+              if: steps.cache-build.outputs.cache-hit != 'true'
+              id: cache-save-build
+              uses: actions/cache/save@v3
+              with:
+                  path: '**/.next/cache'
+                  key: build-bun${{ matrix.bun-version }}-${{ matrix.os }}-${{ hashFiles('bun.lockb') }}
