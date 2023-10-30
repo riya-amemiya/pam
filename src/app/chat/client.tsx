@@ -82,9 +82,11 @@ export default function ChatClient({
   } = useChat({
     api: `/api/chat/${model}`,
     body: {
-      apiKey: OPENAI_API_KEY,
       temperature: openaiConfig.temperature,
       max_tokens: openaiConfig.max_tokens,
+    },
+    headers: {
+      Authorization: OPENAI_API_KEY || "",
     },
   });
   useEffect(() => {
