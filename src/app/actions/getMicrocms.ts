@@ -1,4 +1,8 @@
 "use server";
+
+import { microcmsClient } from "@/lib/microcmsClient";
+import { microcmsCardsType } from "types/microcmsCardsType";
+
 export async function getMicrocms<T>(
   endpoint: string,
   queries?: {
@@ -16,14 +20,9 @@ export async function getMicrocms<T>(
     ids?: string;
   },
 ): Promise<T> {
-  const data = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-    }/api/microcms/${endpoint}`,
-    {
-      method: "POST",
-      body: JSON.stringify({ queries }),
-    },
-  );
-  return await data.json();
+  const data: microcmsCardsType = await microcmsClient.get({
+    endpoint,
+    queries,
+  });
+  return data as unknown as T;
 }
