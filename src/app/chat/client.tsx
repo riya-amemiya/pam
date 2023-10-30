@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRecoilState } from "recoil";
 import useSWRMutation from "swr/mutation";
-import * as z from "zod";
+import z from "zod";
 
 import { messagesState } from "@/atom/messagesState";
 import { openaiConfigState } from "@/atom/openaiConfigState";

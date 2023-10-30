@@ -1,4 +1,4 @@
-import * as z from "zod";
+import z from "zod";
 
 import { FormControl, FormItem, FormLabel, FormMessage } from "../../form";
 import { RadioGroup, RadioGroupItem } from "../../radio-group";

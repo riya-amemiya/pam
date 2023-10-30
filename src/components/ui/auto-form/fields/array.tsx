@@ -1,6 +1,6 @@
 import { Plus, Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
-import * as z from "zod";
+import z from "zod";
 
 import { Button } from "@/stories/atoms/Button";
 
