@@ -10,9 +10,9 @@ export async function POST(
   { params }: { params: { model: string } },
 ) {
   const model = params.model;
-
+  const apiKey = request.headers.get("authorization") || "";
   // Extract the `messages` from the body of the request
-  const { messages, apiKey, temperature, max_tokens } = await request.json();
+  const { messages, temperature, max_tokens } = await request.json();
 
   if (model.includes("gpt")) {
     return new StreamingTextResponse(
