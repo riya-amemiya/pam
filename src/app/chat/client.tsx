@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRecoilState } from "recoil";
 import useSWRMutation from "swr/mutation";
-import * as z from "zod";
+import z from "zod";
 
 import { messagesState } from "@/atom/messagesState";
 import { openaiConfigState } from "@/atom/openaiConfigState";
@@ -82,9 +82,11 @@ export default function ChatClient({
   } = useChat({
     api: `/api/chat/${model}`,
     body: {
-      apiKey: OPENAI_API_KEY,
       temperature: openaiConfig.temperature,
       max_tokens: openaiConfig.max_tokens,
+    },
+    headers: {
+      Authorization: OPENAI_API_KEY || "",
     },
   });
   useEffect(() => {

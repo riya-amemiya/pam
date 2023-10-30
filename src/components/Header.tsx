@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useModal } from "react-hooks-use-modal";
-import * as z from "zod";
+import z from "zod";
 
 import { Button } from "@/stories/atoms/Button";
 import { Database } from "types/supabase";

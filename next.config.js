@@ -14,20 +14,20 @@ const nextConfig = {
         "node_modules/@esbuild/linux-x64",
       ],
     },
+    webpackBuildWorker: true,
   },
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+    ],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  webpack: (config) => {
-    config.experiments = { ...config.experiments, topLevelAwait: true };
-
-    return config;
-  },
 };
-
 module.exports = withKumaUI(
   million.next(
     withInterceptStdout(nextConfig, (text) =>
