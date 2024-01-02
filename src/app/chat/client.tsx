@@ -124,7 +124,7 @@ export default function ChatClient({
           ))}
 
           <form
-            onSubmit={async (event): Promise<false | void> => {
+            onSubmit={(event): false | void => {
               event.preventDefault();
               if (model === "none") {
                 toast.error("モデルを選択してください");

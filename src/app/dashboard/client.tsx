@@ -72,7 +72,7 @@ export const DashboardClient = ({
           OPENAI_API_KEY: z.string().optional().describe("OPENAI_API_KEY"),
           EDEN_AI_API_KEY: z.string().optional().describe("EDEN_AI_API_KEY"),
         })}
-        onSubmit={async (event) => {
+        onSubmit={(event) => {
           const callback = async () => {
             await updateUserData({
               id: userData.user.id,

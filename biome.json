@@ -54,37 +54,35 @@
 				"noUselessFragments": "warn",
 				"noUselessThisAlias": "error",
 				"noVoid": "error",
-				"useSimpleNumberKeys": "warn",
-				"useSimplifiedLogicExpression": "warn"
+				"useSimpleNumberKeys": "error",
+				"useSimplifiedLogicExpression": "error"
 			},
 			"correctness": {
 				"noConstantCondition": "error",
+				"noEmptyCharacterClassInRegex": "error",
+				"noInvalidNewBuiltin": "error",
 				"noNonoctalDecimalEscape": "error",
 				"noSelfAssign": "error",
-				"noUndeclaredVariables": "off",
-				"noUnusedVariables": "off",
+				"noUndeclaredVariables": "warn",
+				"noUnusedVariables": "warn",
 				"useExhaustiveDependencies": "off",
 				"useHookAtTopLevel": "error"
 			},
 			"nursery": {
-				"noApproximativeNumericConstant": "error",
 				"noDuplicateJsonKeys": "error",
 				"noEmptyBlockStatements": "error",
-				"noEmptyCharacterClassInRegex": "error",
-				"noInvalidNewBuiltin": "error",
-				"noMisleadingInstantiator": "error",
-				"noMisrefactoredShorthandAssign": "error",
+				"noImplicitAnyLet": "error",
 				"noUnusedImports": "error",
-				"noUselessElse": "error",
-				"useArrowFunction": "warn",
-				"useAsConstAssertion": "error",
+				"noUnusedPrivateClassMembers": "error",
+				"useAwait": "error",
 				"useGroupedTypeImport": "error",
-				"useShorthandAssign": "error"
+				"useRegexLiterals": "error"
 			},
 			"recommended": true,
 			"style": {
 				"noImplicitBoolean": "warn",
 				"noNegationElse": "error",
+				"noParameterAssign": "off",
 				"noParameterProperties": "off",
 				"noShoutyConstants": "warn",
 				"useBlockStatements": "error",
@@ -99,23 +97,24 @@
 					}
 				},
 				"useShorthandArrayType": "error",
+				"useShorthandAssign": "error",
 				"useSingleCaseStatement": "error"
 			},
 			"suspicious": {
+				"noApproximativeNumericConstant": "error",
 				"noConfusingVoidType": "off",
 				"noConsoleLog": "warn",
 				"noControlCharactersInRegex": "error",
 				"noFallthroughSwitchClause": "error",
 				"noGlobalIsFinite": "error",
 				"noGlobalIsNan": "error",
+				"noMisleadingInstantiator": "error",
+				"noMisrefactoredShorthandAssign": "error",
 				"noRedundantUseStrict": "warn",
 				"noUnsafeDeclarationMerging": "error",
 				"useGetterReturn": "error",
 				"useIsArray": "error"
 			}
 		}
-	},
-	"organizeImports": {
-		"enabled": false
 	}
 }

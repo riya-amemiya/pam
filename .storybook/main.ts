@@ -22,7 +22,7 @@ const config: StorybookConfig = {
       },
     },
   ],
-  webpackFinal: async (config) => {
+  webpackFinal: (config) => {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
@@ -31,7 +31,7 @@ const config: StorybookConfig = {
         "%": path.resolve(__dirname, "../src/app"),
       };
     }
-    config.plugins = [...(config.plugins ?? []), new KumaUIWebpackPlugin({})];
+    config.plugins = [...(config.plugins ?? []), new KumaUIWebpackPlugin()];
     return config;
   },
   framework: {

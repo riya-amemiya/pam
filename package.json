@@ -15,7 +15,7 @@
     "sitemap": "next-sitemap",
     "eslint": "eslint src/",
     "biome:check": "biome check .",
-    "lint": "yarn eslint --fix && yarn lint:noFormat && yarn format --write",
+    "lint": "yarn eslint --fix && yarn format --write && yarn lint:noFormat",
     "lint:turbo": "turbo run lint",
     "lint:nofix": "yarn lint:noFormat && yarn format",
     "lint:nofix:turbo": "turbo run lint:nofix",
